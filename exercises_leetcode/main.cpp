@@ -8,6 +8,8 @@ using namespace std;
 int main() {
 	try{ 
 		assert(twoSum() && "two sum failed"); 
+		assert(twoSum_hash() && "two sum failed");
+
 	}
 	catch (const char* msg) {
 		cerr << msg << endl;
