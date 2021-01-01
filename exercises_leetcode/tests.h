@@ -3,3 +3,4 @@
 
 bool twoSum();
 bool twoSum_hash();
+bool hasGroupsSizeX();

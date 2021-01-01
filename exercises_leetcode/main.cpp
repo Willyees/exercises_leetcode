@@ -7,8 +7,8 @@
 using namespace std;
 
 int main() {
-	/*try{ 
-		assert(twoSum() && "two sum failed"); 
+	/*try{
+		assert(twoSum() && "two sum failed");
 		assert(twoSum_hash() && "two sum failed");
 
 	}
@@ -16,9 +16,12 @@ int main() {
 		cerr << msg << endl;
 	}*/
 	Solution sol;
-	cout << sol.getMaxRepetitions("aahumeaylnlfdxfircvscxggbwkfnqduxwfnfozvsrtkjprepggxrpnrvystmwcysyycqpevikeffmznimkkasvwsrenazkycxf"
-		, 1000000, "aac", 10);
+	//vector<int> v{ 1, 2, 3, 4, 4, 3, 2, 1 };
+	hasGroupsSizeX();
+
 	return 0;
 }
+
+
 
 

@@ -77,3 +77,34 @@ bool twoSum_hash() {
 
 	return passed;
 }
+
+bool hasGroupsSizeX() {
+	bool passed = true;
+
+	vector<vector<int>> inputs;
+	vector<bool> corrects;
+	//0
+	inputs.push_back(vector<int> { 1, 2, 3, 4, 4, 3, 2, 1 });
+	corrects.push_back(true);
+	//1
+	inputs.push_back(vector<int> { 1, 1, 1, 2, 2, 2, 3, 3 });
+	corrects.push_back(false);
+	//2
+	inputs.push_back(vector<int> { 1 });
+	corrects.push_back(false);
+	//3
+	inputs.push_back(vector<int> { 1, 1, 2, 2, 2, 2 });
+	corrects.push_back(true);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		bool sol = problems.hasGroupsSizeX(inputs[i]);
+		if (sol == corrects[i])
+			cout << "hasGroupSizeX" << i << " ok" << endl;
+		else{
+			cout << "hasGroupSizeX" << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
