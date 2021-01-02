@@ -108,3 +108,66 @@ bool hasGroupsSizeX() {
 
 	return passed;
 }
+
+bool findPrimeFactors() {
+	bool passed = true;
+
+	std::vector<int> inputs;
+	std::vector<std::vector<int>> corrects;
+
+	//0
+	inputs.push_back(15);
+	corrects.push_back(vector<int> {3, 5});
+	//1
+	inputs.push_back(20);
+	corrects.push_back(vector<int> {2,2,5});
+	//2
+	inputs.push_back(17);
+	corrects.push_back(vector<int> {17});
+	//3
+	inputs.push_back(25);
+	corrects.push_back(vector<int> {5,5});
+
+	for (int i = 0; i < inputs.size(); i++) {
+		std::vector<int> sol = problems.findPrimeFactors(inputs[i]);
+		if (sol == corrects[i])
+			cout << "findPrimeFactors" << i << " ok" << endl;
+		else {
+			cout << "findPrimeFactors" << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
+bool gcd() {
+	bool passed = true;
+	std::vector<pair<int,int>> inputs;
+	std::vector<int> corrects;
+
+	//0
+	inputs.push_back(make_pair(12, 24));
+	corrects.push_back(12);
+	//1
+	inputs.push_back(make_pair(33, 15));
+	corrects.push_back(3);	
+	//2
+	inputs.push_back(make_pair(125, 725));
+	corrects.push_back(25);	
+	//3
+	inputs.push_back(make_pair(125, 13));
+	corrects.push_back(1);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.gcd(inputs[i].first, inputs[i].second);
+		if (sol == corrects[i])
+			cout << "gcd" << i << " ok" << endl;
+		else {
+			cout << "gcd" << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}

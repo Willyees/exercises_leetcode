@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <assert.h>
+#include <algorithm>
 #include "tests.h"
 #include "solution.h"
 
@@ -17,8 +18,7 @@ int main() {
 	}*/
 	Solution sol;
 	//vector<int> v{ 1, 2, 3, 4, 4, 3, 2, 1 };
-	hasGroupsSizeX();
-
+	gcd();
 	return 0;
 }
 

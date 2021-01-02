@@ -6,6 +6,8 @@
 #include <strstream>
 #include <set>
 #include <unordered_set>
+#include <assert.h>
+#include <numeric>
 
 using namespace std;
 
@@ -89,8 +91,10 @@ string Solution::removeKdigits(string num, int k) {
 
 /*deck: group of cards, each has an integer.
 * return true if they can be divided in groups of same length (x). Each group contains same integer cards
+* cannot just check if all the groups are the same length because a group could be further split xes: [2,2,2,2] -> [2,2],[2,2]. Use greatest common denominator
 */
 bool Solution::hasGroupsSizeX(vector<int>& deck) {
+    //cannot be less than 2 items
     if (deck.size() < 2)
         return false;
     map<int, int> m;
@@ -102,13 +106,59 @@ bool Solution::hasGroupsSizeX(vector<int>& deck) {
             m.insert(make_pair(e, 1));
     }
 
-    int count = 0;
-    for (pair<int,int> e : m) {
-        if (!count)
-            count = e.second;
-        if (e.second != count)
-            return false;
+    //find greatest common divisor between all the groups. if it is > 1, it means that all the groups have size at least > 1.
+    int g = -1;
+    for (auto m_it = m.begin(); m_it != m.end(); m_it++) {
+        if (g == -1)
+            g = m_it->second;
+        else
+            g = gcd(m_it->second, g);
     }
-    return true;
-        
+    return g >= 2;
+}
+
+std::vector<int> Solution::findPrimeFactors(int x) {
+    //12: 2,2,3
+    //start with 2, if whole number obtained, keep going
+    //int start = x;
+    std::vector<int> factors { 1 };
+    while (x % 2 == 0) {
+        factors.push_back(2);
+        x /= 2;
+    }
+    //it must be odd now. keep checking for factors skipping 1 position (skip even factors)
+    //using sqrt(x) because all composite numbers have at least 1 prime number < sqrt(x)
+    for (int i = 3; i <= sqrt(x);) {
+        if (x % i == 0){
+            factors.push_back(i);
+            x /= i;
+        }
+        else
+            i += 2;
+    }
+    
+    if (x > 2){
+        //assert(factors.size() == 0 && "factors of a prime number should be none at this point");
+        factors.push_back(x);
+    }
+    return factors;
+}
+
+/*
+find all factors of the two numbers. multiply the common ones
+xes: 12: 2,2,3; 36: 2,2,3,3; gdc = 2*2*3* = 12*/
+int Solution::gcd(int a, int b) {
+    vector<int> factorsA = findPrimeFactors(a);
+    vector<int> factorsB = findPrimeFactors(b);
+    vector<int> intersection;
+
+    //assumed that vectors are sorted
+    set_intersection(factorsA.begin(), factorsA.end(), factorsB.begin(), factorsB.end(), back_inserter(intersection));
+    
+    //multiply all elements in container
+    return accumulate(intersection.begin(), intersection.end(), 1, multiplies<int>());//1 is initial value, mutilplies is functor used on values
+    //or
+    //int result = 1;
+    //for_each(intersection.begin(), intersection.end(), [&result](int value) { result *= value; });
+
 }
