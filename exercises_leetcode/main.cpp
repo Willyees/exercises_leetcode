@@ -18,8 +18,9 @@ int main() {
 	}*/
 	Solution sol;
 	//vector<int> v{ 1, 2, 3, 4, 4, 3, 2, 1 };
-	gcd();
-	return 0;
+	sol.getPermutations("", "asd");
+
+
 }
 
 

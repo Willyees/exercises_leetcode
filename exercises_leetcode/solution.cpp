@@ -7,6 +7,7 @@
 #include <set>
 #include <unordered_set>
 #include <assert.h>
+#include <iostream>
 #include <numeric>
 
 using namespace std;
@@ -116,6 +117,25 @@ bool Solution::hasGroupsSizeX(vector<int>& deck) {
     }
     return g >= 2;
 }
+/*Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
+xes: 12 -> 21; 21->-1
+*/
+int Solution::nextGreaterElement(int n) {
+    int highest = n;
+    //splitting the int
+    vector<int> v_i;
+    while (n != 0) {
+        v_i.push_back(n % 10);
+        n /= 10;
+
+    }
+    //find all the combinations, then check which is highest. O(N!)
+    for (int i = 0; i < v_i.size(); ++i) {
+
+    }
+
+    return -1;
+}
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
@@ -142,6 +162,25 @@ std::vector<int> Solution::findPrimeFactors(int x) {
         factors.push_back(x);
     }
     return factors;
+}
+
+std::vector<int> Solution::getPermutations(int) {
+    vector<int> results;
+
+
+
+    return results;//check what happens returnign reference to vector
+}
+
+std::string Solution::getPermutations(std::string str, std::string remaining) {
+    int n = remaining.size();
+    if (remaining.size() == 0) {
+        cout << str << endl;
+        return str;
+    }
+    for (int i = 0; i < n; ++i) {
+        getPermutations(str + remaining.at(i), remaining.substr(0, i) + remaining.substr(i + 1, remaining.size() - i - 1));
+    }
 }
 
 /*
