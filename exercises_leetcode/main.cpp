@@ -6,7 +6,6 @@
 #include "solution.h"
 
 using namespace std;
-
 int main() {
 	/*try{
 		assert(twoSum() && "two sum failed");
@@ -18,7 +17,7 @@ int main() {
 	}*/
 	Solution sol;
 	//vector<int> v{ 1, 2, 3, 4, 4, 3, 2, 1 };
-	sol.getPermutations("", "asd");
+	getPermutations();
 
 
 }

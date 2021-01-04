@@ -164,22 +164,25 @@ std::vector<int> Solution::findPrimeFactors(int x) {
     return factors;
 }
 
-std::vector<int> Solution::getPermutations(int) {
-    vector<int> results;
-
-
-
-    return results;//check what happens returnign reference to vector
+std::vector<int> Solution::getPermutations(int num) {
+    vector<string> results_s;
+    vector<int> results_i;
+    getPermutations(results_s, "", to_string(num));
+    results_i.resize(results_s.size());
+    transform(results_s.begin(), results_s.end(), results_i.begin(), [](string s) {return stoi(s); });
+    return results_i;//check what happens returnign reference to vector
 }
 
-std::string Solution::getPermutations(std::string str, std::string remaining) {
+void Solution::getPermutations(std::vector<string>& result, std::string str, std::string remaining) {
     int n = remaining.size();
     if (remaining.size() == 0) {
-        cout << str << endl;
-        return str;
+        result.push_back(str);
     }
+    
     for (int i = 0; i < n; ++i) {
-        getPermutations(str + remaining.at(i), remaining.substr(0, i) + remaining.substr(i + 1, remaining.size() - i - 1));
+        string remaining_s = remaining.substr(0, i) + remaining.substr(i + 1, remaining.size() - i - 1);
+        string temp = str + remaining.at(i);
+        getPermutations(result, temp, remaining_s);
     }
 }
 

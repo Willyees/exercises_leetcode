@@ -6,3 +6,4 @@ bool twoSum_hash();
 bool hasGroupsSizeX();
 bool findPrimeFactors();
 bool gcd();
+bool getPermutations();

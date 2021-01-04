@@ -1,6 +1,7 @@
 #include "tests.h"
 #include <algorithm>
 #include <iostream>
+#include <assert.h>
 using namespace std;
 
 Solution problems;
@@ -169,5 +170,41 @@ bool gcd() {
 		}
 	}
 
+	return passed;
+}
+
+bool getPermutations() {
+	bool passed = true;
+	std::vector<int> inputs;
+	std::vector<std::vector<int>> corrects;
+
+	//0
+	inputs.push_back(1);
+	corrects.push_back(vector<int> {1});
+
+	//1
+	inputs.push_back(52);
+	corrects.push_back(vector<int> {25,52});
+
+	//2
+	inputs.push_back(123);
+	corrects.push_back(vector<int> {123,132,213,231,312,321});
+
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> sol = problems.getPermutations(inputs[i]);
+		assert(sol.size() == corrects[i].size() && "not maching sol and corrects size");
+		bool it = true;
+		for(int j = 0; j < corrects[i].size(); ++j){
+			if (find(sol.cbegin(), sol.cend(), corrects[i][j]) == sol.cend()){
+				it = false;
+				passed = false;
+			}
+		}
+		if (it)
+			cout << "getPermutations" << i << " ok" << endl;
+		else
+			cout << "getPermutations" << i << " failed" << endl;
+	}
+	
 	return passed;
 }

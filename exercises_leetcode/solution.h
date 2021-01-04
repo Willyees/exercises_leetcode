@@ -10,7 +10,7 @@ public:
 	int gcd_recursive(int x, int y) { return x == 0 ? y : gcd_recursive(y % x, x);}
 	std::vector<int> findPrimeFactors(int);
 	std::vector<int> getPermutations(int);
-	std::string getPermutations(std::string, std::string);
+	void getPermutations(std::vector<std::string>&, std::string, std::string);
 	/*****/
 	std::vector<int> twoSum(std::vector<int>, int target);//1.
 	std::vector<int> twoSum_hash(std::vector<int>, int target);//hash map version of twosum
