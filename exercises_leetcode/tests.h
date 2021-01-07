@@ -7,3 +7,4 @@ bool hasGroupsSizeX();
 bool findPrimeFactors();
 bool gcd();
 bool getPermutations();
+bool getNextPermutation();

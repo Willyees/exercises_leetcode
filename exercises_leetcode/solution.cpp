@@ -119,21 +119,37 @@ bool Solution::hasGroupsSizeX(vector<int>& deck) {
 }
 /*Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
 xes: 12 -> 21; 21->-1
+slow solution: permutations of a very long number will be still be O(n.size()!), possibly overflowing. Also, dont need to find all the permutations becuase only the next higher is needed (should discard all the ones leading to a lower number compared to 'num': can use std::next_permutation)
 */
 int Solution::nextGreaterElement(int n) {
-    int highest = n;
-    //splitting the int
-    vector<int> v_i;
-    while (n != 0) {
-        v_i.push_back(n % 10);
-        n /= 10;
+    int higher = numeric_limits<int>::max();
 
+    //find all the permutations, then check which is highest. O(N!)
+    vector<int> perm = getPermutations(n);
+    for (int& e : perm) {
+        if (e > n && e < higher)
+            higher = e;
     }
-    //find all the combinations, then check which is highest. O(N!)
-    for (int i = 0; i < v_i.size(); ++i) {
+    if (higher != numeric_limits<int>::max())
+        return higher;
+    return -1;
+}
 
+/*
+a faster solution: using std::next_permutation */
+int Solution::nextGreaterElement_stlnextPermutation(int n) {
+    string num = to_string(n);
+
+    if (next_permutation(num.begin(), num.end())) {
+        //could remove the try catch and use the (str.compare(s2) < 0) which compares position by position with a different string. This would check that next permuted string is not > max<int>().
+        try {
+            stoi(num);
+        }
+        catch (std::out_of_range& e) {
+            return -1;
+        }
+        return stoi(num);
     }
-
     return -1;
 }
 
@@ -169,7 +185,7 @@ std::vector<int> Solution::getPermutations(int num) {
     vector<int> results_i;
     getPermutations(results_s, "", to_string(num));
     results_i.resize(results_s.size());
-    transform(results_s.begin(), results_s.end(), results_i.begin(), [](string s) {return stoi(s); });
+    transform(results_s.begin(), results_s.end(), results_i.begin(), [](string s) {return stoi(s); });//this will fail in case the int is > max<int>()
     return results_i;//check what happens returnign reference to vector
 }
 
@@ -177,6 +193,7 @@ void Solution::getPermutations(std::vector<string>& result, std::string str, std
     int n = remaining.size();
     if (remaining.size() == 0) {
         result.push_back(str);
+        //cout << str << endl;
     }
     
     for (int i = 0; i < n; ++i) {
@@ -184,6 +201,35 @@ void Solution::getPermutations(std::vector<string>& result, std::string str, std
         string temp = str + remaining.at(i);
         getPermutations(result, temp, remaining_s);
     }
+}
+/*return true if a higher next permutation exists and modify n
+* return false if it doesn't exist and set n as lowest possible permutation
+* xes: n = 321-> no higher permutations exits -> false -> n = 123
+*/
+bool Solution::nextPermutation(string& n) {
+    if (n.size() == 1)
+        return false;
+
+    //find decreasing section
+    int last = n.size() - 1;
+    int index = last;
+    while (n[--index] >= n[last]) {
+        last = index;
+        if (index == 0) {//no more higher permutation, return 1st permutation
+            //sort(n.begin(), n.end());
+            reverse(n.begin(), n.end());//could sort, but this is a special case in which is only needed to reverse the string to get the lowest permutation
+            return false;
+        }
+    }
+
+    //find successive value to swap with s[index]
+    int swap_index = n.size();//starting from out of bounds because --swap_index is performed as first operation
+    while (n[--swap_index] <= n[index]);
+    //swap previous digit with its successive one
+    swap(n[swap_index], n[index]);
+    //reverse the previous decreasing section
+    reverse(n.begin() + index + 1, n.end());
+    return true;
 }
 
 /*

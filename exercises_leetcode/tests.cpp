@@ -208,3 +208,55 @@ bool getPermutations() {
 	
 	return passed;
 }
+
+bool getNextPermutation() {
+	bool passed = true;
+	std::vector<string> inputs;
+	std::vector<string> corrects;
+
+	//0
+	inputs.push_back("213");
+	corrects.push_back("231");
+
+	//1
+	inputs.push_back("321");
+	corrects.push_back("123");
+
+	//2
+	inputs.push_back("12");
+	corrects.push_back("21");
+
+	//3
+	inputs.push_back("5");
+	corrects.push_back("5");
+
+	//3
+	inputs.push_back("951430");
+	corrects.push_back("953014");
+	
+	//4
+	inputs.push_back("6541");
+	corrects.push_back("1456");
+
+	//5
+	inputs.push_back("153");
+	corrects.push_back("315");
+
+	//6
+	inputs.push_back("999");
+	corrects.push_back("999");
+
+	for (int i = 0; i < inputs.size(); i++) {
+		problems.nextPermutation(inputs[i]);
+		string sol = inputs[i];
+		if (sol == corrects[i])
+			cout << "nextPermutation" << i << " ok" << endl;
+		else {
+			cout << "nextPermutation" << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+
+	return passed;
+}
