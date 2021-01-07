@@ -81,7 +81,7 @@ string Solution::removeKdigits(string num, int k) {
         smallest = 9;
     }
     //clear leading zeroes
-    
+
     if (!output.empty())
         output.erase(0, output.find_first_not_of('0'));
 
@@ -153,6 +153,63 @@ int Solution::nextGreaterElement_stlnextPermutation(int n) {
     return -1;
 }
 
+/*find the longest substring without a repeating character
+* this solution is correct, but slow.
+*/
+int Solution::lengthOfLongestSubstring(string s) {
+    int longest = 0;
+    for (int i = 0; i < s.size(); ++i) {
+        unordered_set<char> set;
+        int j = i;
+        while (set.find(s[j]) == set.end() && j < s.size()) {
+            set.insert(s[j]);
+            ++j;
+        }
+        longest = max(j - i, longest);
+    }
+    return longest;
+}
+
+/*similar as _0 solution: using a slinding window to check if the characters are already in the string.
+* once a window between [i, j) has been checked, when adding j to the window, it is only needed to check j if it is in the interval because all the previous have been already checked
+* differently from _0, is only needed 1 set and not 1 per interval (this would require to add many items to each sets, O(j-i))
+*/
+int Solution::lengthOfLongestSubstring_1(std::string s) {
+    size_t longest = 0;
+    unordered_set<char> uset;
+    size_t i = 0, j = 0;
+    while (i < s.size() && j < s.size()) {
+        if (uset.find(s[j]) == uset.end()){
+            uset.insert(s[j++]);
+            longest = max<unsigned int>(longest, j - i);//only calculate the longest in case no duplicate were found
+        }
+        else {
+            uset.erase(s[i++]);
+        }
+    }
+    return longest;
+}
+
+/*different approach, using a map to store the index of the characters. It is used to look up indexes, not to check if the character is already present
+*/
+int Solution::lengthOfLongestSubstring_2(std::string s) {
+    size_t longest = 0;
+    unordered_map<char, size_t> umap;
+    size_t i = 0, j = 0;
+    while (i < s.size() && j < s.size()) {
+        if (umap.find(s[j]) == umap.end()) {
+            umap.insert(make_pair(s[j], j));
+        }
+        else {
+            i = max(umap.at(s[j]) + 1, i);//there is the possibility that i gets pushed back in case an old character has not been encountered since some time43
+            umap.at(s[j]) = j;
+        }
+        longest = max<unsigned int>(longest, j - i + 1);//calculate it in any case: if would only do it when no duplicate are found, it would miss 1 case everytime
+        j++;
+    }
+    return longest;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going
@@ -222,10 +279,10 @@ bool Solution::nextPermutation(string& n) {
         }
     }
 
-    //find successive value to swap with s[index]
+    //find successive value to swap with n[index]
     int swap_index = n.size();//starting from out of bounds because --swap_index is performed as first operation
     while (n[--swap_index] <= n[index]);
-    //swap previous digit with its successive one
+    //swap index digit with its lexicographically successive one
     swap(n[swap_index], n[index]);
     //reverse the previous decreasing section
     reverse(n.begin() + index + 1, n.end());

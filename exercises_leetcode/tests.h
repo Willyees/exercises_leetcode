@@ -8,3 +8,6 @@ bool findPrimeFactors();
 bool gcd();
 bool getPermutations();
 bool getNextPermutation();
+bool getlengthOfLongestSubstring_0();
+bool getlengthOfLongestSubstring_1();
+bool getlengthOfLongestSubstring_2();

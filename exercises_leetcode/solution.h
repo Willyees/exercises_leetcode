@@ -20,4 +20,7 @@ public:
 	bool hasGroupsSizeX(std::vector<int>& deck); //914. X of a Kind in a Deck of Cards
 	int nextGreaterElement(int);//556. Next Greater Element III
 	int nextGreaterElement_stlnextPermutation(int);//556. Next Greater Element III. best solution involves finding the next greater permutation without finding them all and then sorting them
+	int lengthOfLongestSubstring(std::string);//Jan 07 daily. slow solution O(N*M)
+	int lengthOfLongestSubstring_1(std::string);//Jan 07 daily. faster solution
+	int lengthOfLongestSubstring_2(std::string);
 };

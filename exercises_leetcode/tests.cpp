@@ -260,3 +260,103 @@ bool getNextPermutation() {
 
 	return passed;
 }
+
+bool getlengthOfLongestSubstring_0() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back("abcabcbb");
+	corrects.push_back(3);
+
+	//1
+	inputs.push_back("bbbbb");
+	corrects.push_back(1);
+
+	//2
+	inputs.push_back("pwwkew");
+	corrects.push_back(3);
+	
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.lengthOfLongestSubstring(inputs[i]);
+		if (sol == corrects[i])
+			cout << "lengthOfLongestSubstring_0 " << i << " ok" << endl;
+		else {
+			cout << "lengthOfLongestSubstring_0" << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
+bool getlengthOfLongestSubstring_1() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back("abcabcbb");
+	corrects.push_back(3);
+
+	//1
+	inputs.push_back("bbbbb");
+	corrects.push_back(1);
+
+	//2
+	inputs.push_back("pwwkew");
+	corrects.push_back(3);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.lengthOfLongestSubstring_1(inputs[i]);
+		if (sol == corrects[i])
+			cout << "lengthOfLongestSubstring_1 " << i << " ok" << endl;
+		else {
+			cout << "lengthOfLongestSubstring_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
+bool getlengthOfLongestSubstring_2() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back("abcabcbb");
+	corrects.push_back(3);
+
+	//1
+	inputs.push_back("bbbbb");
+	corrects.push_back(1);
+
+	//2
+	inputs.push_back("pwwkew");
+	corrects.push_back(3);
+
+	//3
+	inputs.push_back("tmmzuxt");
+	corrects.push_back(5);
+	
+	//3
+	inputs.push_back("aabaab!bb");
+	corrects.push_back(3);
+
+
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.lengthOfLongestSubstring_2(inputs[i]);
+		if (sol == corrects[i])
+			cout << "lengthOfLongestSubstring_2 " << i << " ok" << endl;
+		else {
+			cout << "lengthOfLongestSubstring_2 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
