@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <iostream>
 #include <numeric>
+#include <sstream>
 
 using namespace std;
 
@@ -210,6 +211,50 @@ int Solution::lengthOfLongestSubstring_2(std::string s) {
     return longest;
 }
 
+/*bruteforce approach
+*/
+int Solution::findKthPositive(vector<int>& arr, int k) {
+    int j = 0;
+    size_t c = 0;
+    size_t index = 0;
+    while (c != k) {
+        if (arr[index] != j)
+            ++c;
+        else
+            index++;
+        j++;
+    }
+    return j;
+    /*for (int i = 0; i < arr.size() - 2; ++i) {
+        if (arr[i + 1] != arr[i] + 1) {
+            int j = i;
+            while (++j < arr[i + 1]) {
+                if (++c == k)
+                    return j;
+            }
+        }
+    }
+    return -1;*/
+}
+
+bool Solution::arrayStringsAreEqual(std::vector<string>& word1, std::vector<string>& word2) {
+    ostringstream s1;
+    ostringstream s2;
+    for_each(word1.begin(), word1.end(), [&s1](string s) {s1 << s; });
+    for_each(word2.begin(), word2.end(), [&s2](string s) {s2 << s; });
+
+    return !s1.str().compare(s2.str()); 
+}
+
+/*return smallest greater than n prime palindrome
+* 
+*/
+int Solution::primePalindrome(int n) {
+    while (!isPalindrome(to_string(n)) || !isPrime(n))//best to check first isPalindrome because it is O(n.size()), compared to isprime O(sqrt(n)) which is much longer
+        ++n;
+    return n;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going
@@ -286,6 +331,31 @@ bool Solution::nextPermutation(string& n) {
     swap(n[swap_index], n[index]);
     //reverse the previous decreasing section
     reverse(n.begin() + index + 1, n.end());
+    return true;
+}
+
+bool Solution::isPalindrome(string s) {
+    size_t length = s.size() - 1;
+    for (int i = 0; i < s.size() / 2; ++i)
+        if (s[i] != s[length - i]){
+            return false;
+        }
+    return true;
+}
+
+bool Solution::isPrime(int n) {
+    if (n < 2)
+        return false;
+
+    if (n == 2)
+        return true;
+    else if (n % 2 == 0)
+        return false;
+
+    for (int i = 3; i <= sqrt(n); i += 2) {
+        if (n % i == 0)
+            return false;
+    }
     return true;
 }
 

@@ -360,3 +360,110 @@ bool getlengthOfLongestSubstring_2() {
 	return passed;
 }
 
+bool isPalindrome() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<bool> corrects;
+
+	//0
+	inputs.push_back("123");
+	corrects.push_back(false);
+
+	//1
+	inputs.push_back("12321");
+	corrects.push_back(true);
+
+	//2
+	inputs.push_back("1");
+	corrects.push_back(true);
+
+	//3
+	inputs.push_back("22");
+	corrects.push_back(true);
+
+	//4
+	inputs.push_back("21");
+	corrects.push_back(false);
+
+	//5
+	inputs.push_back("2222");
+	corrects.push_back(true);
+
+	//6
+	inputs.push_back("");
+	corrects.push_back(true);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.isPalindrome(inputs[i]);
+		if (sol == corrects[i])
+			cout << "isPalindrome " << i << " ok" << endl;
+		else {
+			cout << "isPalindrome " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
+bool isPrime() {
+	bool passed = true;
+
+	
+	vector<bool> corrects;
+
+	//1-20
+	vector<int> inputs { 2, 3,	5,	7,	11,	13,	17,	19,	23,	29,	31,	37,	41,	43,	47,	53,	59,	61,	67,	71, };
+	for (int i = 0; i < 20; ++i)
+		corrects.push_back(true);
+
+	//21
+	inputs.push_back(13);
+	corrects.push_back(true);
+
+	//22
+	inputs.push_back(1);
+	corrects.push_back(true);
+
+	//23
+	inputs.push_back(2);
+	corrects.push_back(true);
+
+	//24
+	inputs.push_back(3);
+	corrects.push_back(true);
+
+	//25
+	inputs.push_back(6);
+	corrects.push_back(false);
+
+	//26
+	inputs.push_back(15);
+	corrects.push_back(false);
+
+	//27
+	inputs.push_back(17);
+	corrects.push_back(true);
+
+	//28
+	inputs.push_back(1);
+	corrects.push_back(false);
+
+	//29
+	inputs.push_back(0);
+	corrects.push_back(false);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		bool sol = problems.isPrime(inputs[i]);
+		if (sol == corrects[i])
+			cout << "isPrime " << i << " ok" << endl;
+		else {
+			cout << "isPrime " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+
+	return passed;
+}
+

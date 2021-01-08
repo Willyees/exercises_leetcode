@@ -15,12 +15,9 @@ int main() {
 	catch (const char* msg) {
 		cerr << msg << endl;
 	}*/
+	string s = "123";
 	Solution sol;
-	//vector<int> v{ 1, 2, 3, 4, 4, 3, 2, 1 };
-	getlengthOfLongestSubstring_0();
-	getlengthOfLongestSubstring_1();
-	getlengthOfLongestSubstring_2();
-
+	cout << sol.primePalindrome(9989900) << endl;
 
 }
 

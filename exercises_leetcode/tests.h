@@ -11,3 +11,5 @@ bool getNextPermutation();
 bool getlengthOfLongestSubstring_0();
 bool getlengthOfLongestSubstring_1();
 bool getlengthOfLongestSubstring_2();
+bool isPalindrome();
+bool isPrime();

@@ -12,6 +12,8 @@ public:
 	std::vector<int> getPermutations(int);
 	void getPermutations(std::vector<std::string>&, std::string, std::string);
 	bool nextPermutation(std::string&);
+	bool isPalindrome(std::string);
+	bool isPrime(int);
 	/*****/
 	std::vector<int> twoSum(std::vector<int>, int target);//1.
 	std::vector<int> twoSum_hash(std::vector<int>, int target);//hash map version of twosum
@@ -23,4 +25,7 @@ public:
 	int lengthOfLongestSubstring(std::string);//Jan 07 daily. slow solution O(N*M)
 	int lengthOfLongestSubstring_1(std::string);//Jan 07 daily. faster solution
 	int lengthOfLongestSubstring_2(std::string);
+	int findKthPositive(std::vector<int>& arr, int k);//Jan 06 daily. Kth Missing Positive Number
+	bool arrayStringsAreEqual(std::vector<std::string>& word1, std::vector<std::string>& word2);//Jan 08 daily. 
+	int primePalindrome(int);//866. Prime Palindrome
 };
