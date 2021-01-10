@@ -10,6 +10,7 @@
 #include <iostream>
 #include <numeric>
 #include <sstream>
+#include "datastructures.h"
 
 using namespace std;
 
@@ -255,6 +256,38 @@ int Solution::primePalindrome(int n) {
     return n;
 }
 
+/*return the length of the shortest transformation sequence from beginWord to endWord. only 1 letter transformed per time and the transformed word must be in the vector
+*/
+int Solution::ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+    //find word in wordlist with 2 same items
+    //add words from the list in the graph
+    Graph g(wordList.size());
+    g.addEdges(wordList);
+    vector<string> trans = helpers::similarTransformations(beginWord, wordList);
+    vector<string> result;
+    uint16_t length = numeric_limits<uint16_t>::max();
+    for (string& s : trans) {
+        unordered_map<string, string> v = g.breadthFistSearch(s);
+        std::vector<string> v_s;
+        string start = beginWord;
+        string end = endWord;
+        v_s.push_back(end);
+        //find the path from last word using the parents
+        while (end != start && end != "") {
+            end = v.find(end)->second;
+            v_s.push_back(end);
+        }
+        reverse(v_s.begin(), v_s.end());
+        for_each(v_s.begin(), v_s.end(), [](string s) {cout << s << endl; });
+        if (v_s.size() < length) {
+            result.resize(v_s.size());
+            copy(result.begin(), result.end(), v_s.begin());
+            length = v_s.size();
+        }
+    }
+    return length;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going
@@ -376,4 +409,18 @@ int Solution::gcd(int a, int b) {
     //int result = 1;
     //for_each(intersection.begin(), intersection.end(), [&result](int value) { result *= value; });
 
+}
+
+std::vector<string> helpers::similarTransformations(string input, vector<string> wordlist) {
+    vector<string> result;
+    for (string& s : wordlist) {
+        uint32_t diff = 0;
+        for (int i = 0; i < input.size(); ++i) {
+            if (input[i] != s[i])
+                diff++;
+        }
+        if (diff == 1)
+            result.push_back(s);
+    }
+    return result;
 }
