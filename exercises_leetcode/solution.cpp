@@ -288,6 +288,63 @@ int Solution::ladderLength(string beginWord, string endWord, vector<string>& wor
     return length;
 }
 
+/*sum position by position element. if > 10, add the remainder to the next element
+* xes: [2,4,3], l2 = [5,6,4], return [7,0,8]
+*/
+ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
+    //not possible to iterate backwards (no parent pointer)
+    assert(l1 != nullptr && "l1 is nullptr");
+    ListNode* head = new ListNode();//keep track of first pointer (return at the end)
+    ListNode* current = head;
+    ListNode* previous = head;
+    int carried = 0;
+    while (l1 != nullptr && l2 != nullptr) {
+        int i = l1->val + l2->val + carried;
+        if (i > 9) {
+            i = i % 10;
+            carried = 1;
+        }
+        else if (i >= 0)
+            carried = 0;
+        else
+            throw "sum should be > 0";
+        current = new ListNode(i);
+        previous->next = current;
+        previous = current;
+        l1 = l1->next; l2 = l2->next;
+    }
+
+    ListNode* longer = nullptr;
+    if (l1 != nullptr) longer = l1;
+    else if(l2 != nullptr) longer = l2;
+
+    while (longer != nullptr) {
+        int i = longer->val + carried;
+        if (i > 9){
+            i = i % 10;
+            carried = 1;
+        }
+        else if (i >= 0)
+            carried = 0;
+        else
+            throw "sum should be > 0";
+
+        current = new ListNode(i);
+        previous->next = current;
+        previous = current;
+        longer = longer->next;
+    }
+    //check no carried are present in last part
+    if(carried == 1){
+        current = new ListNode(carried);
+        previous->next = current;
+        previous = current;
+    }
+    ListNode* temp = head->next;
+    delete head;
+    return temp;//head is an empty node before the actual first one
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

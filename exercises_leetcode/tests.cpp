@@ -467,3 +467,78 @@ bool isPrime() {
 	return passed;
 }
 
+bool addTwoNumbers() {
+	auto loadLinkedList = [](vector<int> a) {
+		ListNode* previous = nullptr;
+		for (auto it = a.rbegin(); it != a.rend(); ++it) {
+			ListNode* l = new ListNode(*it, previous);
+			previous = l;
+		}
+		return previous;
+	};
+	auto linkedListEqual = [](ListNode* l1, ListNode* l2) {
+		try {
+			while (l1 != nullptr || l2 != nullptr) {//if they have different size, it should try to access to nullptr, then catch error
+				if (l1 == nullptr || l2 == nullptr)
+					throw "trying to access nullptr";
+				cout << l1->val << " " << l2->val << endl;
+				if (l1->val != l2->val)
+					return false;
+				l1 = l1->next; l2 = l2->next;
+			}
+		}
+		catch (const char* msg) {
+			cerr << msg << endl;
+		}
+		return true;
+	};
+
+	bool passed = true;
+
+	vector<pair<ListNode*, ListNode*>> inputs;
+	vector<ListNode*> corrects;
+
+	//0
+	vector<int> a { 2,4,3 };
+	vector<int> b { 5,6,4 };
+	ListNode* l1 = loadLinkedList(a);
+	ListNode* l2 = loadLinkedList(b);
+	inputs.push_back(make_pair(l1, l2));
+	vector<int> c{ 7,0,8 };
+	ListNode* o = loadLinkedList(c);
+	corrects.push_back(o);
+
+	//1
+	a = { 0 };
+	b = { 0 };
+	l1 = loadLinkedList(a);
+	l2 = loadLinkedList(b);
+	inputs.push_back(make_pair(l1, l2));
+	c = { 0 };
+	o = loadLinkedList(c);
+	corrects.push_back(o);
+
+	//1
+	a = { 9,9,9,9,9,9,9 };
+	b = { 9,9,9,9 };
+	l1 = loadLinkedList(a);
+	l2 = loadLinkedList(b);
+	inputs.push_back(make_pair(l1, l2));
+	c = { 8,9,9,9,0,0,0,1 };
+	o = loadLinkedList(c);
+	corrects.push_back(o);
+
+
+	for (int i = 0; i < inputs.size(); i++) {
+		ListNode* sol = problems.addTwoNumbers(inputs[i].first, inputs[i].second);
+		if (linkedListEqual(sol, corrects[i]))
+			cout << "addTwoNumbers " << i << " ok" << endl;
+		else {
+			cout << "addTwoNumbers " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+

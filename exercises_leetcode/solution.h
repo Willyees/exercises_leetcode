@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "datastructures.h"
 
 namespace helpers {
 	std::vector<std::string> similarTransformations(std::string input, std::vector<std::string> wordlist);
@@ -32,4 +33,5 @@ public:
 	bool arrayStringsAreEqual(std::vector<std::string>& word1, std::vector<std::string>& word2);//Jan 08 daily. 
 	int primePalindrome(int);//866. Prime Palindrome
 	int ladderLength(std::string beginWord, std::string endWord, std::vector<std::string>& wordList);//Word Ladder. Jan 09 daily
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);//Add Two Numbers. Jan 12 daily
 };

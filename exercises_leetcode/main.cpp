@@ -31,9 +31,9 @@ int main() {
 	catch (const char* msg) {
 		cerr << msg << endl;
 	}*/
-	vector<string> v{ "hot","dot","dog","lot","log","cog" };
-	Solution sol;
-	cout << sol.ladderLength("hit", "cog", v) << endl;
+	
+	addTwoNumbers();
+
 	
 }
 
