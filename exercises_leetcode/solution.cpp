@@ -290,6 +290,7 @@ int Solution::ladderLength(string beginWord, string endWord, vector<string>& wor
 
 /*sum position by position element. if > 10, add the remainder to the next element
 * xes: [2,4,3], l2 = [5,6,4], return [7,0,8]
+* time: O(max(l1.size, l2.size); space: O(max(l1.size, l2.size) + 1)
 */
 ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
     //not possible to iterate backwards (no parent pointer)
@@ -343,6 +344,40 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
     ListNode* temp = head->next;
     delete head;
     return temp;//head is an empty node before the actual first one
+}
+
+/*people stores the ith weight of person. a boat can carry at most 2 people if the weight is < limit, otherwise it is guaranteed to carry 1 person.
+* return the minimum number of boats needed to carry all the people
+*/
+int Solution::numRescueBoats(vector<int>& people, int limit) {
+    //algorithm: if heaviest person can be paired with lightest, do so. otherwise they will need to a boat for themselves
+    sort(people.begin(), people.end());
+    int boats = 0;
+    int it_b = 0;//points last. heaviest person
+    int it_e = people.size() - 1;//points out of bound vector (-1 begin)
+    while (it_b <= it_e) {
+        if(people[it_e] + people[it_b] > limit){//if heavy + light cannot stay in same boat, use 1 for the heavy alone
+            --it_e;
+        }
+        else {
+            --it_e;
+            ++it_b;
+        }
+        ++boats;
+    }
+    return boats;
+}
+
+/*recursive solution
+* limit: people: vector of each person weight, weight total limit per boat, n: current vector index, max_ppl: max ppl per boat, n_ppl: people considered in the weight 
+*/
+int Solution::numRescueBoats(vector<int>& people, int limit, int n, int max_ppl, int n_ppl) {
+    //failed attempt: cannot sort them into different boat of size 2. this function will only find the best situation in which the maximum number of people are put into a SINGLE boat (implementation of knapsack problem)
+    if (n == 0 || limit == 0)
+        return 0;
+    if (people[n - 1] > limit || n_ppl > max_ppl)
+        return numRescueBoats(people, limit, n - 1, max_ppl, n_ppl);
+    return max(people[n - 1] + numRescueBoats(people, limit - people[n - 1], n - 1, max_ppl, n_ppl + 1), numRescueBoats(people, limit, n - 1, max_ppl, n_ppl));
 }
 
 std::vector<int> Solution::findPrimeFactors(int x) {

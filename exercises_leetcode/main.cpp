@@ -31,8 +31,9 @@ int main() {
 	catch (const char* msg) {
 		cerr << msg << endl;
 	}*/
-	
-	addTwoNumbers();
+	vector<int> v{ 3,5,3,4 };
+	Solution sol;
+	cout << sol.numRescueBoats(v, 5) << endl;
 
 	
 }
