@@ -18,6 +18,10 @@ public:
 	bool nextPermutation(std::string&);
 	bool isPalindrome(std::string);
 	bool isPrime(int);
+	std::vector<int>::iterator remove_vi(std::vector<int>::iterator, std::vector<int>::iterator, int);//used to move element matching at the end of vector
+	/*interview questions exercises*/
+	int removeDuplicates(std::vector<int>& nums);//Remove Duplicates from Sorted Array, using stl remove and erase
+	int removeDuplicates_1(std::vector<int>& nums);//Remove Duplicates from Sorted Array, implementing remove functionality
 	/*****/
 	std::vector<int> twoSum(std::vector<int>, int target);//1.
 	std::vector<int> twoSum_hash(std::vector<int>, int target);//hash map version of twosum

@@ -484,6 +484,50 @@ bool Solution::isPrime(int n) {
     return true;
 }
 
+/*implementation of std::remove. it works on the whole vector, cannot specify smaller subsection in it
+* could be improved because at the moment is O(N^2)
+*/
+std::vector<int>::iterator Solution::remove_vi(std::vector<int>::iterator b, std::vector<int>::iterator end, int e) {
+
+    for (auto it_b = b, it_e = b; it_b < end && it_e < end; ++it_b, ++it_e) {
+        if (*it_b == e) {
+            while (it_e != end && *it_e == e){
+                ++it_e;
+            }
+            *it_b = *it_e;
+            --end;
+            //slide 1 left until end
+            auto it_c = it_b + 1;
+            while (it_c < end) {
+                *it_c = *(it_c + 1);
+                it_c++;
+            }
+        }
+    }
+    return end;
+}
+
+/*remove duplicates in place. no use of extra storage O(1) space
+* using remove erase idiom
+*/
+int Solution::removeDuplicates(vector<int>& nums) {
+    vector<int>::iterator it_e = nums.end();
+    for (auto it = nums.begin(); it != it_e; ++it) {
+        it_e = remove(it + 1, it_e, *it);
+    }
+    nums.erase(it_e, nums.end());
+    return nums.size();
+}
+
+int Solution::removeDuplicates_1(std::vector<int>& nums) {
+    vector<int>::iterator it_e = nums.end();
+    for (auto it = nums.begin(); it != it_e; ++it) {
+        it_e = remove_vi(it + 1, it_e,  *it);
+    }
+    nums.erase(it_e, nums.end());
+    return nums.size();
+}
+
 /*
 find all factors of the two numbers. multiply the common ones
 xes: 12: 2,2,3; 36: 2,2,3,3; gdc = 2*2*3* = 12*/

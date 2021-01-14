@@ -1,6 +1,9 @@
 #pragma once
 #include "solution.h"
 
+/*helpers*/
+
+/**/
 bool twoSum();
 bool twoSum_hash();
 bool hasGroupsSizeX();
@@ -14,3 +17,4 @@ bool getlengthOfLongestSubstring_2();
 bool isPalindrome();
 bool isPrime();
 bool addTwoNumbers();
+bool removeDuplicates();

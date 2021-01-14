@@ -542,3 +542,37 @@ bool addTwoNumbers() {
 	return passed;
 }
 
+bool removeDuplicates() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(vector<int> {1, 1, 2});
+	corrects.push_back(vector<int> {1, 2});
+
+	//1
+	inputs.push_back(vector<int> {0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
+	corrects.push_back(vector<int> {0, 1, 2, 3, 4});
+
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> vi = inputs[i];
+		problems.removeDuplicates(vi);
+		if (vi == corrects[i])
+			cout << "removeDuplicates " << i << " ok" << endl;
+		else {
+			cout << "removeDuplicates " << i << " failed" << endl;
+			passed = false;
+		}
+		problems.removeDuplicates_1(inputs[i]);
+		if (inputs[i] == corrects[i])
+			cout << "removeDuplicates_1 " << i << " ok" << endl;
+		else {
+			cout << "removeDuplicates_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
