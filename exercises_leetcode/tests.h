@@ -18,3 +18,4 @@ bool isPalindrome();
 bool isPrime();
 bool addTwoNumbers();
 bool removeDuplicates();
+bool maxProfit();

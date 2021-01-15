@@ -576,3 +576,33 @@ bool removeDuplicates() {
 	return passed;
 }
 
+bool maxProfit() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back(vector<int> {7, 1, 5, 3, 6, 4});
+	corrects.push_back(7);
+
+	//0
+	inputs.push_back(vector<int> {1, 2, 3, 4, 5});
+	corrects.push_back(4);
+	
+	//0
+	inputs.push_back(vector<int> {7, 6, 4, 3, 1});
+	corrects.push_back(0);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.maxProfit(inputs[i]);
+		if (sol == corrects[i])
+			cout << "maxProfit " << i << " ok" << endl;
+		else {
+			cout << "maxProfit " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+

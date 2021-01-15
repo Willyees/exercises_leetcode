@@ -379,6 +379,27 @@ int Solution::numRescueBoats(vector<int>& people, int limit, int n, int max_ppl,
         return numRescueBoats(people, limit, n - 1, max_ppl, n_ppl);
     return max(people[n - 1] + numRescueBoats(people, limit - people[n - 1], n - 1, max_ppl, n_ppl + 1), numRescueBoats(people, limit, n - 1, max_ppl, n_ppl));
 }
+/*return max profit by selling stocks. prices: history of stock prices.
+* can only buy if no stock is hold
+* O(N) single pass, O(1) time
+*/
+int Solution::maxProfit(vector<int>& prices) {
+    //find minimum in decreasing sequence
+    int min = 0;
+    int max = 0;
+    int profit = 0;
+    vector<int>::const_iterator it = prices.begin();
+    while(it != prices.end()){
+        while (it < (prices.end()- 1) && *it >= *(it + 1)) { ++it; }
+        min = *it;
+        //find maximum in increasing sequence
+        while (it < (prices.end() - 1) && *it <= *(it + 1)) { ++it; }
+        max = *it;
+        profit += (max - min);
+        ++it;
+    }
+    return profit;
+}
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
