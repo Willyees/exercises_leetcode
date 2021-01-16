@@ -19,3 +19,4 @@ bool isPrime();
 bool addTwoNumbers();
 bool removeDuplicates();
 bool maxProfit();
+bool rotate();

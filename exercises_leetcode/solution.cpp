@@ -401,6 +401,68 @@ int Solution::maxProfit(vector<int>& prices) {
     return profit;
 }
 
+/*move the last element in the first position for k times
+* xes: k = 1, nums = {1,2,3} -> nums = {3,1,2}
+* slow bruteforce solution O(k*N), space O(1)
+*/
+void Solution::rotate(std::vector<int>& nums, int k) {
+    for (int i = 0; i < k; ++i) {
+        int last = nums[nums.size() - 1];
+        for (int j = nums.size() - 1; j >= 1; --j) {
+            nums[j] = nums[j - 1];
+        }
+        nums[0] = last;
+    }
+}
+
+void Solution::rotate_1(std::vector<int>& nums, int k) {
+    //everything moved of 2 positions
+    int l = nums.size() - 1;
+    int index = nums.size() - k;
+    int prev = nums[index];
+
+    for (int i = 0; i < nums.size(); ++i) {
+        int temp = nums[(index + k ) % l];
+        nums[(index + k ) % l] = prev;
+        prev = temp;
+        index += k;
+    }
+}
+
+/*reverse the array 2 times, the second time reverse using k as a barrier index
+* xes: {1,2,3,4,5,6}, 2 -> first reverse {6,5|,4,3,2,1}, second reverse {5,6,|1,2,3,4}
+*/
+void Solution::rotate_2(std::vector<int>& nums, int k) {
+    k %= nums.size();
+    //can use std::reverse(begin, end)
+    //otherwise
+    //reverse 1.
+    for (auto it_b = nums.begin(), it_e = nums.end() - 1; it_e > it_b; it_b++, it_e--) {
+        int temp = *it_b;
+        *it_b = *it_e;
+        *it_e = temp;
+    }
+    //reverse 2 with barrier first part
+    int start = 0;
+    int end = k - 1;
+    while (start < end) {
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+        start++; end--;
+    }
+    
+    //reverse 2 with barrier second part
+    start = k;
+    end = nums.size() - 1;
+    while (start < end) {
+        int temp = nums[start];
+        nums[start] = nums[end];
+        nums[end] = temp;
+        start++; end--;
+    }
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

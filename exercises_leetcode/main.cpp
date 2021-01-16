@@ -31,9 +31,9 @@ int main() {
 	catch (const char* msg) {
 		cerr << msg << endl;
 	}*/
-	vector<int> v{ 7,6,4,3,1 };
+	vector<int> v{ -1};
 	Solution sol;
-	maxProfit();
+	rotate();
 }
 
 

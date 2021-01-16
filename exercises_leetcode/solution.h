@@ -41,5 +41,8 @@ public:
 	int numRescueBoats(std::vector<int>& people, int limit);//Boats to Save People. Jan 13 daily
 	int numRescueBoats(std::vector<int>& people, int limit, int n, int max_ppl, int n_ppl);//recursive helper function. O(2^n). failed attempt
 	int maxProfit(std::vector<int>& prices);//Best Time to Buy and Sell Stock II. O(N)
+	void rotate(std::vector<int>& nums, int k);//Rotate Array
+	void rotate_1(std::vector<int>& nums, int k);//Rotate Array
+	void rotate_2(std::vector<int>& nums, int k);//Rotate Array
 
 };

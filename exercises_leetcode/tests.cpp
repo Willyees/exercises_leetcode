@@ -606,3 +606,46 @@ bool maxProfit() {
 	return passed;
 }
 
+bool rotate() {
+	bool passed = true;
+	vector<pair<int, vector<int>>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(make_pair(2, vector<int> {1,2,3,4}));
+	corrects.push_back({ 3,4,1,2 });
+
+	//1
+	inputs.push_back(make_pair(3, vector<int> {1, 2, 3, 4, 5, 6, 7}));
+	corrects.push_back({ 5,6,7,1,2,3,4 });
+	
+	//2
+	inputs.push_back(make_pair(2, vector<int> {-1, -100, 3, 99}));
+	corrects.push_back({ 3,99,-1,-100 });
+
+	//2
+	inputs.push_back(make_pair(2, vector<int> {-1}));
+	corrects.push_back({ -1});
+	
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> v = inputs[i].second;
+		problems.rotate(v, inputs[i].first);
+		if (v == corrects[i])
+			cout << "rotate " << i << " ok" << endl;
+		else {
+			cout << "rotate " << i << " failed" << endl;
+			passed = false;
+		}
+		vector<int> v1 = inputs[i].second;
+		problems.rotate_2(v1, inputs[i].first);
+		if (v1 == corrects[i])
+			cout << "rotate_2 " << i << " ok" << endl;
+		else {
+			cout << "rotate_2 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+	return passed;
+
+}
+
