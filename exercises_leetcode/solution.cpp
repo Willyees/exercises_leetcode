@@ -463,6 +463,48 @@ void Solution::rotate_2(std::vector<int>& nums, int k) {
     }
 }
 
+/*find if it returns any duplicates
+* using stl unique: removes consecutive elements by moving them at the end of the array and outputs iterator pointing to first elements moved at the end of vector (duplicate element). It needs also to shift other elements 1 position left
+* O(NlogN) to sort for binary sort, O(N) unique -> O(NLogN) time, O(1) space
+*/
+bool Solution::containsDuplicate(std::vector<int>& v) {
+    //need to sort the vector to be able to delete all the consecutive elements
+    sort(v.begin(), v.end());
+    auto last = unique(v.begin(), v.end());//move consecutive end of v
+    if (last != v.end())
+        return true;
+    return false;
+}
+
+/*attempt to find if duplicates without sorting, using hash map
+* time: O(N), space : O(N)
+* hash map insert(O(1)), if using insert from a binary tree O(logN) it would be O(NlogN)
+*/
+bool Solution::containsDuplicate_1(std::vector<int>& v) {
+    unordered_map<int, int> map_i;//<position, counter duplicates>
+    
+    for (int& e : v) {
+        auto it = map_i.find(e);
+        if (it != map_i.end())
+            it->second += 1;
+        else
+            map_i.insert(make_pair(e, 1));
+    }
+    for (auto it = map_i.begin(); it != map_i.end(); ++it)
+        if (it->second != 1)
+            return true;
+    return false;
+}
+
+bool Solution::containsDuplicate_2(std::vector<int>& v) {
+    unordered_set<int> set_b;
+    for (auto& e : v)
+        set_b.insert(e);
+    if (set_b.size() != v.size())
+        return true;//some elements were not inserted because they exists already
+    return true;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

@@ -44,5 +44,8 @@ public:
 	void rotate(std::vector<int>& nums, int k);//Rotate Array
 	void rotate_1(std::vector<int>& nums, int k);//Rotate Array
 	void rotate_2(std::vector<int>& nums, int k);//Rotate Array
+	bool containsDuplicate(std::vector<int>&);//Contains Duplicates, stl
+	bool containsDuplicate_1(std::vector<int>&);//Contains Duplicates, hashmap O(N), O(N)
+	bool containsDuplicate_2(std::vector<int>&);//Contains Duplicates, hashset O(N), O(N)
 
 };

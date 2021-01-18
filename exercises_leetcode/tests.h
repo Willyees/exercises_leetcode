@@ -20,3 +20,4 @@ bool addTwoNumbers();
 bool removeDuplicates();
 bool maxProfit();
 bool rotate();
+bool containsDuplicate();

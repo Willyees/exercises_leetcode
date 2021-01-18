@@ -31,9 +31,7 @@ int main() {
 	catch (const char* msg) {
 		cerr << msg << endl;
 	}*/
-	vector<int> v{ -1};
-	Solution sol;
-	rotate();
+	containsDuplicate();
 }
 
 

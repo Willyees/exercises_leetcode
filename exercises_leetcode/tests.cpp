@@ -649,3 +649,53 @@ bool rotate() {
 
 }
 
+bool containsDuplicate() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<bool> corrects;
+
+	//0
+	inputs.push_back(vector<int> { 1, 2, 3, 1 });
+	corrects.push_back(true);
+
+	//1
+	inputs.push_back(vector<int> {1, 2, 3, 4 });
+	corrects.push_back(false);
+
+	//2
+	inputs.push_back(vector<int> {1, 1, 1, 3, 3, 4, 3, 2, 4, 2 });
+	corrects.push_back(true);
+
+	//3
+	inputs.push_back(vector<int> {});
+	corrects.push_back(false);
+
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> v_i = inputs[i];
+		bool sol = problems.containsDuplicate(v_i);
+		if (sol == corrects[i])
+			cout << "containsDuplicate " << i << " ok" << endl;
+		else {
+			cout << "containsDuplicate " << i << " failed" << endl;
+			passed = false;
+		}
+
+		sol = problems.containsDuplicate_1(inputs[i]);
+		if (sol == corrects[i])
+			cout << "containsDuplicate_1 " << i << " ok" << endl;
+		else {
+			cout << "containsDuplicate_1 " << i << " failed" << endl;
+			passed = false;
+		}
+
+		sol = problems.containsDuplicate_2(inputs[i]);
+		if (sol == corrects[i])
+			cout << "containsDuplicate_2 " << i << " ok" << endl;
+		else {
+			cout << "containsDuplicate_2 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+	return passed;
+}
+
