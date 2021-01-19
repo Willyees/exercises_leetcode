@@ -505,6 +505,73 @@ bool Solution::containsDuplicate_2(std::vector<int>& v) {
     return true;
 }
 
+/*nums: series of ints, all are doubles and one is a single. return the single value
+* can't use std::unique because it leaves 1 value for the duplicates, but we want it all removed
+* bruteforce: O(N^2)
+* not using any counter variable. tried an exotic way to solve it. in case the loop reaches the last j value, return it as the correct answer
+*/
+int Solution::singleNumber(std::vector<int>& nums) {
+    for (int i = 0; i < nums.size(); ++i) {
+        for (int j = 0; j < nums.size(); ++j) {
+            if (nums[i] == nums[j])
+                if(i != j)
+                    break;
+            if (j == nums.size() - 1)
+                return nums[i];
+        }
+    }
+    return -1;
+}
+
+/*using hashmap, time: O(N), space: O(N)*/
+int Solution::singleNumber_1(std::vector<int>& nums) {
+    unordered_map<int, int> u_map;
+    for (auto& e : nums) {
+        auto it = u_map.find(e);
+        if (it != u_map.end())
+            it->second++;
+        else
+            u_map.insert(make_pair(e, 1));
+    }
+    for (auto e : u_map)
+        if (e.second == 1)
+            return e.first;
+    return -1;
+}
+
+int Solution::singleNumber_2(std::vector<int>& nums) {
+    list<int> list_i;
+    for (int& e : nums) {
+        bool found = false;
+        auto it = list_i.begin();
+        for (; it != list_i.end(); ++it) {
+            if (*it == e){
+                found = true;
+                break;
+            }
+        }
+        if (found)
+            list_i.erase(it);
+        else
+            list_i.push_back(e);  
+    }
+    assert(!list_i.empty() && "list cannot be empty");
+    return list_i.front();
+}
+
+/*using bit manipulation
+  XOR: true (1) if inputs are different, false (0) if they are the same
+  nums {a, b, b}; a xor 0 = a; b xor b = 0; 
+  b xor b xor a -> 0 xor a = a;
+*/
+int Solution::singleNumber_3(std::vector<int>& nums) {
+    int out = 0;
+    for (auto& n : nums) {
+        out ^= n;
+    }
+    return out;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

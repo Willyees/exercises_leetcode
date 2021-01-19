@@ -23,15 +23,10 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 }
 
 int main() {
-	/*try{
-		assert(twoSum() && "two sum failed");
-		assert(twoSum_hash() && "two sum failed");
+	list<int> v{ 2,2,1 };
+	singleNumber();
 
-	}
-	catch (const char* msg) {
-		cerr << msg << endl;
-	}*/
-	containsDuplicate();
+	return 0;
 }
 
 

@@ -699,3 +699,63 @@ bool containsDuplicate() {
 	return passed;
 }
 
+bool singleNumber() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back(vector<int> {2, 2, 1});
+	corrects.push_back(1);
+
+	//1
+	inputs.push_back(vector<int> {4, 1, 2, 1, 2});
+	corrects.push_back(4);
+
+	//2
+	inputs.push_back(vector<int> {1});
+	corrects.push_back(1);
+
+	//3
+	inputs.push_back(vector<int> {4, 1, 2, 1, 2});
+	corrects.push_back(4);
+	
+
+	for (int i = 0; i < inputs.size(); i++) {
+		int sol = problems.singleNumber(inputs[i]);
+		if (sol == corrects[i])
+			cout << "singleNumber " << i << " ok" << endl;
+		else {
+			cout << "singleNumber " << i << " failed" << endl;
+			passed = false;
+		}
+
+		sol = problems.singleNumber_1(inputs[i]);
+		if (sol == corrects[i])
+			cout << "singleNumber_1 " << i << " ok" << endl;
+		else {
+			cout << "singleNumber_1 " << i << " failed" << endl;
+			passed = false;
+		}
+
+		sol = problems.singleNumber_2(inputs[i]);
+		if (sol == corrects[i])
+			cout << "singleNumber_2 " << i << " ok" << endl;
+		else {
+			cout << "singleNumber_2 " << i << " failed" << endl;
+			passed = false;
+		}
+
+		sol = problems.singleNumber_3(inputs[i]);
+		if (sol == corrects[i])
+			cout << "singleNumber_3 " << i << " ok" << endl;
+		else {
+			cout << "singleNumber_3 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+
+	return passed;
+}
+

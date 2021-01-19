@@ -21,3 +21,4 @@ bool removeDuplicates();
 bool maxProfit();
 bool rotate();
 bool containsDuplicate();
+bool singleNumber();

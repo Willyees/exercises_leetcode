@@ -47,5 +47,9 @@ public:
 	bool containsDuplicate(std::vector<int>&);//Contains Duplicates, stl
 	bool containsDuplicate_1(std::vector<int>&);//Contains Duplicates, hashmap O(N), O(N)
 	bool containsDuplicate_2(std::vector<int>&);//Contains Duplicates, hashset O(N), O(N)
+	int singleNumber(std::vector<int>& nums);//bruteforce O(N^2)
+	int singleNumber_1(std::vector<int>& nums);//hash map O(N), space: O(N)
+	int singleNumber_2(std::vector<int>& nums);//linked list O(N^2), space: O(N)
+	int singleNumber_3(std::vector<int>& nums);//bit manipulation O(N), space: O(N)
 
 };
