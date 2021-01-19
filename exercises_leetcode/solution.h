@@ -51,5 +51,8 @@ public:
 	int singleNumber_1(std::vector<int>& nums);//hash map O(N), space: O(N)
 	int singleNumber_2(std::vector<int>& nums);//linked list O(N^2), space: O(N)
 	int singleNumber_3(std::vector<int>& nums);//bit manipulation O(N), space: O(N)
+	std::vector<int> intersect(std::vector<int>&, std::vector<int>&);
+	std::vector<int> intersect_1(std::vector<int>&, std::vector<int>&);
+
 
 };

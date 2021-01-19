@@ -759,3 +759,46 @@ bool singleNumber() {
 	return passed;
 }
 
+bool intersect() {
+	bool passed = true;
+	vector<pair<vector<int>, vector<int>>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2, 2, 1}, vector<int>{2,2}));
+	corrects.push_back(vector<int> {2,2});
+
+	//1
+	inputs.push_back(make_pair(vector<int> {1}, vector<int>{1}));
+	corrects.push_back(vector<int> {1});
+
+	//2
+	inputs.push_back(make_pair(vector<int> {4, 9, 5}, vector<int>{9, 4, 9, 8, 4}));
+	corrects.push_back(vector<int> {4,9});
+
+	//2
+	inputs.push_back(make_pair(vector<int> {1,2,2,1}, vector<int>{1,2}));
+	corrects.push_back(vector<int> {1,2});
+	
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> sol = problems.intersect(inputs[i].first, inputs[i].second);
+		if (sol == corrects[i])
+			cout << "intersect " << i << " ok" << endl;
+		else {
+			cout << "intersect " << i << " failed" << endl;
+			passed = false;
+		}
+		vector<int> nums2 = inputs[i].second;
+		sol = problems.intersect_1(inputs[i].first, nums2);
+		if (sol == corrects[i])
+			cout << "intersect_1 " << i << " ok" << endl;
+		else {
+			cout << "intersect_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+	
+
+	return passed;
+}
+

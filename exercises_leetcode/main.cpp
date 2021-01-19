@@ -24,7 +24,7 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	list<int> v{ 2,2,1 };
-	singleNumber();
+	intersect();
 
 	return 0;
 }

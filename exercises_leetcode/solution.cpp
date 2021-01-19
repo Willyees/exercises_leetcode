@@ -572,6 +572,56 @@ int Solution::singleNumber_3(std::vector<int>& nums) {
     return out;
 }
 
+/*find intersection between 2 vectors. no ordered, return as many items as are intersected
+bruteforce*/
+vector<int> Solution::intersect(vector<int>& nums1, vector<int>& nums2) {
+    //for each items in nums1 check if it is present in nums2 and then return them all
+    //this might need to have the vectors sorted, otherwise it wont work
+    vector<int>& num1 = nums1.size() > nums2.size() ? nums2 : nums1;
+    vector<int>& num2 = nums1.size() > nums2.size() ? nums1 : nums2;
+    vector<int> out;
+    if (num1.empty() || num2.empty())
+        return out;
+    int prev = num1.at(0);//starting from out of bounds
+    int prev_i = 0;
+    int i = -1;
+    for (int& n1 : num1) {
+        if (n1 == prev && i >= 0)
+            i = ++prev_i;
+        else
+            i = 0;        
+        while (i < num2.size()) {
+            if (n1 == num2[i]) {
+                out.push_back(n1);
+                prev_i = i;
+                break;
+            }
+            ++i;
+        }  
+        prev = n1;
+    }
+    return out;
+}
+
+std::vector<int> Solution::intersect_1(std::vector<int>& nums1, std::vector<int>& nums2) {
+    //remove common items from second vector
+    vector<int> out;
+    auto it_e = nums2.end();
+    for (int& e : nums1) {
+        auto it = nums2.begin();
+        while (it != it_e) {
+            if(e == *it){
+                out.push_back(e);
+                //swap with last
+                *it = *--it_e;
+                break;
+            }
+            ++it;
+        }
+    }
+    return out;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

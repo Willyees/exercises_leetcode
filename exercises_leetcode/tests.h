@@ -22,3 +22,4 @@ bool maxProfit();
 bool rotate();
 bool containsDuplicate();
 bool singleNumber();
+bool intersect();
