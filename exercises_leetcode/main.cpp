@@ -23,8 +23,10 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 }
 
 int main() {
-	list<int> v{ 2,2,1 };
-	intersect();
+	Solution sol;
+	vector<int> v{ 1,5,2 };
+
+	plusOne();
 
 	return 0;
 }

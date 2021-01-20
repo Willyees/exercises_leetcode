@@ -622,6 +622,57 @@ std::vector<int> Solution::intersect_1(std::vector<int>& nums1, std::vector<int>
     return out;
 }
 
+/*digits: non empty vector representing int >= 0
+* return + 1 to the int
+* not working for '0' and very high digit number because of overflow int
+*/
+std::vector<int> Solution::plusOne(std::vector<int>& digits) {
+    //transform digits into int, add 1, transfrom back into vector
+    int n = 0;
+    int count = 1;
+    auto end = --digits.rend();
+    auto it = digits.rbegin();
+    while(it != end) {
+        int sum = count * *it;
+        n += count * *it;
+        ++it; count *= 10;
+        assert(count < numeric_limits<int>::max());
+    }
+    n += count * *it;//last iteration outside the loop, so no over
+    assert(n < numeric_limits<int>::max());
+    n++;
+    if (n / count >= count)//in case no switch to next number of digits happened, decrease of 1 zero the count
+        count *= 10;
+
+    vector<int> out;
+    while(count > 0){
+        out.push_back(n / count);
+        n = n % count;
+        count /= 10;
+    }
+    return out;
+}
+
+/*solution working with the vector digits, without transforming into int*/
+std::vector<int> Solution::plusOne_1(std::vector<int>& digits) {
+    int last = digits.size() - 1;
+
+    while (last >= 0) {
+        if (digits[last] == 9) {
+            digits[last] = 0;
+            last--;
+        }
+        else {
+            digits[last] += 1;
+            return digits;
+        }
+    }
+    //if while loop is finished, it means that all the digits were 9 until the beginning of the vector
+    vector<int> out(digits.size() + 1, 0);
+    out[0] = 1;
+    return out;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

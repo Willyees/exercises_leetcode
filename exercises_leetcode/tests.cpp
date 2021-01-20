@@ -802,3 +802,63 @@ bool intersect() {
 	return passed;
 }
 
+bool plusOne() {
+	bool passed = true;
+
+	vector<vector<int>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(vector<int> {1, 5, 2});
+	corrects.push_back(vector<int> {1, 5, 3});
+
+	//1
+	inputs.push_back(vector<int> {4,3,2,1});
+	corrects.push_back(vector<int> {4,3,2,2});
+
+	//2
+	inputs.push_back(vector<int> {1,1,9});
+	corrects.push_back(vector<int> {1,2,0});
+
+	//3
+	inputs.push_back(vector<int> {9,9});
+	corrects.push_back(vector<int> {1,0,0});
+
+	//4
+	inputs.push_back(vector<int> {9, 8, 7, 6, 5, 4, 3, 2, 1, 0});
+	corrects.push_back(vector<int> {9, 8, 7, 6, 5, 4, 3, 2, 1, 1});
+
+	//4
+	inputs.push_back(vector<int> {0});
+	corrects.push_back(vector<int> {1});
+
+	//4
+	inputs.push_back(vector<int> {1,0});
+	corrects.push_back(vector<int> {1,1});
+
+	//4
+	inputs.push_back(vector<int> {9});
+	corrects.push_back(vector<int> {1, 0});
+
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> sol = problems.plusOne(inputs[i]);
+		if (sol == corrects[i])
+			cout << "plusOne " << i << " ok" << endl;
+		else {
+			cout << "plusOne " << i << " failed" << endl;
+			passed = false;
+		}
+		vector<int> v_i = inputs[i];
+		sol = problems.plusOne_1(v_i);
+
+		if (sol == corrects[i])
+			cout << "plusOne_1 " << i << " ok" << endl;
+		else {
+			cout << "plusOne_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+

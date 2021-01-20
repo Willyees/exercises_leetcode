@@ -53,6 +53,7 @@ public:
 	int singleNumber_3(std::vector<int>& nums);//bit manipulation O(N), space: O(N)
 	std::vector<int> intersect(std::vector<int>&, std::vector<int>&);
 	std::vector<int> intersect_1(std::vector<int>&, std::vector<int>&);
-
+	std::vector<int> plusOne(std::vector<int>& digits);
+	std::vector<int> plusOne_1(std::vector<int>& digits);
 
 };
