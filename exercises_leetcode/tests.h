@@ -24,3 +24,4 @@ bool containsDuplicate();
 bool singleNumber();
 bool intersect();
 bool plusOne();
+bool moveZeroes();

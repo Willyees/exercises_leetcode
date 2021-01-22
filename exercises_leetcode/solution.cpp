@@ -673,6 +673,124 @@ std::vector<int> Solution::plusOne_1(std::vector<int>& digits) {
     return out;
 }
 
+void Solution::moveZeroes(std::vector<int>& nums) {
+    //for_each(nums.begin(), nums.end(), [](int p) {cout << p << endl; });
+    int i = 0;
+    int last = nums.size() - 1;//last element. used to swap with 0s
+    while (i < last) {
+        if (nums[i] == 0) {//swap with next element to keep order
+            for (int swap_i = i; swap_i < last; ++swap_i) {
+                int temp = nums[swap_i + 1];
+                nums[swap_i + 1] = 0;
+                nums[swap_i] = temp;
+                
+            }
+            --last;
+        }
+        else {
+            ++i;
+        }
+    }
+    //for_each(nums.begin(), nums.end(), [](int p) {cout << p << endl; });
+}
+
+void Solution::moveZeroes_1(std::vector<int>& nums) {
+    vector<int> pos_zeroes;
+    for (int i = 0; i < nums.size(); ++i) {
+        if (nums[i] == 0)
+            pos_zeroes.push_back(i);
+    }
+
+    if (pos_zeroes.empty())
+        return;
+    /*int i_nums = nums.size() - 1;//this mehtod will replace the old values, need to do it from left side
+    for (int i_zeroes = pos_zeroes.size() - 1; i_zeroes >= 0; --i_zeroes) {
+        for (; i_nums > pos_zeroes[i_zeroes]; --i_nums) {
+            nums[i_nums - (i_zeroes + 1)] = nums[i_nums];//move the actual value i_zeroes position on the left
+        }
+        i_nums = i_zeroes - 1;
+    }*/
+    int i_nums = 0; 
+    for (int i_zeroes = 0; i_zeroes < pos_zeroes.size(); ++i_zeroes) {
+        for (; i_nums < pos_zeroes[i_zeroes] - i_zeroes; ++i_nums) {
+            //move values as many times as i_nums to the left (no swap needed). in practice copy from i_zeroes right position into the current position
+            nums[i_nums] = nums[i_nums + i_zeroes];
+        }
+        i_nums = pos_zeroes[i_zeroes] - i_zeroes;
+    }
+    //last iteration [pos_zeroes last, nums.size())
+    for (int i = pos_zeroes.back() - pos_zeroes.size() + 1; i < nums.size() - pos_zeroes.size(); ++i) {//start from position that would copy 1 position after last zero position
+        nums[i] = nums[i + pos_zeroes.size()];
+    }
+    
+    for (int i = nums.size() - pos_zeroes.size(); i < nums.size(); ++i)
+        nums[i] = 0;
+}
+
+//bruteforce 
+bool Solution::isValidSudoku(std::vector<std::vector<char>>& board) {
+    //check that a single cell is not duplicated either in a row, column and 3x3 cell
+    //rows
+    for (vector<char>& row : board) {
+        //O(N * 9 ^ 2)
+        int curr_i = 0;
+
+        for (char& c : row) {
+            int i = 0;
+
+            if (c == '.') {
+                curr_i++;
+                continue;
+            }
+            while (i < row.size()) {
+                if (row[i] == c && i != curr_i){
+                    cout << "val: " << c << endl;
+                    cout << "val: " << row[i] << "pos: " << i << endl;
+                    return false;
+                }
+                i++;
+            }
+            curr_i++;
+        }
+    }
+    //columns
+    for (int col = 0; col < board[0].size(); ++col) {
+        for (int row = 0; row < board.size(); ++row) {
+            if (board[row][col] == '.')
+                continue;
+            //check all items in same column (column stays the same)
+            for (int row_check = 0; row_check < board.size(); ++row_check) {
+                if (board[row][col] == board[row_check][col] && row != row_check){
+                    printf("val: %c pos: %d %d", board[row][col], row, col);
+                    printf("val: %c pos: %d %d", board[row_check][col], row_check, col);
+                    return false;
+                }
+            }
+        }
+    }
+    //3x3
+    for (int row = 0; row < board.size(); ++row) {
+        for (int col = 0; col < board[row].size(); ++col) {
+            //check 3x3 for this element
+            if (board[row][col] == '.')
+                continue;
+            int start_row_3x3 = row / 3 * 3;
+            for (int row_3x3 = start_row_3x3; row_3x3 < start_row_3x3 + 3; ++row_3x3) {
+                int start_col_3x3 = col / 3 * 3;
+                for (int col_3x3 = start_col_3x3; col_3x3 < start_col_3x3 + 3; ++col_3x3) {
+                    //cout << row_3x3 << " " << col_3x3 << endl;
+                    if (board[row][col] == board[row_3x3][col_3x3] && (row != row_3x3 || col != col_3x3)){
+                        printf("val: %c pos: %d %d", board[row][col], row, col);
+                        printf("val: %c pos: %d %d", board[row_3x3][col_3x3], row_3x3, col_3x3);
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

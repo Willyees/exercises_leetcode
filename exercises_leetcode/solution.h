@@ -55,5 +55,8 @@ public:
 	std::vector<int> intersect_1(std::vector<int>&, std::vector<int>&);
 	std::vector<int> plusOne(std::vector<int>& digits);
 	std::vector<int> plusOne_1(std::vector<int>& digits);
+	void moveZeroes(std::vector<int>& nums);//time: O(N^2), space: O(1)
+	void moveZeroes_1(std::vector<int>& nums);
+	bool isValidSudoku(std::vector<std::vector<char>>& board);
 
 };

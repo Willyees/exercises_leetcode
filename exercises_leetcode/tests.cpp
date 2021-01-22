@@ -862,3 +862,66 @@ bool plusOne() {
 	return passed;
 }
 
+bool moveZeroes() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(vector<int> {0, 1, 0, 3, 12});
+	corrects.push_back(vector<int> {1,3,12,0,0});
+
+	//1
+	inputs.push_back(vector<int> {1,2,3,4,0});
+	corrects.push_back(vector<int> {1,2,3,4,0});
+
+	//1
+	inputs.push_back(vector<int> {1, 2, 0, 0, 4});
+	corrects.push_back(vector<int> {1, 2, 4, 0, 0});
+
+	//1
+	inputs.push_back(vector<int> {1, 2, 3, 4});
+	corrects.push_back(vector<int> {1, 2, 3, 4});
+
+	//1
+	inputs.push_back(vector<int> {0,1});
+	corrects.push_back(vector<int> {1,0});
+
+	//1
+	inputs.push_back(vector<int> {0});
+	corrects.push_back(vector<int> {0});
+	
+	//1
+	inputs.push_back(vector<int> {1});
+	corrects.push_back(vector<int> {1});
+
+	//1
+	inputs.push_back(vector<int> {});
+	corrects.push_back(vector<int> {});
+
+	//1
+	inputs.push_back(vector<int> {4, 2, 4, 0, 0, 3, 0, 5, 1, 0});
+	corrects.push_back(vector<int> {4, 2, 4, 3, 5, 1, 0, 0, 0, 0});
+
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<int> v_i(inputs[i].begin(), inputs[i].end());
+		problems.moveZeroes(v_i);
+		if (v_i == corrects[i])
+			cout << "moveZeroes " << i << " ok" << endl;
+		else {
+			cout << "moveZeroes " << i << " failed" << endl;
+			passed = false;
+		}
+
+		v_i = inputs[i];
+		problems.moveZeroes_1(v_i);
+		if (v_i == corrects[i])
+			cout << "moveZeroes_1 " << i << " ok" << endl;
+		else {
+			cout << "moveZeroes_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+	return passed;
+}
+
