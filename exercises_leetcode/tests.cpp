@@ -925,3 +925,30 @@ bool moveZeroes() {
 	return passed;
 }
 
+bool rotateMatrix() {
+	bool passed = true;
+	vector<vector<vector<int>>> inputs;
+	vector<vector<vector<int>>> corrects;
+
+	//0
+	inputs.push_back(vector<vector<int>> { {1, 2, 3}, { 4,5,6 }, { 7,8,9 }});
+	corrects.push_back(vector<vector<int>> { {7, 4, 1} , {8, 5, 2}, {9, 6, 3}});
+
+	//1
+	inputs.push_back(vector<vector<int>> { {5, 1, 9, 11} , {2, 4, 8, 10}, {13, 3, 6, 7}, {15, 14, 12, 16}});
+	corrects.push_back(vector<vector<int>> { {15, 13, 2, 5} , {14, 3, 4, 1}, {12, 6, 8, 9}, {16, 7, 10, 11}});
+
+	for (int i = 0; i < inputs.size(); i++) {
+		vector<vector<int>> v_i = inputs[i];
+		problems.rotate_matrix(v_i);
+		if (v_i == corrects[i])
+			cout << "moveZeroes " << i << " ok" << endl;
+		else {
+			cout << "moveZeroes " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+

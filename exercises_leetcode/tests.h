@@ -25,3 +25,4 @@ bool singleNumber();
 bool intersect();
 bool plusOne();
 bool moveZeroes();
+bool rotateMatrix();

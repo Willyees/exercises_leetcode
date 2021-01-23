@@ -58,5 +58,6 @@ public:
 	void moveZeroes(std::vector<int>& nums);//time: O(N^2), space: O(1)
 	void moveZeroes_1(std::vector<int>& nums);
 	bool isValidSudoku(std::vector<std::vector<char>>& board);
+	void rotate_matrix(std::vector<std::vector<int>>& matrix);
 
 };

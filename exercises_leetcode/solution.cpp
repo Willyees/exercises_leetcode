@@ -791,6 +791,30 @@ bool Solution::isValidSudoku(std::vector<std::vector<char>>& board) {
     return true;
 }
 
+void Solution::rotate_matrix(std::vector<std::vector<int>>& matrix) {
+    int row = 0;
+    int length = matrix[row].size() - 1;
+    while((row + 1 ) * 2 <=  matrix.size()){
+        for (int col = row; col < matrix[row].size() - 1 - row; ++col) {//for further smaller squares, dotn start at col 0, but keep starting 1 more on the right (can use the row number to find starting col position)
+            //-row because for each row there is the last position that has been already worked on and dont need any more swapping
+            int prev = matrix[row][col];
+            int row_prev = row;
+            int col_prev = col;
+            for (int c = 0; c < 4; ++c) {
+                int row_swap, col_swap;
+                col_swap = length - row_prev;
+                row_swap = col_prev;
+                int temp = matrix[row_swap][col_swap];
+                matrix[row_swap][col_swap] = prev;
+                prev = temp;
+                row_prev = row_swap;
+                col_prev = col_swap;
+            }
+        }
+        row++;
+    }
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going
