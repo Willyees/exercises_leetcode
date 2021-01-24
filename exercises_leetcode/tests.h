@@ -26,3 +26,6 @@ bool intersect();
 bool plusOne();
 bool moveZeroes();
 bool rotateMatrix();
+bool reverseString();
+bool reverseInt();
+bool firstUniqChar();

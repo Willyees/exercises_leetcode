@@ -947,8 +947,163 @@ bool rotateMatrix() {
 			cout << "moveZeroes " << i << " failed" << endl;
 			passed = false;
 		}
+		v_i = inputs[i];
+		problems.rotate_matrix_1(v_i);
+		if (v_i == corrects[i])
+			cout << "moveZeroes_1 " << i << " ok" << endl;
+		else {
+			cout << "moveZeroes_1 " << i << " failed" << endl;
+			passed = false;
+		}
 	}
 
+	return passed;
+}
+
+bool reverseString() {
+	bool passed = true;
+	vector<vector<char>> inputs;
+	vector<vector<char>> corrects;
+
+	//0
+	inputs.push_back(vector<char> {'h', 'e', 'l', 'l', 'o'});
+	corrects.push_back(vector<char>{'o', 'l', 'l', 'e', 'h'});
+
+	//0
+	inputs.push_back(vector<char> {'H', 'a', 'n', 'n', 'a', 'h'});
+	corrects.push_back(vector<char>{'h', 'a', 'n', 'n', 'a', 'H'});
+
+	//0
+	inputs.push_back(vector<char> {});
+	corrects.push_back(vector<char>{});
+
+	//0
+	inputs.push_back(vector<char> {'H'});
+	corrects.push_back(vector<char>{'H'});
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		vector<char> v_c = inputs[i];
+		problems.reverseString(v_c);
+		if (v_c == corrects[i])
+			cout << "reverseString " << i << " ok" << endl;
+		else {
+			cout << "reverseString " << i << " failed" << endl;
+			passed = false;
+		}
+		
+		v_c = inputs[i];
+		problems.reverseString_1(v_c);
+		if (v_c == corrects[i])
+			cout << "reverseString_1 " << i << " ok" << endl;
+		else {
+			cout << "reverseString_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+	return passed;
+}
+
+bool reverseInt() {
+	bool passed = true;
+	vector<int> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back(123);
+	corrects.push_back(321);
+
+	//1
+	inputs.push_back(-123);
+	corrects.push_back(-321);
+	//2
+	inputs.push_back(120);
+	corrects.push_back(21);
+
+	//3
+	inputs.push_back(0);
+	corrects.push_back(0);
+
+	//4
+	inputs.push_back(1534236469);
+	corrects.push_back(0);
+
+	//4
+	inputs.push_back(-2147483648);
+	corrects.push_back(0);
+	
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		int sol = problems.reverse_i(inputs[i]);
+		if (sol == corrects[i])
+			cout << "reverse_i " << i << " ok" << endl;
+		else {
+			cout << "reverse_i " << i << " failed" << endl;
+			passed = false;
+		}
+		sol = problems.reverse_i_1(inputs[i]);
+		if (sol == corrects[i])
+			cout << "reverse_i_1 " << i << " ok" << endl;
+		else {
+			cout << "reverse_i_1 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
+bool firstUniqChar() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back("cc");
+	corrects.push_back(-1);
+
+	//0
+	inputs.push_back("leetcode");
+	corrects.push_back(0);
+
+	//1
+	inputs.push_back("loveleetcode");
+	corrects.push_back(2);
+
+	//2
+	inputs.push_back("");
+	corrects.push_back(-1);
+
+	//0
+	inputs.push_back("s");
+	corrects.push_back(0);
+
+	//0
+	inputs.push_back("papp");
+	corrects.push_back(1);
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		int sol = problems.firstUniqChar(inputs[i]);
+		if (sol == corrects[i])
+			cout << "firstUniqChar " << i << " ok" << endl;
+		else {
+			cout << "firstUniqChar " << i << " failed" << endl;
+			passed = false;
+		}
+		sol = problems.firstUniqChar_1(inputs[i]);
+		if (sol == corrects[i])
+			cout << "firstUniqChar_1 " << i << " ok" << endl;
+		else {
+			cout << "firstUniqChar_1 " << i << " failed" << endl;
+			passed = false;
+		}
+		sol = problems.firstUniqChar_2(inputs[i]);
+		if (sol == corrects[i])
+			cout << "firstUniqChar_2 " << i << " ok" << endl;
+		else {
+			cout << "firstUniqChar_2 " << i << " failed" << endl;
+			passed = false;
+		}
+	}
 	return passed;
 }
 

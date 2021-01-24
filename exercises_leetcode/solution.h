@@ -58,6 +58,18 @@ public:
 	void moveZeroes(std::vector<int>& nums);//time: O(N^2), space: O(1)
 	void moveZeroes_1(std::vector<int>& nums);
 	bool isValidSudoku(std::vector<std::vector<char>>& board);
-	void rotate_matrix(std::vector<std::vector<int>>& matrix);
+	void rotate_matrix(std::vector<std::vector<int>>& matrix);//O(N^2)
+	void rotate_matrix_1(std::vector<std::vector<int>>& matrix);//O(N^2)
+	void reverseString(std::vector<char>& s);//stl O(N)
+	void reverseString_1(std::vector<char>& s);//O(N)
+	int reverse_i(int);
+	int reverse_i_1(int);
+	int reverse_i_2(int);
+	int firstUniqChar(std::string s);//O(N^2)
+	int firstUniqChar_1(std::string s);//O(N) hashmap
+	int firstUniqChar_2(std::string s);//O(N) array
+	bool isAnagram(std::string s, std::string t);
+
+
 
 };

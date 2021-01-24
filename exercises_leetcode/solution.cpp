@@ -815,6 +815,156 @@ void Solution::rotate_matrix(std::vector<std::vector<int>>& matrix) {
     }
 }
 
+/*transpose the matrix and reverse each row
+*/
+void Solution::rotate_matrix_1(std::vector<std::vector<int>>& matrix) {
+    //transpose
+    for(int row = 0; row < matrix.size(); ++row){
+        for(int col = row; col < matrix[row].size(); ++col){//each new row, start from +1 column 
+            swap(matrix[row][col], matrix[col][row]);
+        }
+    }
+    //reverse
+    for (int row = 0; row < matrix.size(); ++row) {
+        reverse(matrix[row].begin(), matrix[row].end());
+    }
+}
+
+/*have to be space: O(1)*/
+void Solution::reverseString(std::vector<char>& s) {
+    reverse(s.begin(), s.end());//stl
+}
+
+/*O(N)*/
+void Solution::reverseString_1(std::vector<char>& s) {
+    int last = s.size() - 1;
+    for (int i = 0; i < s.size() / 2; ++i) {//dont need case in which s.size is odd. middle value is not moved anywhere
+        char temp = s[i];
+        s[i] = s[last - i];
+        s[last - i] = temp;
+    }
+    
+}
+
+/*mathematical way: find values from left hand side, keep adding with increasing 10 magnitude
+* O(N)
+*/
+int Solution::reverse_i(int x) {
+    const int limit_max = numeric_limits<int>::max();
+    const int limit_min = numeric_limits<int>::min();
+    //find out how many digits in x
+    int factor = 1;
+    int x1 = x;
+    while (x1 /= 10)
+        factor *= 10;
+
+    int out = 0;
+    while (x != 0) {
+        if (x >= 0 && (limit_max - out) / factor < (x % 10))
+            return 0;
+        if (x <= 0 && (limit_min - out) / factor > (x % 10))
+            return 0;
+        out += x % 10 * factor;
+        x /= 10;
+        factor /= 10;
+    }
+    return out;
+}
+
+/*similar to the mathematical one, but is cleaner*/
+int Solution::reverse_i_1(int x) {
+    //dont need to find the factor multiply
+    int out = 0;
+    //get left most digit
+    while (x != 0) {
+        int p = x % 10;
+        x /= 10;
+        if (out > INT_MAX / 10 || (out == INT_MAX / 10 && p > 7)) return 0;
+        if (out < INT_MIN / 10 || (out == INT_MIN / 10 && p < -8)) return 0;
+        out = out * 10 + p;
+    }
+    return out;
+}
+
+/*using a string to reverse*/
+int Solution::reverse_i_2(int x) {
+    //not finishing because there is no point in trasforming into string since it will neeeded to be cast to in to calculate the limit_max and _min
+    int limit_max = numeric_limits<int>::max();
+    int limit_min = numeric_limits<int>::min();
+    string s = to_string(x);
+    int factor = s.size() == 1 ? 1 : s.size() - 1  * 10;
+    reverse(s.begin(), s.end());
+    for (char c : s) {
+        int p = c - '0';
+        //if(limit_max / )
+    }
+    return 0;
+}
+
+/*return first non repeting character position, otherwise -1
+bruteforce O(N^2): have to check for everyelement if it has a double in the whole string*/
+int Solution::firstUniqChar(std::string s) {
+    for (int i = 0; i < s.size(); ++i) {
+        bool found = false;
+        for (int j = 0; j < s.size(); ++j){
+            if (s[i] == s[j] && i != j){
+                found = true;
+                break;
+            }
+        }
+        if(!found)
+            return i;
+    }
+    return -1;
+}
+
+int Solution::firstUniqChar_1(std::string s) {
+    unordered_map<char, int> o_set;
+    for (int i = 0; i < s.size(); ++i) {
+        auto it = o_set.find(s[i]);
+        if (it == o_set.end())
+            o_set.insert(make_pair(s[i], 1));
+        else
+            it->second++;
+    }
+    for (int i = 0; i < s.size(); ++i){
+        auto it = o_set.find(s[i]);
+        if (it != o_set.end() && it->second == 1)
+            return i;
+    }
+    return -1;
+}
+
+/*similar to hashmap but using array to store the indexes*/
+int Solution::firstUniqChar_2(std::string s) {
+    int a[26] = { 0 };//26 character in the alphabet. a[0] initialized to 0, then all the missing init to 0
+    //'a':0 , 'b': 1, etc.. 'z':26
+    for (int i = 0; i < s.size(); ++i) {
+        a[s[i] - 'a'] += 1;
+    }
+    for (int i = 0; i < s.size(); ++i) {
+        if (a[s[i] - 'a'] == 1)
+            return i;
+    }
+    return -1;
+
+}
+
+/*is t string anagram of t?
+using array to store the count of letters*/
+bool Solution::isAnagram(std::string s, std::string t) {
+    //if the count of the letters are the same for both the s and t return true
+    int c_s[26] = {};
+    for (const char c : s)
+        c_s[c - 'a']++;
+    for (const char c : t)
+        c_s[c - 'a']--;
+    for(int i = 0; i < 26; ++i)
+        if(c_s[i] != 0)
+            return false;
+    return true;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going
