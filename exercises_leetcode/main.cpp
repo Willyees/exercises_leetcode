@@ -24,7 +24,7 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	Solution sol;
-	cout << sol.isAnagram("anagram", "nagaram");
+	isPalindromeAscii();
 	return 0;
 }
 

@@ -29,3 +29,4 @@ bool rotateMatrix();
 bool reverseString();
 bool reverseInt();
 bool firstUniqChar();
+bool isPalindromeAscii();

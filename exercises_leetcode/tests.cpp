@@ -1107,3 +1107,33 @@ bool firstUniqChar() {
 	return passed;
 }
 
+bool isPalindromeAscii() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<bool> corrects;
+
+	//0
+	inputs.push_back("A man, a plan, a canal: Panama");
+	corrects.push_back(true);
+
+	//1
+	inputs.push_back("race a car");
+	corrects.push_back(false);
+
+	//2
+	inputs.push_back("a1b iIb1a");
+	corrects.push_back(true);
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		bool sol = problems.isPalindrome_ascii(inputs[i]);
+		if (sol == corrects[i])
+			cout << "isPalindromeAscii " << i << " ok" << endl;
+		else {
+			cout << "isPalindromeAscii " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+

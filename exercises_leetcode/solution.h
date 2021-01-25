@@ -69,6 +69,7 @@ public:
 	int firstUniqChar_1(std::string s);//O(N) hashmap
 	int firstUniqChar_2(std::string s);//O(N) array
 	bool isAnagram(std::string s, std::string t);
+	bool isPalindrome_ascii(std::string s);
 
 
 

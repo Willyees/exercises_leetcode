@@ -965,6 +965,33 @@ bool Solution::isAnagram(std::string s, std::string t) {
     return true;
 }
 
+/*similar to inPlalindrome, but any ascii symbol can be used. only keep the alpha
+* O(N)
+*/
+bool Solution::isPalindrome_ascii(std::string s) {
+    //while looping and checking the string, skip any not alpha and lowercase them
+    string::iterator it_b = s.begin();
+    string::iterator it_e = s.end() - 1;
+
+    while (it_b < it_e) {
+        if (!isalnum(*it_b)){
+            it_b++; 
+            continue;
+        }
+
+        if (!isalnum(*it_e)){
+            it_e--;
+            continue;
+        }
+      
+        if (tolower(*it_b) != tolower(*it_e))
+            return false;
+        it_b++; it_e--;
+    }
+
+    return true ;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going
