@@ -31,3 +31,4 @@ bool reverseInt();
 bool firstUniqChar();
 bool isPalindromeAscii();
 bool myAtoi();
+bool strStr();

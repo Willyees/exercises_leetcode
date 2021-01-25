@@ -1026,6 +1026,34 @@ int Solution::myAtoi(std::string s) {
     return result;
 }
 
+int Solution::strStr(std::string haystack, std::string needle) {
+    int i_n = 0;
+    int j = 0;
+    int next_j = 0;
+    bool next_j_set = false;
+    while (j < haystack.size() && i_n < needle.size()) {
+        if (!next_j_set && needle[0] == haystack[j] && j != next_j) {
+            next_j_set = true;
+            next_j = j;
+        }
+        if (needle[i_n] == haystack[j]){
+            i_n++;
+        }
+        else {
+            i_n = 0;
+            if (next_j_set){
+                j = next_j - 1;//-1 because it will be incremented after this statement
+                next_j_set = false;
+            }
+        }
+        j++;
+    }
+    if (i_n == needle.size())
+        return j - i_n;
+    return -1;
+}
+
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

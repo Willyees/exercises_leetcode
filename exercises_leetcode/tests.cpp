@@ -1179,3 +1179,42 @@ bool myAtoi() {
 	return passed;
 }
 
+bool strStr() {
+	bool passed = true;
+	vector<pair<string, string>> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back(make_pair("mississippi", "pi"));
+	corrects.push_back(9);
+
+	//1
+	inputs.push_back(make_pair("hello", "ll"));
+	corrects.push_back(2);
+
+	//2
+	inputs.push_back(make_pair("", ""));
+	corrects.push_back(0);
+
+	//2
+	inputs.push_back(make_pair("aassvv", "b"));
+	corrects.push_back(-1);
+
+	//0
+	inputs.push_back(make_pair("mississipi", "issip"));
+	corrects.push_back(4);
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		int sol = problems.strStr(inputs[i].first, inputs[i].second);
+		if (sol == corrects[i])
+			cout << "strStr " << i << " ok" << endl;
+		else {
+			cout << "strStr " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+
+	return passed;
+}
+

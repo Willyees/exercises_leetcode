@@ -71,6 +71,7 @@ public:
 	bool isAnagram(std::string s, std::string t);
 	bool isPalindrome_ascii(std::string s);//O(N)
 	int myAtoi(std::string s);
+	int strStr(std::string haystack, std::string needle);//O(N^2)
 
 
 

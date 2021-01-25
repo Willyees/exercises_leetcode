@@ -24,7 +24,8 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	Solution sol;
-	myAtoi();
+	strStr();
+		
 	return 0;
 }
 
