@@ -24,7 +24,7 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	Solution sol;
-	isPalindromeAscii();
+	myAtoi();
 	return 0;
 }
 

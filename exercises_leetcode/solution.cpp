@@ -992,6 +992,40 @@ bool Solution::isPalindrome_ascii(std::string s) {
     return true ;
 }
 
+int Solution::myAtoi(std::string s) {
+    int result = 0;
+    int sign = 1;
+    auto it = s.begin();
+    //skip whitespaces, no need to remove them
+    string ws = "\t\n\r\f\v ";
+    auto it_f = s.find_first_not_of(ws);
+    if (it_f != s.npos)
+        it += it_f;
+    else
+        return 0;
+    //check sign
+    if (it + 1 != s.end()) {
+        if (*it == '-') {
+            sign = -1;//otherwise do nothing, is positive
+            it++;
+        }
+        else if (*it == '+')
+            it++;
+    }
+    while (it != s.end() && isdigit(*it)) {
+        int n = *it - '0';
+        if (sign > 0 && (INT_MAX / 10 - result) <= 0)//todo: complete these ifs correctly
+            return INT_MAX;
+        if (sign < 0 && (INT_MIN / 10 + result) >= 0)
+            return INT_MIN;
+        int tmp = result * 10;
+        result = tmp + n;
+        ++it;
+    }
+    result *= sign;
+    return result;
+}
+
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
     //start with 2, if whole number obtained, keep going

@@ -1137,3 +1137,45 @@ bool isPalindromeAscii() {
 	return passed;
 }
 
+bool myAtoi() {
+	bool passed = true;
+	vector<string> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back("42");
+	corrects.push_back(42);
+
+	//1
+	inputs.push_back("   -42");
+	corrects.push_back(-42);
+
+	//
+	inputs.push_back("4193 with words");
+	corrects.push_back(4193);
+
+	//
+	inputs.push_back("words and 987");
+	corrects.push_back(0);
+
+	//
+	inputs.push_back("-91283472332");
+	corrects.push_back(-2147483648);
+
+	//
+	inputs.push_back("  ");
+	corrects.push_back(0);
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		int sol = problems.myAtoi(inputs[i]);
+		if (sol == corrects[i])
+			cout << "myAtoi " << i << " ok" << endl;
+		else {
+			cout << "myAtoi " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
+	return passed;
+}
+
