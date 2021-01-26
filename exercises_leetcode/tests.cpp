@@ -1,10 +1,40 @@
 #include "tests.h"
+#include "datastructures.h"
 #include <algorithm>
 #include <iostream>
 #include <assert.h>
 using namespace std;
 
 Solution problems;
+
+/*helpers*/
+ListNode* createLinkedList(vector<int> v) {
+	ListNode* head = new ListNode(15);//first is dummy
+	ListNode* prev = head;
+	for (int val : v) {
+		ListNode* ln = new ListNode(val);
+		prev->next = ln;
+		prev = ln;
+	}
+
+	return head->next;
+}
+
+bool isLLEqual(ListNode* h, std::vector<int> vals) {
+	if (h == nullptr)
+		return vals.size() == 0;
+	int index = 0;
+	while (h->next != nullptr && index < vals.size()) {
+		cout << h->val << endl;
+		if (vals[index] != h->val)
+			return false;
+		index++;
+		h = h->next;
+	}
+	return index == vals.size() - 1 && h->next == nullptr;
+}
+
+/**/
 
 bool twoSum() {
 	bool passed = true;
@@ -1270,6 +1300,38 @@ bool countAndSay() {
 	}
 
 
+
+	return passed;
+}
+
+bool removeNthFromEnd() {
+	bool passed = true;
+	vector<pair<vector<int>, int>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2}, 1));
+	corrects.push_back(vector<int> {1});
+
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2, 3, 4, 5}, 2));
+	corrects.push_back(vector<int> {1, 2, 3, 5});
+
+	//1
+	inputs.push_back(make_pair(vector<int> {1}, 1));
+	corrects.push_back(vector<int> {});
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		ListNode* h = createLinkedList(inputs[i].first);
+		h = problems.removeNthFromEnd(h, inputs[i].second);
+		if (isLLEqual(h, corrects[i]))
+			cout << "removeNthFromEnd " << i << " ok" << endl;
+		else {
+			cout << "removeNthFromEnd " << i << " failed" << endl;
+			passed = false;
+		}
+		ListNode::clear(h);
+	}
 
 	return passed;
 }

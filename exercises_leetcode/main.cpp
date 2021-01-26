@@ -24,8 +24,8 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	Solution sol;
-	vector<string> v { "ab", "a" };
-	cout << sol.longestCommonPrefix(v);
+	vector<int> v{ 1,2,3,4,5 };
+	removeNthFromEnd();
 		
 	return 0;
 }

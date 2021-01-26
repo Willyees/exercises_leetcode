@@ -66,3 +66,11 @@ void Graph::addEdges(std::vector<string>& v) {
 		}
 	}
 }
+
+void ListNode::clear(ListNode* h) {
+	while (h != nullptr) {
+		ListNode* temp = h;
+		h = h->next;
+		delete temp;
+	}
+}

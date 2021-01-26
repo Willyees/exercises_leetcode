@@ -1,8 +1,10 @@
 #pragma once
 #include "solution.h"
+#include "datastructures.h"
 
 /*helpers*/
-
+ListNode* createLinkedList(std::vector<int>);
+bool isLLEqual(ListNode* h, std::vector<int> vals);
 /**/
 bool twoSum();
 bool twoSum_hash();
@@ -33,3 +35,4 @@ bool isPalindromeAscii();
 bool myAtoi();
 bool strStr();
 bool countAndSay();
+bool removeNthFromEnd();

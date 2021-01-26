@@ -1098,6 +1098,7 @@ std::string Solution::countAndSay_find_cont(string n_p) {
     return out;
 }
 
+/*O(N)*/
 std::string Solution::longestCommonPrefix(std::vector<std::string>& strs) {
     if (strs.empty())
         return string("");
@@ -1113,6 +1114,64 @@ std::string Solution::longestCommonPrefix(std::vector<std::string>& strs) {
         }
     }
     return strs[0].substr(0, i);//must all be the same strings
+}
+
+/*delete node pointed in a singly linked list. no head is provided
+O(N). A normal deletion in linked list would be O(1) if provided witht he head*/
+
+void Solution::deleteNode(ListNode* node) {
+    //when deleting, need to change previous node to point to the next one, then remove the node from heap
+    //since is not possible to reach the head, remove by replacing this node with next and so on. 
+        ListNode* prev = node;
+        while (node->next != nullptr) {
+            node->val = node->next->val;
+            prev = node;
+            node = node->next;
+        }
+        prev->next = nullptr;
+        delete node;
+}
+/*a better method to delete is to copy the value of the next node, then modify the next pointer to skip the copied node
+* this can be done because it is guaranteed that the node is not the tail
+*/
+void Solution::deleteNode_1(ListNode* node) {
+    ListNode* temp = node->next;
+    node->val = node->next->val;
+    node->next = node->next->next;
+    delete temp;
+}
+
+/*remove the nth element from the end*/
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
+    //keep pointer to node with a n delay from the current
+    if (head == nullptr)
+        return nullptr;
+    ListNode* diff = head;
+    ListNode* current = head;
+    ListNode* prev = head;
+    while (current != nullptr) {
+        if (n != 0)//try to stop 1 pos before than the one to be removed: can in O(1) modify the next pointer
+            --n;
+        else{
+            prev = diff;
+            diff = diff->next;
+        }
+        current = current->next;
+    }
+    if (diff == head) {
+        if (head->next == nullptr) {
+            delete head;
+            return nullptr;
+        }
+        ListNode* new_head = head->next;
+        delete head;
+        return new_head;
+    }
+    //better to stop 1 pos earlier, so 
+    //cant use deleteNode_1 method because it could be passed a tail node, so is needed also to change the previous node->next to point a nullptr
+    prev->next = diff->next == nullptr ? nullptr : diff->next;
+    delete diff;
+    return head;
 }
 
 
