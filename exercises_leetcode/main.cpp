@@ -24,8 +24,8 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	Solution sol;
-	countAndSay();
-	cout << sol.countAndSay_find_cont("1211");
+	vector<string> v { "ab", "a" };
+	cout << sol.longestCommonPrefix(v);
 		
 	return 0;
 }

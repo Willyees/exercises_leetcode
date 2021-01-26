@@ -76,6 +76,7 @@ public:
 	std::string countAndSay(int n);
 	std::string countAndSay_helper(int n);
 	std::string countAndSay_find_cont(std::string n);
+	std::string longestCommonPrefix(std::vector<std::string>& strs);
 
 
 

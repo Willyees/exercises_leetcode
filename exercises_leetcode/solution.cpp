@@ -1098,6 +1098,23 @@ std::string Solution::countAndSay_find_cont(string n_p) {
     return out;
 }
 
+std::string Solution::longestCommonPrefix(std::vector<std::string>& strs) {
+    if (strs.empty())
+        return string("");
+    int min_l = INT_MAX;
+    for (int i = 0; i < strs.size(); i++) {
+        min_l = min(min_l, (int) strs[i].size());
+    }
+    int i = 0;
+    for (; i < min_l; ++i) {
+        for (int w = 0; w < strs.size() - 1; ++w) {
+            if (strs[w][i] != strs[w + 1][i])
+                return string(strs[w].begin(), strs[w].begin() + i);//if 
+        }
+    }
+    return strs[0].substr(0, i);//must all be the same strings
+}
+
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
