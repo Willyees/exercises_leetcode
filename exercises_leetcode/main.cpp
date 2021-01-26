@@ -24,7 +24,8 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 
 int main() {
 	Solution sol;
-	strStr();
+	countAndSay();
+	cout << sol.countAndSay_find_cont("1211");
 		
 	return 0;
 }

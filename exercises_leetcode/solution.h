@@ -72,6 +72,10 @@ public:
 	bool isPalindrome_ascii(std::string s);//O(N)
 	int myAtoi(std::string s);
 	int strStr(std::string haystack, std::string needle);//O(N^2)
+	int strStr_1(std::string haystack, std::string needle);//cleaner way to do it
+	std::string countAndSay(int n);
+	std::string countAndSay_helper(int n);
+	std::string countAndSay_find_cont(std::string n);
 
 
 

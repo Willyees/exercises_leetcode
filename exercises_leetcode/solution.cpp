@@ -1053,6 +1053,51 @@ int Solution::strStr(std::string haystack, std::string needle) {
     return -1;
 }
 
+int Solution::strStr_1(std::string haystack, std::string needle) {
+    //check if a string starting with needle[0] is the same as needle
+    for (int i = 0; i <= haystack.size() - needle.size(); ++i) {
+        if(haystack[i] == needle[0]){
+        if (haystack.substr(i, needle.size()) == needle)
+            return i;
+        }
+    }
+    return -1;
+}
+
+/*return the nth number in the sayandcount sequence
+sort the digits and replace them with how many same digits are present: xes: 12223 -> one1 three2 one3 ->11 32 13
+*/
+std::string Solution::countAndSay(int n) {
+    return countAndSay_helper(n);//? n:1 countnadsay(0)?
+}
+
+std::string Solution::countAndSay_helper(int n) {
+    if (n == 1)
+        return "1";
+    //sort the int n passed from the higher coutnandsay
+    string n_p = countAndSay_helper(n - 1);
+    string n_count = countAndSay_find_cont(n_p);
+    return n_count;
+    
+}
+
+std::string Solution::countAndSay_find_cont(string n_p) {
+    //transform the normal string in the explicit one
+    //sort(n_p.begin(), n_p.end());//if sorting on n_p, it will be lost the order of the string. best is to count, then recreate a new string
+    string out = "";
+    auto it = n_p.begin();
+    while (it != n_p.end()) {
+        const char it_s = *it;
+        int count = 0;
+        while (it != n_p.end() && it_s == *it) {
+            count++;
+            ++it;
+        }
+        out += to_string(count) + it_s;
+    }
+    return out;
+}
+
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3

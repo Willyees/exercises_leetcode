@@ -1212,7 +1212,63 @@ bool strStr() {
 			cout << "strStr " << i << " failed" << endl;
 			passed = false;
 		}
+		sol = problems.strStr_1(inputs[i].first, inputs[i].second);
+		if (sol == corrects[i])
+			cout << "strStr_1 " << i << " ok" << endl;
+		else {
+			cout << "strStr_1 " << i << " failed" << endl;
+			passed = false;
+		}
 	}
+
+
+	return passed;
+}
+
+bool countAndSay() {
+	bool passed = true;
+	vector<int> inputs;
+	vector<string> corrects;
+
+	//1
+	inputs.push_back(4);
+	corrects.push_back("1211");
+
+	//0
+	inputs.push_back(3);
+	corrects.push_back("21");
+
+	//1
+	inputs.push_back(1);
+	corrects.push_back("1");
+
+	//2
+	inputs.push_back(5);
+	corrects.push_back("111221");
+
+
+
+	//1
+	inputs.push_back(1);
+	corrects.push_back("1");
+
+	//1
+	inputs.push_back(1);
+	corrects.push_back("1");
+	//1
+	inputs.push_back(10);
+	corrects.push_back("13211311123113112211");
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		string sol = problems.countAndSay(inputs[i]);
+		if (sol == corrects[i])
+			cout << "countAndSay " << i << " ok" << endl;
+		else {
+			cout << "countAndSay " << i << " failed" << endl;
+			passed = false;
+		}
+	}
+
 
 
 	return passed;
