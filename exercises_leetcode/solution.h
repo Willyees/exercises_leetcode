@@ -80,6 +80,7 @@ public:
 	void deleteNode(ListNode* node);//O(N). accepted method, but it is not the best
 	void deleteNode_1(ListNode* node);//O(1)
 	ListNode* removeNthFromEnd(ListNode* head, int n);
+	ListNode* removeNthFromEnd_1(ListNode* head, int n);//using a dummy node for cleaner code and removed edge head cases
 
 
 

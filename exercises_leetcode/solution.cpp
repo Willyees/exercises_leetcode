@@ -1174,6 +1174,28 @@ ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
     return head;
 }
 
+/*similar to removeNthFromEnd, but using a head dummy node*/
+ListNode* Solution::removeNthFromEnd_1(ListNode* head, int n) {
+    ListNode dummy_o = ListNode(0);
+    ListNode* dummy = &dummy_o;
+    dummy->next = head;
+    ListNode* diff = dummy;
+    ListNode* curr = dummy;
+    while (curr != nullptr) {//should start from the dummy node in case the head is to be deleted and only 1 item in the ll. this way the last call diff->next->next will not access a nullptr
+        if (n != -1)//-1 because it points to the position before the one to be deleted
+            --n;
+        else {
+            diff = diff->next;
+        }
+        curr = curr->next;
+    }
+    //if the one to be deleted is a head, the dummy node will change to point to the second node, but then only returned the dummy->next, so the second node
+    ListNode* to_delete = diff->next;
+    diff->next = diff->next->next;
+    delete to_delete;
+    return dummy->next;//by returning dummy next, the cases in which the head is deleted are taken care of.
+}
+
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3

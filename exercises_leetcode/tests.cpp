@@ -1331,6 +1331,16 @@ bool removeNthFromEnd() {
 			passed = false;
 		}
 		ListNode::clear(h);
+		h = createLinkedList(inputs[i].first);
+		h = problems.removeNthFromEnd_1(h, inputs[i].second);
+		if (isLLEqual(h, corrects[i]))
+			cout << "removeNthFromEnd_1 " << i << " ok" << endl;
+		else {
+			cout << "removeNthFromEnd_1 " << i << " failed" << endl;
+			passed = false;
+		}
+
+		
 	}
 
 	return passed;
