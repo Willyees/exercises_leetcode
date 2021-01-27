@@ -81,7 +81,8 @@ public:
 	void deleteNode_1(ListNode* node);//O(1)
 	ListNode* removeNthFromEnd(ListNode* head, int n);
 	ListNode* removeNthFromEnd_1(ListNode* head, int n);//using a dummy node for cleaner code and removed edge head cases
-
+	ListNode* reverseList(ListNode* head);//O(N), O(1)
+	ListNode* reverseList_recursive(ListNode*);//O(N), O(N)
 
 
 };

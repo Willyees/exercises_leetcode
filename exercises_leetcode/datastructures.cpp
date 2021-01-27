@@ -74,3 +74,11 @@ void ListNode::clear(ListNode* h) {
 		delete temp;
 	}
 }
+/*
+print the linked list chain*/
+void ListNode::print(ListNode* h) {
+	while (h != nullptr) {
+		cout << h->val << endl;
+		h = h->next;
+	}
+}

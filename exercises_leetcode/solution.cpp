@@ -1174,7 +1174,9 @@ ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
     return head;
 }
 
-/*similar to removeNthFromEnd, but using a head dummy node*/
+/*similar to removeNthFromEnd, but using a head dummy node
+start iterating from the dummy node, and stop at the node before the one to be deleted. delete it and return the dummy->next
+O(lengthchain), O(1)*/
 ListNode* Solution::removeNthFromEnd_1(ListNode* head, int n) {
     ListNode dummy_o = ListNode(0);
     ListNode* dummy = &dummy_o;
@@ -1194,6 +1196,34 @@ ListNode* Solution::removeNthFromEnd_1(ListNode* head, int n) {
     diff->next = diff->next->next;
     delete to_delete;
     return dummy->next;//by returning dummy next, the cases in which the head is deleted are taken care of.
+}
+
+/*iterate solution*/
+ListNode* Solution::reverseList(ListNode* head) {
+    ListNode* prev = nullptr;
+    ListNode* next = nullptr;
+    while (head != nullptr){
+        next = head->next;
+        head->next = prev;
+        prev = head;
+        head = next;
+    }
+    return prev;
+}
+
+/*the next pointer is modified while unwinding. a previous node will modify the next node next
+for example in a ll |1,2,3,4,5|, after reaching the node 5 and starting to unwind, the node with head 4, will set the 5->next to point to the node 4
+this will continue until node 1 which doesnt need any previous node to set it up because it needs to be set next as nullptr*/
+
+ListNode* Solution::reverseList_recursive(ListNode* head) {
+    if (head->next == nullptr || head == nullptr) {//base case: reached the tail node, or the ll is only 1 element long
+        return head;
+    }
+    //cant return a different value other than the base head, otherwise it would be lost
+    ListNode* new_head = reverseList_recursive(head->next);
+    head->next->next = head;//head here refers to the old current node. after the base case it refers to actually the next node from the new head
+    head->next = nullptr;//this pointer was pointing to the old next value, it should be set to nullptr until an unwinding node will set it to itself
+    return new_head;
 }
 
 

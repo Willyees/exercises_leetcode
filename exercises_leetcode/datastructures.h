@@ -40,4 +40,5 @@ struct ListNode {
 	ListNode(int n) : val(n), next(nullptr) {};
 	ListNode(int n, ListNode* next) : val(n), next(next) {};
 	static void clear(ListNode*);
+	static void print(ListNode*);
 };

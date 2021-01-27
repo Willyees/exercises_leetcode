@@ -25,8 +25,12 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 int main() {
 	Solution sol;
 	vector<int> v{ 1,2,3,4,5 };
-	removeNthFromEnd();
-		
+	ListNode* h = createLinkedList(v);
+	ListNode::print(h);
+	h = sol.reverseList_recursive(h);
+	cout << "---" << endl;
+	ListNode::print(h);
+
 	return 0;
 }
 
