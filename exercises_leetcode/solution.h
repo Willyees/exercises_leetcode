@@ -86,6 +86,8 @@ public:
 	ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
 	ListNode* mergeTwoLists_sorted(ListNode* l1, ListNode* l2);
 	bool isPalindrome(ListNode* head);
+	bool hasCycle(ListNode* head);
+	bool hasCycle_1(ListNode* head);
 
 
 };

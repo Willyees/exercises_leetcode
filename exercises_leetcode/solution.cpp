@@ -1319,6 +1319,34 @@ bool Solution::isPalindrome(ListNode* head) {
 
 }
 
+/*check if the set contains already a pointer to a same node
+O(N). find:O(1), insert O(1). memory: O(N)*/
+bool Solution::hasCycle(ListNode* head) {
+    unordered_set<ListNode*> u_set;
+    while (head != nullptr) {
+        if (u_set.find(head) == u_set.end())
+            u_set.insert(head);
+        else
+            return true;
+        head = head->next;
+    }
+    return false;
+}
+
+/*memory:O(1)
+using differnt speed pointers, if the fast reaches the slow there must be a cycle. it might not happen in a single iteration because the fast could skip the slow in the current iteration*/
+bool Solution::hasCycle_1(ListNode* head) {
+    ListNode* slow = head;
+    ListNode* fast = head;
+    while (fast->next == nullptr && fast != nullptr) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast)
+            return true;
+    }
+    return false;
+}
+
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3
