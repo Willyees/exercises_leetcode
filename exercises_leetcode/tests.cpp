@@ -23,9 +23,10 @@ ListNode* createLinkedList(vector<int> v) {
 bool isLLEqual(ListNode* h, std::vector<int> vals) {
 	if (h == nullptr)
 		return vals.size() == 0;
+	ListNode::print(h);
+
 	int index = 0;
 	while (h->next != nullptr && index < vals.size()) {
-		cout << h->val << endl;
 		if (vals[index] != h->val)
 			return false;
 		index++;
@@ -1341,6 +1342,49 @@ bool removeNthFromEnd() {
 		}
 
 		
+	}
+
+	return passed;
+}
+
+bool mergeTwoLists() {
+	bool passed = true;
+	vector<pair<vector<int>, vector<int>>> inputs;
+	vector<vector<int>> corrects;
+	//0
+	inputs.push_back(make_pair(vector<int> {}, vector<int> {0}));
+	corrects.push_back(vector<int> {0});
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2}, vector<int> {1, 3}));
+	corrects.push_back(vector<int> {1,1,2,3});
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2, 4}, vector<int> {1, 3,4}));
+	corrects.push_back(vector<int> {1, 1, 2, 3,4,4});
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2}, vector<int> {4, 5, 6}));
+	corrects.push_back(vector<int> {1, 4, 2, 5, 6});
+	//0
+	inputs.push_back(make_pair(vector<int> {1, 2,3}, vector<int> {4, 5}));
+	corrects.push_back(vector<int> {1, 4, 2, 5, 3});
+	//0
+	inputs.push_back(make_pair(vector<int> {}, vector<int> {}));
+	corrects.push_back(vector<int> {});
+
+	//0
+	inputs.push_back(make_pair(vector<int> {0}, vector<int> {}));
+	corrects.push_back(vector<int> {0});
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		ListNode* h1 = createLinkedList(inputs[i].first);
+		ListNode* h2 = createLinkedList(inputs[i].second);
+		ListNode* h = problems.mergeTwoLists(h1, h2);
+		if (isLLEqual(h, corrects[i]))
+			cout << "mergeTwoLists " << i << " ok" << endl;
+		else {
+			cout << "mergeTwoLists " << i << " failed" << endl;
+			passed = false;
+		}
+		ListNode::clear(h);
 	}
 
 	return passed;

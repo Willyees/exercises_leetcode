@@ -1226,6 +1226,99 @@ ListNode* Solution::reverseList_recursive(ListNode* head) {
     return new_head;
 }
 
+/*forgot that the return should have been sorted from exercise specification. this function will return 1 by 1 element*/
+ListNode* Solution::mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode dummy = ListNode(-1);
+    if (l1 != nullptr) {
+        if (l2 == nullptr)
+            return l1;
+        dummy.next = l1;
+    }
+    else if (l2 != nullptr)
+        return l2;
+    else
+        return dummy.next;//both are nullptr, return nullptr
+    ListNode* node = &dummy;
+    while (l1 != nullptr && l2 != nullptr) {
+        ListNode* l1_next = l1->next;
+        ListNode* l2_next = l2->next;
+        node = node->next;//updating the node here instead of end of while, beacause in case l2 is tail node, it would push the nullptr as next.
+        node->next = l1;
+        //if(node->next->next != nullptr)
+            node = node->next;
+        node->next = l2;
+        l1 = l1_next;
+        l2 = l2_next;
+        //node = node->next; old node update
+    }
+    ListNode* l_valid = nullptr;
+    if (l1 != nullptr)
+        l_valid = l1;
+    else if (l2 != nullptr)
+        l_valid = l2;
+    node->next->next = l_valid;//node has not been updated for l2
+    return dummy.next;
+}
+
+ListNode* Solution::mergeTwoLists_sorted(ListNode* l1, ListNode* l2) {
+    ListNode dummy = ListNode(-1);
+    ListNode* node = &dummy;
+    while (l1 && l2) {
+        if (l1->val < l2->val) {
+            node->next = l1;
+            l1 = l1->next;
+        }
+        else {
+            node->next = l2;
+            l2->next = l2;
+        }
+        node = node->next;
+    }
+    node->next = l1 ? l1 : l2;
+    return dummy.next;
+}
+
+/*find out if singly list is palindrome*/
+bool Solution::isPalindrome(ListNode* head) {
+    if (!head && !head->next)
+        return true;
+    //find half
+    int counter = 0;
+    ListNode* c_head = head;
+    while (c_head) {
+        counter++;
+        c_head = c_head->next;
+    }
+    int half = counter / 2;
+    //int half = counter % 2 == 0? counter / 2 : counter / 2 + 1;
+    //reverse first half
+    ListNode* node = head;
+    ListNode* prev = nullptr;
+    ListNode* p_next = nullptr;//node->next
+    while (half != 0) {
+        p_next = node->next;
+        node->next = prev;
+        half--;
+        prev = node;
+        node = p_next;
+    }
+    //node->next = prev;
+    //store the next pointer because is the first second half, then 
+    ListNode* second = counter % 2 == 0? p_next : p_next->next;
+    //node now points to the half
+    //check the halves are the same
+    ListNode* first = prev;
+    while (second && first) {
+        if (first->val != second->val)
+            return false;
+        first = first->next;
+        second = second->next;
+    }
+    return true;
+
+
+}
+
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3

@@ -83,6 +83,9 @@ public:
 	ListNode* removeNthFromEnd_1(ListNode* head, int n);//using a dummy node for cleaner code and removed edge head cases
 	ListNode* reverseList(ListNode* head);//O(N), O(1)
 	ListNode* reverseList_recursive(ListNode*);//O(N), O(N)
+	ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
+	ListNode* mergeTwoLists_sorted(ListNode* l1, ListNode* l2);
+	bool isPalindrome(ListNode* head);
 
 
 };

@@ -36,3 +36,4 @@ bool myAtoi();
 bool strStr();
 bool countAndSay();
 bool removeNthFromEnd();
+bool mergeTwoLists();
