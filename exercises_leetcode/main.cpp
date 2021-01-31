@@ -22,13 +22,12 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 	return result;
 }
 
-void f(int*& p) {
-	p = nullptr;
+void f(int i = 5) {
+	cout << i;
 }
 int main() {
 	Solution sol;
-	isBSTValid();
-
+	isSymmetric();
 	return 0;
 }
 

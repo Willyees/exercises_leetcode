@@ -34,7 +34,7 @@ bool isLLEqual(ListNode* h, std::vector<int> vals) {
 	}
 	return index == vals.size() - 1 && h->next == nullptr;
 }
-/*create bst from vector, if the value in the vector is nil_t, that node is set as a nullptr*/
+/*create bst from vector, if the value in the vector is nil_t, that node is set as a nullptr, index: should be passed as 0*/
 TreeNode* createBinarySearchTree(std::vector<int>& vals, int index) {
 	//2*i + 1 left child; 2*i + 2 right child
 	if (index >= vals.size())
@@ -46,7 +46,7 @@ TreeNode* createBinarySearchTree(std::vector<int>& vals, int index) {
 		return node;
 	node->left = createBinarySearchTree(vals, index * 2 + 1);//creating left
 	node->right = createBinarySearchTree(vals, index * 2 + 2);//create right
-	return node;
+	return node;	
 }
 /*******/
 
@@ -1460,4 +1460,35 @@ bool isBSTValid() {
 		}
 		TreeNode::clear(root);
 	}
+}
+
+bool isSymmetric() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<bool> corrects;
+
+	//0
+	inputs.push_back(vector<int> {1, 2, 2, 3, 4, 4, 3});
+	corrects.push_back(true);
+
+	//1
+	inputs.push_back(vector<int> {1, 2, 2, nil_t, 3, nil_t, 3});
+	corrects.push_back(false);
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		TreeNode* root = createBinarySearchTree(inputs[i], 0);
+		//TreeNode::printInOrder(root);
+		bool sol = problems.isSymmetric_3(root);
+		if (sol == corrects[i]) {
+			cout << "isSymmetric_3 " << i << " ok" << endl;
+		}
+		else {
+			cout << "isSymmetric_3 " << i << " failed" << endl;
+			passed = false;
+		}
+		TreeNode::clear(root);
+	}
+
+
+	return passed;
 }

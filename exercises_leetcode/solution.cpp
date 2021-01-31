@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <queue>
+#include <stack>
 #include <sstream>
 #include <set>
 #include <unordered_set>
@@ -1347,6 +1348,30 @@ bool Solution::hasCycle_1(ListNode* head) {
     return false;
 }
 
+/*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves
+easier way is to keep track of parents, children using datastructures STACK*/
+std::vector<int> Solution::inorder_it(TreeNode* root) {
+    if (!root)
+        return vector<int> {};
+    stack<TreeNode*> s;//not pushing the root from outside the while because is needed to push the current node inside the while
+    vector<int> out;
+    TreeNode* node = root;
+    while (!s.empty() || node != nullptr) {
+        while (node) {//keep pushing left until hit leaf (no more left)
+            s.push(node);
+            node = node->left;
+        }
+        node = s.top();
+        //cout << node->val << endl;
+        out.push_back(node->val);
+        s.pop();
+        //dont need a while loop for right elements. only need to set the current node as the right, then go back to the iteration, trying to find the most left in the new subtree.
+        //if no more left available, the previous element in the stack is the parent and will be printed
+        node = node->right;
+    }
+    return out;
+}
+
 /*depth: distance from node u to root
 maxdepth: maximum distance from furthest leaf u to root
 Depth first search*/
@@ -1466,6 +1491,90 @@ TreeNode* Solution::isValidBST_2_helper(TreeNode* root, std::vector<int>& v_inor
         isValidBST_2_helper(root->right, v_inorder);
     }
     return root;
+}
+
+/*symmetric at level order. 
+solving by checking if each level is palindrome*/
+bool Solution::isSymmetric_1(TreeNode* root) {
+    //stalled: not possible to iterate over the queue backwards without popping
+    if (!root)
+        return true;
+    list<TreeNode*> q;
+    q.push_back(root);
+    auto it_l = q.end();
+    while (q.empty()) {
+        //check that all the elements present in the queue are palindrome
+        for (int i = 0, length = q.size(); i < length / 2; ++i) {
+            if (q.back()->val == q.front()->val) {
+
+            }
+            else
+                return false;
+        }
+    }
+}
+
+/*incorrect: will not take into account for nullptr nodes.
+iteratively visit nodes in inorder way. using stack to keep track of previous nodes to still visit
+2 inorder visits, first is normal and second is reversed. they both stop and start from root node. at the end check if the 2 vectors created are the same*/
+bool Solution::isSymmetric_2(TreeNode* root) {
+    vector<int> l;//inorder left subtree
+    vector<int> r;//inorder right subtree
+    stack<TreeNode*> s;
+    TreeNode* node = root;
+   
+    while (!s.empty() || node != nullptr) {
+        while (node) {
+            s.push(node);
+            node = node->left;
+        }
+        node = s.top();
+        s.pop();
+        if (node == root)//break when is the root
+            break;
+        l.push_back(node->val);
+
+        node = node->right;
+    }
+
+    //reversed inorder
+    node = root;
+    s = stack<TreeNode*>();
+    while (!s.empty() || node != nullptr) {
+        while (node) {
+            s.push(node);
+            node = node->right;
+        }
+        node = s.top();
+        s.pop();
+        if (node == root)//break when is the root
+            break;
+        r.push_back(node->val);
+
+        node = node->left;
+    }
+    
+    return r == l;//todo complete
+}
+
+bool Solution::isSymmetric_3(TreeNode* root) {
+    return isSymmetric_3_isMirror(root, root);
+}
+
+/*from the root, spawn the next nodes, one on the left and one on the right. one by one check if the level order and the level order reversed outputs the same values
+*/
+bool Solution::isSymmetric_3_isMirror(TreeNode* t1, TreeNode* t2) {
+    if (t1 == nullptr && t2 == nullptr)
+        return true;
+    if (t1 == nullptr || t2 == nullptr)
+        return false;
+    if (t1->val != t2->val)
+        return false;
+    bool symmetric = true;
+    symmetric &= isSymmetric_3_isMirror(t1->left, t2->right);
+    symmetric &= isSymmetric_3_isMirror(t1->right, t2->left);
+
+    return symmetric;
 }
 
 

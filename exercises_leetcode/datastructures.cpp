@@ -82,15 +82,16 @@ void ListNode::print(ListNode* h) {
 		h = h->next;
 	}
 }
-/*print tree in order, r is the root node*/
+/*print tree in order, r is the root node. recursively*/
 void TreeNode::printInOrder(TreeNode* r) {
 	if (r == nullptr)
 		return;
 	printInOrder(r->left);
 	cout << r->val << endl;
 	printInOrder(r->right);
-	
 }
+
+
 /*clear the nodes by level order*/
 void TreeNode::clear(TreeNode*& r) {
 	queue<TreeNode*> q;

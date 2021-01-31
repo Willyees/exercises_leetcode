@@ -5,7 +5,7 @@
 /*helpers*/
 ListNode* createLinkedList(std::vector<int>);
 bool isLLEqual(ListNode* h, std::vector<int> vals);
-TreeNode* createBinarySearchTree(std::vector<int>&, int);
+TreeNode* createBinarySearchTree(std::vector<int>&, int = 0);
 /**/
 bool twoSum();
 bool twoSum_hash();
@@ -41,3 +41,4 @@ bool mergeTwoLists();
 /*trees*/
 bool maxDepthTree();
 bool isBSTValid();
+bool isSymmetric();

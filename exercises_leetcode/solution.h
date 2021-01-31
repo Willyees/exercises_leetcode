@@ -91,6 +91,11 @@ public:
 	bool hasCycle(ListNode* head);
 	bool hasCycle_1(ListNode* head);
 	/*trees*/
+	std::vector<int> inorder_it(TreeNode* root);//O(N), O(N)
+	std::vector<int> inorder_rec(TreeNode* root);
+
+
+
 	int maxDepth(TreeNode* root);//depth first search
 	int maxDepth_1(TreeNode* root);//breadth first search
 	int maxDepth_h(TreeNode* root, int count);
@@ -99,6 +104,10 @@ public:
 	bool isValidBST_1_helper(TreeNode* root, TreeNode*& prev);
 	bool isValidBST_2(TreeNode* root);
 	TreeNode* isValidBST_2_helper(TreeNode* root, std::vector<int>&);//O(N), O(N) space.
+	bool isSymmetric_1(TreeNode* root);
+	bool isSymmetric_2(TreeNode* root);
+	bool isSymmetric_3(TreeNode* root);//from solution
+	bool isSymmetric_3_isMirror(TreeNode* , TreeNode*);//from solution
 
 
 
