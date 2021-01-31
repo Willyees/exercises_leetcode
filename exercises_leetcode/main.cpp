@@ -22,11 +22,13 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 	return result;
 }
 
+void f(int*& p) {
+	p = nullptr;
+}
 int main() {
 	Solution sol;
-	ListNode* h = createLinkedList(vector<int> {1, 0, 0});
-	cout << sol.isPalindrome(h);
-	ListNode::clear(h);
+	isBSTValid();
+
 	return 0;
 }
 

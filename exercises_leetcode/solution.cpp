@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <queue>
-#include <strstream>
+#include <sstream>
 #include <set>
 #include <unordered_set>
 #include <assert.h>
@@ -1345,6 +1345,127 @@ bool Solution::hasCycle_1(ListNode* head) {
             return true;
     }
     return false;
+}
+
+/*depth: distance from node u to root
+maxdepth: maximum distance from furthest leaf u to root
+Depth first search*/
+int Solution::maxDepth(TreeNode* root) {
+    if (root == nullptr)
+        return 0;
+    if (root->left == nullptr && root->right == nullptr)
+        return 1;
+    int l = maxDepth(root->left);//depth left subtree
+    int r = maxDepth(root->right);//depth right subtree
+    return max(l, r) + 1;
+}
+
+/*breath first search
+use queue to load children to visit next.
+push all the parents, then for each node present in the queue, push their children and pop out all the parents, so only the children are prensent
+add 1 because next iteration will be visiting lower level (where are the children). keep adding and popping until reaches the leaves, children with left and right nulltpr*/
+int Solution::maxDepth_1(TreeNode* root) {
+    if (root == nullptr)
+        return 0;
+    queue<TreeNode*> q;
+    q.push(root);
+    int depth = 0;//count all the levels
+    while (!q.empty()) {
+        depth++;
+        for (int i = 0, n = q.size(); i < n; ++i) {
+            //visit all the parents in this level and add all their children that makes up the next level
+            TreeNode* node = q.front();
+            q.pop();
+            if (node->left != nullptr)
+                q.push(node->left);
+            if (node->right != nullptr)
+                q.push(node->right);
+        }
+        //next iteration will pop all the newly added children until no more nodes are present in the queue
+    }
+    return depth;
+}
+
+int Solution::maxDepth_h(TreeNode* root, int count) {
+    if (root == nullptr)
+        return count + 1;
+}
+
+/*check that the children nodes are lower or higher than the parent
+incorrect solution: if some values are incorrect in the middle of the subtree, this function will not find out*/
+bool Solution::isValidBST(TreeNode* root) {
+    //breadth first earch
+    if (!root)
+        return false;
+    queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty()) {
+        TreeNode* parent = q.front();
+        q.pop();
+        if (parent->left != nullptr)
+            if (parent->left->val > parent->val)
+                return false;
+        if (parent->right != nullptr)
+            if (parent->right->val < parent->val)
+                return false;
+    }
+    return true;
+}
+
+/*in order traversal, if the previous node is not lower, than it is not valid*/
+bool Solution::isValidBST_1(TreeNode* root) {
+    TreeNode* ptr = nullptr;
+    return isValidBST_1_helper(root, ptr);
+    
+}
+
+/*prev needs to be a global variable, otherwise is not possible to correcly pass the previous in all the cases
+this version could be improved by removing the valid bool and directly returning false based on the reutnr value of the first recursive call(node->left, prev)*/
+bool Solution::isValidBST_1_helper(TreeNode* root, TreeNode*& prev) {
+    bool valid = true;
+    if (root) {
+        valid = valid && isValidBST_1_helper(root->left, prev);//keep passing down the prev node until it reaches a new base case (new done found for the inorder)
+        if(prev) cout << prev->val << " " << root->val << endl;
+        if (prev && root->val <= prev->val)//check prev is not nullptr since the inital root has no previous
+            return false;
+        prev = root;
+        valid = valid && isValidBST_1_helper(root->right, prev);
+    }
+    return valid;
+}
+
+/*this method is invalid because is not possible to return the correct inorder value for all the scenarios. for example cannot return a root node as a "previous node" to a lower one.
+need to have a global previous variable*/
+/*TreeNode* Solution::isValidBST_1_helper(TreeNode* root, bool& valid) {
+
+    if (root) {//if not after leaf
+        TreeNode* child = isValidBST_1_helper(root->left, valid);//point to left and pass the node itself
+        if (child){
+            valid = valid && child->val < root->val;
+            cout << "child: " << child->val << "parent: " << root->val << endl;
+        }
+        child = isValidBST_1_helper(root->right, valid);
+    }
+    return root;
+}*/
+
+bool Solution::isValidBST_2(TreeNode* root) {
+    vector<int> v;
+    isValidBST_2_helper(root, v);
+    for (int i = 0; i < v.size() - 1; ++i) {
+        if (v[i] >= v[i + 1])
+            return false;
+    }
+    return true;
+}
+
+TreeNode* Solution::isValidBST_2_helper(TreeNode* root, std::vector<int>& v_inorder) {
+    if (root) {
+        isValidBST_2_helper(root->left, v_inorder);
+        v_inorder.push_back(root->val);
+        isValidBST_2_helper(root->right, v_inorder);
+    }
+    return root;
 }
 
 

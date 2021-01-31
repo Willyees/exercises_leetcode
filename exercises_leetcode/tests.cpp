@@ -34,8 +34,21 @@ bool isLLEqual(ListNode* h, std::vector<int> vals) {
 	}
 	return index == vals.size() - 1 && h->next == nullptr;
 }
-
-/**/
+/*create bst from vector, if the value in the vector is nil_t, that node is set as a nullptr*/
+TreeNode* createBinarySearchTree(std::vector<int>& vals, int index) {
+	//2*i + 1 left child; 2*i + 2 right child
+	if (index >= vals.size())
+		return nullptr;
+	TreeNode* node = nullptr;
+	if (vals[index] != nil_t)
+		node = new TreeNode(vals[index]);//only setting the val
+	else
+		return node;
+	node->left = createBinarySearchTree(vals, index * 2 + 1);//creating left
+	node->right = createBinarySearchTree(vals, index * 2 + 2);//create right
+	return node;
+}
+/*******/
 
 bool twoSum() {
 	bool passed = true;
@@ -1390,3 +1403,61 @@ bool mergeTwoLists() {
 	return passed;
 }
 
+bool maxDepthTree() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<int> corrects;
+
+	//0
+	inputs.push_back(vector<int> {3, 9, 20, nil_t, nil_t, 15, 7});
+	corrects.push_back(3);
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		TreeNode* root = createBinarySearchTree(inputs[i], 0);
+		//TreeNode::printInOrder(root);
+		int sol = problems.maxDepth_1(root);
+		if (sol == corrects[i]) {
+			cout << "maxDepthTree " << i << "ok";
+		}
+		else {
+			cout << "maxDepthTree " << i << "failed";
+			return false;
+		}
+	}
+
+	return passed;
+}
+
+bool isBSTValid() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<bool> corrects;
+
+	//2
+	inputs.push_back(vector<int> {5, 1, 4, nil_t, nil_t, 3, 6});
+	corrects.push_back(false);
+
+	//0
+	inputs.push_back(vector<int> {2, 1, 3});
+	corrects.push_back(true);
+
+	//1
+	inputs.push_back(vector<int> {1, 2, 3});
+	corrects.push_back(false);
+	
+	
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		TreeNode* root = createBinarySearchTree(inputs[i], 0);
+		TreeNode::printInOrder(root);
+		int sol = problems.isValidBST_1(root);
+		if (sol == corrects[i]) {
+			cout << "isValidBST_1 " << i << " ok" << endl;
+		}
+		else {
+			cout << "isValidBST_1 " << i << " failed" << endl;
+			return false;
+		}
+		TreeNode::clear(root);
+	}
+}

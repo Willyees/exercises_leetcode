@@ -42,3 +42,28 @@ struct ListNode {
 	static void clear(ListNode*);
 	static void print(ListNode*);
 };
+
+struct TreeNode {
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode() : val(0), left(nullptr), right(nullptr) {};
+	TreeNode(int val) : val(val), left(nullptr), right(nullptr) {};
+	TreeNode(int val, TreeNode* left, TreeNode* right) : val(val), left(left), right(right) {};
+	
+	void static printInOrder(TreeNode* r);
+	void static clear(TreeNode*& r);//passing as reference because need to reset the pointer r to nullptr
+	static constexpr int nil = -101;
+
+};
+inline const int& nil_t = TreeNode::nil;
+
+
+
+
+class BinaryST {
+	TreeNode* r;
+	//int n; number of nodes in the tree
+	BinaryST(TreeNode* r) : r(r) {}
+	BinaryST() : r(nullptr) {}
+};

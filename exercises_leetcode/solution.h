@@ -18,6 +18,7 @@ public:
 	bool nextPermutation(std::string&);
 	bool isPalindrome(std::string);
 	bool isPrime(int);
+	
 	std::vector<int>::iterator remove_vi(std::vector<int>::iterator, std::vector<int>::iterator, int);//used to move element matching at the end of vector
 	/*interview questions exercises*/
 	int removeDuplicates(std::vector<int>& nums);//Remove Duplicates from Sorted Array, using stl remove and erase
@@ -77,6 +78,7 @@ public:
 	std::string countAndSay_helper(int n);
 	std::string countAndSay_find_cont(std::string n);
 	std::string longestCommonPrefix(std::vector<std::string>& strs);
+	/*linkedlist*/
 	void deleteNode(ListNode* node);//O(N). accepted method, but it is not the best
 	void deleteNode_1(ListNode* node);//O(1)
 	ListNode* removeNthFromEnd(ListNode* head, int n);
@@ -88,6 +90,16 @@ public:
 	bool isPalindrome(ListNode* head);
 	bool hasCycle(ListNode* head);
 	bool hasCycle_1(ListNode* head);
+	/*trees*/
+	int maxDepth(TreeNode* root);//depth first search
+	int maxDepth_1(TreeNode* root);//breadth first search
+	int maxDepth_h(TreeNode* root, int count);
+	bool isValidBST(TreeNode* root);
+	bool isValidBST_1(TreeNode* root);
+	bool isValidBST_1_helper(TreeNode* root, TreeNode*& prev);
+	bool isValidBST_2(TreeNode* root);
+	TreeNode* isValidBST_2_helper(TreeNode* root, std::vector<int>&);//O(N), O(N) space.
+
 
 
 };
