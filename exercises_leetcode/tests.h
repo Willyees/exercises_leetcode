@@ -39,6 +39,8 @@ bool countAndSay();
 bool removeNthFromEnd();
 bool mergeTwoLists();
 /*trees*/
+bool preorder();
+bool postorder();
 bool maxDepthTree();
 bool isBSTValid();
 bool isSymmetric();

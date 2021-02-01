@@ -27,7 +27,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	isSymmetric();
+	postorder();
 	return 0;
 }
 

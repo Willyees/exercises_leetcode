@@ -1403,6 +1403,82 @@ bool mergeTwoLists() {
 	return passed;
 }
 
+bool preorder() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(vector<int> {1, 2, 3, 4, nil_t, 5, 6, nil_t, nil_t, nil_t, nil_t, 7, 8, nil_t, nil_t});
+	corrects.push_back(vector<int> {1, 2, 4, 3, 5, 7, 8, 6});
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		TreeNode* r = createBinarySearchTree(inputs[i]);
+		//TreeNode::printInOrder(r);
+		//cout << "---" << endl;
+		vector<int> v = problems.preorder_it(r);
+		if (v == corrects[i]) 
+			cout << "preorder_it " << i << " ok" << endl;
+		else {
+			passed = false;
+			cout << "preorder_it " << i << " failed" << endl;
+		}	
+		v.clear();
+		v = problems.preorder_rec(r);
+		if (v == corrects[i])
+			cout << "preorder_rec " << i << " ok" << endl;
+		else {
+			passed = false;
+			cout << "preorder_rec " << i << " failed" << endl;
+		}
+		TreeNode::clear(r);
+	}
+
+	return passed;
+}
+
+bool postorder() {
+	bool passed = true;
+	vector<vector<int>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(vector<int> {1, 2, 3, 4, nil_t, 5, 6, nil_t, nil_t, nil_t, nil_t, 7, 8, nil_t, nil_t});
+	corrects.push_back(vector<int> {4, 2, 7, 8, 5, 6, 3, 1});
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		TreeNode* r = createBinarySearchTree(inputs[i]);
+		//TreeNode::printInOrder(r);
+		//cout << "---" << endl;
+		vector<int> v = problems.postorder_it_2stacks(r);
+		if (v == corrects[i])
+			cout << "postorder_it_2stacks " << i << " ok" << endl;
+		else {
+			passed = false;
+			cout << "postorder_it_2stacks " << i << " failed" << endl;
+		}
+		v.clear();
+		v = problems.postorder_it(r);
+		if (v == corrects[i])
+			cout << "postorder_it " << i << " ok" << endl;
+		else {
+			passed = false;
+			cout << "postorder_it " << i << " failed" << endl;
+		}
+		v.clear();
+		v = problems.postorder_rec(r);
+		if (v == corrects[i])
+			cout << "postorder_rec " << i << " ok" << endl;
+		else {
+			passed = false;
+			cout << "postorder_rec " << i << " failed" << endl;
+		}
+		TreeNode::clear(r);
+	}
+
+	return passed;
+}
+
 bool maxDepthTree() {
 	bool passed = true;
 	vector<vector<int>> inputs;

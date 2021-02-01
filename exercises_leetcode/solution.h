@@ -93,6 +93,17 @@ public:
 	/*trees*/
 	std::vector<int> inorder_it(TreeNode* root);//O(N), O(N)
 	std::vector<int> inorder_rec(TreeNode* root);
+	void inorder_rec_helper(TreeNode* root, std::vector<int>& out);
+
+	std::vector<int> postorder_it_2stacks(TreeNode* root);//O(N), O(N). using 2 stacks (2N)
+	std::vector<int> postorder_it(TreeNode* root);//to review how it works
+	std::vector<int> postorder_rec(TreeNode* root);
+	void postorder_rec_helper(TreeNode* root, std::vector<int>&);
+
+	std::vector<int> preorder_it(TreeNode* root);//O(N), O(N)
+	std::vector<int> preorder_rec(TreeNode* root);//O(N), O(N) n:height tree. for skewed ones can be as n
+	void preorder_rec(TreeNode* root, std::vector<int>&);
+
 
 
 

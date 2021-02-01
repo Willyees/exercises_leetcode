@@ -1349,7 +1349,7 @@ bool Solution::hasCycle_1(ListNode* head) {
 }
 
 /*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves
-easier way is to keep track of parents, children using datastructures STACK*/
+STACK, push a*/
 std::vector<int> Solution::inorder_it(TreeNode* root) {
     if (!root)
         return vector<int> {};
@@ -1362,7 +1362,7 @@ std::vector<int> Solution::inorder_it(TreeNode* root) {
             node = node->left;
         }
         node = s.top();
-        //cout << node->val << endl;
+        cout << node->val << endl;
         out.push_back(node->val);
         s.pop();
         //dont need a while loop for right elements. only need to set the current node as the right, then go back to the iteration, trying to find the most left in the new subtree.
@@ -1370,6 +1370,126 @@ std::vector<int> Solution::inorder_it(TreeNode* root) {
         node = node->right;
     }
     return out;
+}
+
+vector<int> Solution::inorder_rec(TreeNode* root) {
+    vector<int> v;
+    inorder_rec_helper(root, v);
+    return v;
+}
+
+void Solution::inorder_rec_helper(TreeNode* root, std::vector<int>& out) {
+    if (!root)
+        return;
+    inorder_rec(root->left);//visit whole left subtree
+    cout << root->val << endl;//visit current node
+    out.push_back(root->val);
+    inorder_rec(root->right);//visit whole right subtree
+}
+
+/*DFS, keep going left until leaf then start printing, move to right subtree, then move up
+this method will perform the reverse postorder (node, right, left) and then reverse the values to get the normal postorder*/
+std::vector<int> Solution::postorder_it_2stacks(TreeNode* root) {
+    stack<TreeNode*> s;
+    stack<int> r_out;
+    vector<int> out;
+    TreeNode* node = root;
+    s.push(node);
+    
+    while (!s.empty() && node != nullptr) {
+        node = s.top();
+        s.pop();
+        r_out.push(node->val);
+        if (node->left)
+            s.push(node->left);
+        if (node->right)
+            s.push(node->right);
+    }
+    //r_out is now reversed because have been printing root, right, left
+    while (!r_out.empty()){
+        out.push_back(r_out.top());
+        r_out.pop();
+    }
+    return out;
+}
+
+/*only 1 stack used. use the */
+std::vector<int> Solution::postorder_it(TreeNode* root) {
+    TreeNode* node = root;
+    TreeNode* last = nullptr;
+    vector<int> out;
+    stack<TreeNode*> s;
+    while (!s.empty() || node != nullptr) {
+        if (node){
+            s.push(node);
+            node = node->left;
+        }
+        else {//node is nullptr
+            //retreive the parent
+            TreeNode* parent = s.top();
+            if (parent->right && parent->right != last) {//important condition that will not let to set a node that has fully explored subtrees
+                node = parent->right;//case where leaf was the parent->left. still need to visit the right subtree
+            }
+            else {//this is either a leaf node or the previous parent of fully explored subtree
+                cout << parent->val << endl;
+                out.push_back(parent->val);
+                last = parent;
+                s.pop();
+            }
+        }
+    }
+    return out;
+}
+
+
+std::vector<int> Solution::postorder_rec(TreeNode* root) {
+    vector<int> v;
+    postorder_rec_helper(root, v);
+    return v;
+}
+
+/*visit fromt the deepest left node in the left subtree, move on the right subtree and do the same, visit parent*/
+void Solution::postorder_rec_helper(TreeNode* root, vector<int>& v) {
+    if (!root)//base case: start returning when nullptr found (no child either left or at right)
+        return;
+    postorder_rec_helper(root->left, v);
+    postorder_rec_helper(root->right, v);
+    cout << root->val << endl;
+    v.push_back(root->val);
+}
+
+/*DFS, keep printing while going to left sub, then move to right*/
+std::vector<int> Solution::preorder_it(TreeNode* root) {
+    stack<TreeNode*> q;
+    q.push(root);
+    vector<int> v;
+    TreeNode* node = root;
+    while (!q.empty() && node != nullptr) {//root might be nullptr, taking it into account
+        node = q.top();
+        q.pop();
+        cout << node->val << endl;
+        v.push_back(node->val);
+        if (node->right)
+            q.push(node->right);
+        if (node->left)//could not push the left node, but just assign it to node = node->left. need 1 check that it is !nullptr
+            q.push(node->left);
+    }
+    return v;
+}
+
+std::vector<int> Solution::preorder_rec(TreeNode* root) {
+    vector<int> v;
+    preorder_rec(root, v);
+    return v;
+}
+
+void Solution::preorder_rec(TreeNode* root, std::vector<int>& out) {
+    if (!root)
+        return;
+    cout << root->val << endl;
+    out.push_back(root->val);
+    preorder_rec(root->left, out);
+    preorder_rec(root->right, out);
 }
 
 /*depth: distance from node u to root
