@@ -44,3 +44,5 @@ bool postorder();
 bool maxDepthTree();
 bool isBSTValid();
 bool isSymmetric();
+/*sorting, searching*/
+bool merge();

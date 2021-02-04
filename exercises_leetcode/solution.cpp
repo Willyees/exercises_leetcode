@@ -1697,6 +1697,101 @@ bool Solution::isSymmetric_3_isMirror(TreeNode* t1, TreeNode* t2) {
     return symmetric;
 }
 
+//iterative
+/*print tree in level order (BFS), each level is a separate vector*/
+std::vector<vector<int>> Solution::levelOrder(TreeNode* root) {
+    vector<vector<int>> out;
+    if (!root)
+        return out;
+    queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty()) {
+        vector<int> level;
+        for(int i = 0, n = q.size(); i < n; ++i){
+            TreeNode* node = q.front();
+            q.pop();
+            level.push_back(node->val);
+            if (node->left)
+                q.push(node->left);
+            if (node->right)
+                q.push(node->right);
+        }
+        out.push_back(level);
+    }
+    return out;
+}
+
+/*iterate over the tree in preorder fashion (DFS), but push the values in the correct inner vector based on their depth*/
+std::vector<std::vector<int>> Solution::levelOrder_preorder_rec(TreeNode* root) {
+    vector<vector<int>> out;
+    levelOrder_preorder_helper(root, 0, out);
+    return out;
+}
+
+/*all the traversal, firstly visit the left subtree then move to the right subtree. This make sure that the pushed values in each vector will have nodes ordered from left to right*/
+void Solution::levelOrder_preorder_helper(TreeNode*  node, int depth, vector<vector<int>>& out) {
+    if (!node)
+        return;
+    if (depth >= out.size())//in case this node is the first being visited from its level, there is no vector to host it yet. so create it as an empty vector
+        out.push_back(vector<int> {});
+    out[depth].push_back(node->val);//push current node visited
+    levelOrder_preorder_helper(node->left, depth + 1, out);//move to the left
+    levelOrder_preorder_helper(node->right, depth + 1, out);//move to the right
+}
+
+/**keep recursively find the mid item and set it as the root of the next subtree. its left subtree is on the left of its vector index (right for right subtree)
+  @param  v:    sorted vector used to build a bst
+  @return       bst with not more than 1 depth difference from any node*/
+TreeNode* Solution::sortedArrayToBST(std::vector<int>& v) {
+    TreeNode* root = sortedArrayToBST_helper(v, 0, v.size() -1);
+    return root;
+}
+
+/**
+* @param index_b:   begin index pointing to the start slice of v to be worked on
+         index_e:   end index
+*/
+TreeNode* Solution::sortedArrayToBST_helper(std::vector<int>& v, int index_b, int index_e) {
+    if (index_b > index_e || index_e >= v.size() || index_b < 0)
+        return nullptr;
+    //int mid_index = (index_e + index_b) / 2; //this might cause overflow for index_b: 1, index_e:int_max
+    int mid_index = index_b + (index_e - index_b) / 2;//not causing overflow
+    TreeNode* node = new TreeNode(v[mid_index]);
+    node->left = sortedArrayToBST_helper(v, index_b, mid_index - 1);
+    node->right = sortedArrayToBST_helper(v, mid_index + 1, index_e);
+    return node;
+}
+
+
+/*sorting and searching*/
+
+/**merge nums2 into nums1, sorted
+* @param nums1: sorted vector. size is m + n. n unitialized elements, are used to store the nums2 elements
+*        m:     size of intialized elements in nums1
+*        n:     size of nums2
+*/
+void Solution::merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {
+    for (auto it_1 = nums1.begin(), it_2 = nums2.begin(); it_1 != nums1.end() && it_2 != nums2.end(); ++it_1) {
+        auto it_1ie = nums1.end() - n;//points to the first not-initialized element
+        if (it_1 >= it_1ie) {//in case the current it points to the unitialized, just copy value from nums2
+            *it_1 = *it_2;
+            ++it_2;
+        }
+        else if (*it_2 < *it_1 ) {//make space for nums2 element. should not compare not-initialized values (taken into account in previous if statement)
+            auto it_1temp = it_1;
+            int prev = *it_2;
+            while (it_1temp != nums1.end() - n + 1) {//might break, .end() + 0 + 1
+                int temp = *it_1temp;
+                *it_1temp = prev;//swap it_2temp with next elements
+                prev = temp;
+                it_1temp++;
+            }
+            n--;//using n as counter of how many items have to be still set from nums2
+            it_2++;
+        }
+    }
+}
+
 
 std::vector<int> Solution::findPrimeFactors(int x) {
     //12: 2,2,3

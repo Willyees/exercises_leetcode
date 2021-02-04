@@ -1568,3 +1568,42 @@ bool isSymmetric() {
 
 	return passed;
 }
+
+bool merge() {
+	typedef pair<vector<int>, int> vec_info;
+	bool passed = true;
+	vector<pair<vec_info, vec_info>> inputs;
+	vector<vector<int>> corrects;
+
+	//0
+	inputs.push_back(make_pair(make_pair(vector<int> {1, 2, 3, 0, 0, 0}, 3), make_pair(vector<int> {2,5,6}, 3)));
+	corrects.push_back(vector<int> {1, 2, 2, 3, 5, 6});
+
+	//1
+	inputs.push_back(make_pair(make_pair(vector<int> {1}, 1), make_pair(vector<int> {}, 0)));
+	corrects.push_back(vector<int> {1});
+
+	//2
+	inputs.push_back(make_pair(make_pair(vector<int> {0}, 0), make_pair(vector<int> {1}, 1)));
+	corrects.push_back(vector<int> {1});
+	
+	//2
+	inputs.push_back(make_pair(make_pair(vector<int> {1,2,3,4,0}, 4), make_pair(vector<int> {5}, 1)));
+	corrects.push_back(vector<int> {1,2,3,4,5});
+
+	for (int i = 0; i < inputs.size(); ++i) {
+		auto& in_i = inputs[i];
+		problems.merge(in_i.first.first, in_i.first.second, in_i.second.first, in_i.second.second);
+		if (in_i.first.first == corrects[i]) {
+			cout << "merge " << i << " ok" << endl;
+		}
+		else {
+			cout << "merge " << i << " failed" << endl;
+			passed = false;
+		}
+		
+	}
+	
+
+	return passed;
+}

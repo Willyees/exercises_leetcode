@@ -27,7 +27,8 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	postorder();
+	merge();
+
 	return 0;
 }
 

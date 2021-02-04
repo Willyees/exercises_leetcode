@@ -105,8 +105,6 @@ public:
 	void preorder_rec(TreeNode* root, std::vector<int>&);
 
 
-
-
 	int maxDepth(TreeNode* root);//depth first search
 	int maxDepth_1(TreeNode* root);//breadth first search
 	int maxDepth_h(TreeNode* root, int count);
@@ -119,7 +117,13 @@ public:
 	bool isSymmetric_2(TreeNode* root);
 	bool isSymmetric_3(TreeNode* root);//from solution
 	bool isSymmetric_3_isMirror(TreeNode* , TreeNode*);//from solution
-
+	std::vector<std::vector<int>> levelOrder(TreeNode*);
+	std::vector<std::vector<int>> levelOrder_preorder_rec(TreeNode*);//using preorder to traverse the tree, then print in levelorder
+	void levelOrder_preorder_helper(TreeNode*, int, std::vector<std::vector<int>>&);//using preorder to traverse the tree, then print in levelorder
+	TreeNode* sortedArrayToBST(std::vector<int>&);//O(N)
+	TreeNode* sortedArrayToBST_helper(std::vector<int>&, int, int);
+	/*sorting and searching*/
+	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);
 
 
 };
