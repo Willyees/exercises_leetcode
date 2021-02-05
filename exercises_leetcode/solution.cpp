@@ -1765,7 +1765,8 @@ TreeNode* Solution::sortedArrayToBST_helper(std::vector<int>& v, int index_b, in
 
 /*sorting and searching*/
 
-/**merge nums2 into nums1, sorted
+/**merge nums2 into nums1, sorted. this method is O(N^2) because it makes space for new values, moving 1by1 until the end.
+*  a better approach would be starting from the end of both vectors and check which one is higher. set it to the last not-initalized element (since no other element will be higher than it). this is done in O(1) which leads to O(N) for all the elements
 * @param nums1: sorted vector. size is m + n. n unitialized elements, are used to store the nums2 elements
 *        m:     size of intialized elements in nums1
 *        n:     size of nums2
@@ -1788,6 +1789,52 @@ void Solution::merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, in
             }
             n--;//using n as counter of how many items have to be still set from nums2
             it_2++;
+        }
+    }
+}
+
+/**find the first bad version returned from the isBad(int). simple O(N) method
+* @param n:     total number of versions
+*/
+int Solution::firstBadVersion(int n) {
+    auto isBad = [](int n) {return n > 95; };//mock isBad function
+    int ns = 0;
+    while (!isBad(ns)) { ++ns; }
+    return ns;
+}
+bool isBadVersion(int n) {
+    return n > 2;
+}
+/**binary search. O(logN). if bad found -> move left until not found either 0 or a good one.
+*                          if good found -> binary search on the right side
+* passing test cases, but not really correct. Not always O(logN), could be O(N) 
+*/
+int Solution::firstBadVersion_1(int n) {
+    int begin = 0;
+    int mid = n / 2;
+    int end = n;
+    while (!isBadVersion(mid) && mid > 0) {
+        mid = mid + 1 + (end - mid + 1) / 2;
+    }
+    //found bad
+    while (isBadVersion(mid) && mid >= 0) { --mid; }
+    //found last good
+    return ++mid;
+}
+
+/**similar concept of the _1 version, but it fully uses the divide and conquer technique of the binary search. No linear search used because is not needed
+*/
+int Solution::firstBadVersion_2(int n) {
+    int begin = 0;
+    int end = n;
+    while (begin != end) {
+        int mid = begin + (end - begin) / 2;
+        if (isBadVersion(n)) {//move left
+            //this will keep moving left until begin and end ==. finding the first bad one
+            end = mid - 1;
+        }
+        else {//move right
+            begin = mid + 1;
         }
     }
 }

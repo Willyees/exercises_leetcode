@@ -1607,3 +1607,7 @@ bool merge() {
 
 	return passed;
 }
+
+bool firstBadVersion() {
+	return true;
+}

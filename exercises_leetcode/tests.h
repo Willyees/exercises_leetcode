@@ -46,3 +46,4 @@ bool isBSTValid();
 bool isSymmetric();
 /*sorting, searching*/
 bool merge();
+bool firstBadVersion();

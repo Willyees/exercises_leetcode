@@ -27,7 +27,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	merge();
+	cout<< sol.firstBadVersion_1(3);
 
 	return 0;
 }

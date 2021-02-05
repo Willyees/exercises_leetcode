@@ -123,7 +123,10 @@ public:
 	TreeNode* sortedArrayToBST(std::vector<int>&);//O(N)
 	TreeNode* sortedArrayToBST_helper(std::vector<int>&, int, int);
 	/*sorting and searching*/
-	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);
+	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);//O(N^2)
+	int firstBadVersion(int n);//bruteforce O(N)
+	int firstBadVersion_1(int n);//binary search- incorrect implementation
+	int firstBadVersion_2(int n);//binary search- correct implementation
 
 
 };
