@@ -127,6 +127,9 @@ public:
 	int firstBadVersion(int n);//bruteforce O(N)
 	int firstBadVersion_1(int n);//binary search- incorrect implementation
 	int firstBadVersion_2(int n);//binary search- correct implementation
+	/*dinamic programming*/
+	int climbStairs_rec(int n);//O(2^N); O(N)
+	int climbStair_rec_memoization(int n);//O(N); O(N)
 
 
 };

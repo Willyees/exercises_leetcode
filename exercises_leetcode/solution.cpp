@@ -1831,12 +1831,48 @@ int Solution::firstBadVersion_2(int n) {
         int mid = begin + (end - begin) / 2;
         if (isBadVersion(n)) {//move left
             //this will keep moving left until begin and end ==. finding the first bad one
-            end = mid - 1;
+            end = mid;
         }
         else {//move right
             begin = mid + 1;
         }
     }
+    return begin;
+}
+
+/**correct but leetcode will output limit time
+* @param n: total number of steps to be taken
+* @param i: current step
+*/
+int climbStairs_rec_helper(int n, int i) {
+    if (i > n)
+        return 0;//this step is not valid, it went overboard
+    if (i == n)
+        return 1;
+    return climbStairs_rec_helper(n, i + 1) + climbStairs_rec_helper(n, i + 2);
+}
+
+/**O(2^N), the number of nodes in the recursion tree is 2^N - 1 (binary tree). O(N) space: depth of recursion tree is N before is starts to unwind
+* recursively: start from step 0. at each step there are 2 possibility: take 1 step or 2 steps
+* only paths that ends at the nth step are valid. if the path ends n+1 is not valid and should not be returned
+*/
+int Solution::climbStairs_rec(int n) {
+    return climbStairs_rec_helper(n,0);
+}
+
+int climbStair_rec_memoization_helper(int n, int i, vector<int>& mem) {
+    if (i > n)
+        return 0;
+    if (i == n)
+        return 1;
+    if (mem[i] != 0) {//if this position has been assinged a value, not the default one
+        return mem[i];
+    }
+    return climbStair_rec_memoization_helper(n, i + 1, mem) + climbStair_rec_memoization_helper(n, i + 2, mem);
+}
+int Solution::climbStair_rec_memoization(int n) {
+    vector<int> mem(n);
+    return climbStair_rec_memoization_helper(n, 0, mem);
 }
 
 

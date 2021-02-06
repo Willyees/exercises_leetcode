@@ -6,6 +6,7 @@
 #include "solution.h"
 #include "datastructures.h"
 
+
 using namespace std;
 
 std::vector<string> similarTransformations(string input, vector<string> wordlist) {
@@ -27,7 +28,9 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout<< sol.firstBadVersion_1(3);
+	vector<int> v(6);
+	cout << v[5];
+	
 
 	return 0;
 }
