@@ -130,6 +130,7 @@ public:
 	/*dinamic programming*/
 	int climbStairs_rec(int n);//O(2^N); O(N)
 	int climbStair_rec_memoization(int n);//O(N); O(N)
+	int rob(std::vector<int>& nums);
 
 
 };

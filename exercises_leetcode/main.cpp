@@ -28,8 +28,10 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	vector<int> v(6);
-	cout << v[5];
+	vector<int> input = { 2,7,9,3,1 };
+	int correct = 4;
+	int out = sol.rob(input);
+	cout << out << endl;
 	
 
 	return 0;

@@ -1903,6 +1903,27 @@ std::vector<int> Solution::findPrimeFactors(int x) {
     return factors;
 }
 
+/**find the most money that can be robbed from houses in a single night. cannot rob two adjacent houses
+* iterative approach. for each house number, decide if robbing it and add it to the total plus all the total scored in the index - 2. if the total that would have been
+* created by not robbing this house, but robbing all the -1 index, do that
+* @param nums:  amount of money in each houses
+*/
+int Solution::rob(std::vector<int>& nums) {
+    int sum = 0, two_before = 0, one_before = 0;
+    for (int i = 0; i < nums.size(); ++i) {
+        //get it plus the - 2 sum
+        int rob_this = two_before + nums[i];
+        //dont get it, but get the previous sum
+        int no_rob_this = one_before;
+        //set the next 2 before and 1 before (which is the current sum)
+        two_before = one_before;
+        one_before = max(rob_this, no_rob_this);//decide if more money are in robbing this house + the path - 2 index. or more money in the path - 1 index (previous house)
+        sum = one_before;
+    }
+    return sum;
+}
+
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;

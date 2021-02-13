@@ -46,3 +46,48 @@ TEST(twoSumHash, handleInput) {
 	EXPECT_TRUE(std::find(out.begin(), out.end(), correct[0]) != out.end() && std::find(out.begin(), out.end(), correct[1]) != out.end());
 
 }
+
+TEST(rob, handleInput) {
+	//0
+	vector<int> input = { 1,2,3,1 };
+	int correct = 4;
+	int out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+	//1
+	input = { 2,7,9,3,1 };
+	correct = 12;
+	out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+	//2
+	input = { 2 };
+	correct = 2;
+	out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+	//3
+	input = { 1 };
+	correct = 1;
+	out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+	//4
+	input = { 1, 2 };
+	correct = 2;
+	out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+	//5
+	input = { 2, 1 };
+	correct = 2;
+	out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+	//6
+	input = {};
+	correct = 0;
+	out = sol.rob(input);
+	EXPECT_EQ(correct, out);
+
+}
