@@ -380,6 +380,20 @@ int Solution::numRescueBoats(vector<int>& people, int limit, int n, int max_ppl,
         return numRescueBoats(people, limit, n - 1, max_ppl, n_ppl);
     return max(people[n - 1] + numRescueBoats(people, limit - people[n - 1], n - 1, max_ppl, n_ppl + 1), numRescueBoats(people, limit, n - 1, max_ppl, n_ppl));
 }
+/**
+* bruteforce version. will check for every price which is the best combination
+*/
+int Solution::maxProfit_1(std::vector<int>& prices) {
+    int maxprofit = 0;
+    for (int i = 0; i < prices.size(); ++i) {
+        for (int l = i; l < prices.size(); ++l) {
+            int profit = prices[l] - prices[i];
+            if (profit > maxprofit)
+                maxprofit = profit;
+        }
+    }
+    return maxprofit;
+}
 /*return max profit by selling stocks. prices: history of stock prices.
 * can only buy if no stock is hold
 * O(N) single pass, O(1) time
