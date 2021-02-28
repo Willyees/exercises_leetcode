@@ -41,7 +41,8 @@ public:
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);//Add Two Numbers. Jan 12 daily. O(N)
 	int numRescueBoats(std::vector<int>& people, int limit);//Boats to Save People. Jan 13 daily
 	int numRescueBoats(std::vector<int>& people, int limit, int n, int max_ppl, int n_ppl);//recursive helper function. O(2^n). failed attempt
-	int maxProfit_1(std::vector<int>& prices);//Best Time to Buy and Sell Stock II. O(N^2)
+	int maxProfit_single(std::vector<int>& prices);//Best Time to Buy and Sell Stock I. O(N^2)
+	int maxProfit_single_1(std::vector<int>& prices);//Best Time to Buy and Sell Stock I. O(N^2)
 	int maxProfit(std::vector<int>& prices);//Best Time to Buy and Sell Stock II. O(N)
 	void rotate(std::vector<int>& nums, int k);//Rotate Array
 	void rotate_1(std::vector<int>& nums, int k);//Rotate Array
@@ -132,6 +133,7 @@ public:
 	int climbStairs_rec(int n);//O(2^N); O(N)
 	int climbStair_rec_memoization(int n);//O(N); O(N)
 	int rob(std::vector<int>& nums);
+	int maxSubArray(std::vector<int>& nums);
 
 
 };

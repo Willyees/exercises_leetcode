@@ -381,15 +381,32 @@ int Solution::numRescueBoats(vector<int>& people, int limit, int n, int max_ppl,
     return max(people[n - 1] + numRescueBoats(people, limit - people[n - 1], n - 1, max_ppl, n_ppl + 1), numRescueBoats(people, limit, n - 1, max_ppl, n_ppl));
 }
 /**
-* bruteforce version. will check for every price which is the best combination
+* bruteforce version. will check for every price which is the best combination. only 1 couple of stocks are needed to be calculated (the highest profitable)
 */
-int Solution::maxProfit_1(std::vector<int>& prices) {
+int Solution::maxProfit_single(std::vector<int>& prices) {
     int maxprofit = 0;
     for (int i = 0; i < prices.size(); ++i) {
         for (int l = i; l < prices.size(); ++l) {
             int profit = prices[l] - prices[i];
             if (profit > maxprofit)
                 maxprofit = profit;
+        }
+    }
+    return maxprofit;
+}
+/**
+* one pass version, O(N). finds the lowest stock and pairs it with the highest
+*/
+int Solution::maxProfit_single_1(std::vector<int>& prices)
+{
+    int min = INT_MAX;
+    int maxprofit = 0;
+    for (int price : prices) {
+        int profit = price - min;
+        if (price < min)
+            min = price; 
+        else if (price > min && profit > maxprofit) {
+            maxprofit = profit;
         }
     }
     return maxprofit;
@@ -1935,6 +1952,21 @@ int Solution::rob(std::vector<int>& nums) {
         sum = one_before;
     }
     return sum;
+}
+
+int Solution::maxSubArray(std::vector<int>& nums) {
+    //for each element, choice is to add it if the sum is > than it was. or dont add it and move the next beginning point at its position
+    int maximum = nums[0];
+    int current_max = nums[0];
+    for (int i = 1; i < nums.size(); ++i) {
+        if (current_max + nums[i] > nums[i])
+            current_max += nums[i];
+        else
+            current_max = nums[i];
+        if (current_max > maximum)
+            maximum = current_max;
+    }
+    return maximum;
 }
 
 

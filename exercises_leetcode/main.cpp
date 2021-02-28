@@ -28,9 +28,9 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	vector<int> input = { 2,7,9,3,1 };
-	int correct = 4;
-	int out = sol.rob(input);
+	vector<int> input = { -2,1,-3,4,-1,2,1,-5,4 };
+	int correct = 6;
+	int out = sol.maxSubArray(input);
 	cout << out << endl;
 	
 
