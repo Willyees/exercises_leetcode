@@ -1955,7 +1955,7 @@ int Solution::rob(std::vector<int>& nums) {
 }
 
 int Solution::maxSubArray(std::vector<int>& nums) {
-    //for each element, choice is to add it if the sum is > than it was. or dont add it and move the next beginning point at its position
+    //for each element, choice is to add it if the sum is > than the element added. otherwise, just add the newest element in the new subarray becuase it is clearly > than the preiovus subarray
     int maximum = nums[0];
     int current_max = nums[0];
     for (int i = 1; i < nums.size(); ++i) {

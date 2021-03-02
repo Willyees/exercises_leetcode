@@ -5,6 +5,7 @@
 #include "tests.h"
 #include "solution.h"
 #include "datastructures.h"
+#include "solution_classes_implementation.h"
 
 
 using namespace std;
@@ -27,12 +28,16 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	Solution sol;
-	vector<int> input = { -2,1,-3,4,-1,2,1,-5,4 };
-	int correct = 6;
-	int out = sol.maxSubArray(input);
-	cout << out << endl;
-	
+	vector<int> a{ 1,2,3 };
+	Shuffler s(a);
+	auto t1 = s.reset();
+	for (auto e : t1) { cout << e << " "; }
+	auto t2 = s.shuffle();
+	cout << endl;
+	for (auto e : t2) { cout << e << " "; }
+	t2 = s.shuffle2();
+	cout << endl;
+	for (auto e : t2) { cout << e << " "; }
 
 	return 0;
 }
