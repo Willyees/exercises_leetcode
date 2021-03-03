@@ -28,16 +28,9 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<int> a{ 1,2,3 };
-	Shuffler s(a);
-	auto t1 = s.reset();
-	for (auto e : t1) { cout << e << " "; }
-	auto t2 = s.shuffle();
-	cout << endl;
-	for (auto e : t2) { cout << e << " "; }
-	t2 = s.shuffle2();
-	cout << endl;
-	for (auto e : t2) { cout << e << " "; }
+	MinStack m;
+	m.push(0);
+	m.getMin();
 
 	return 0;
 }
