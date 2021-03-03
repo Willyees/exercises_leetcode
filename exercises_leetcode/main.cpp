@@ -28,9 +28,8 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	MinStack m;
-	m.push(0);
-	m.getMin();
+	Solution sol;
+	sol.fizzBuzz1(3);
 
 	return 0;
 }

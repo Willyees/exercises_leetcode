@@ -134,6 +134,8 @@ public:
 	int climbStair_rec_memoization(int n);//O(N); O(N)
 	int rob(std::vector<int>& nums);
 	int maxSubArray(std::vector<int>& nums);
-
-
+	/* math */
+	std::vector<std::string> fizzBuzz(int n);//O(N), O(1)
+	std::vector<std::string> fizzBuzz1(int n);//O(N), O(1), but concatenating the strings
+	std::vector<std::string> fizzBuzz2(int n);//O(N), O(1), cleaner solution that uses a hashmap to store the pair of n : "stringname"
 };

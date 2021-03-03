@@ -1969,6 +1969,69 @@ int Solution::maxSubArray(std::vector<int>& nums) {
     return maximum;
 }
 
+/**
+* output string representation of 1 .. "n". if current number is multiple of 3, output "fizz", if of 5 "buzz", if both 3 and 5 "fizzbuzz"
+* @param n: int number final output. needed to check for his multiples and output string based on rules explained above.
+*/
+std::vector<string> Solution::fizzBuzz(int n) {
+    vector<string> v_s(n);
+    for (int i = 1; i <= n; ++i) {
+        if (i % 3 == 0) {
+            if (i % 5 == 0) {
+                v_s[i - 1] = "FizzBuzz";
+            }
+            else {
+                v_s[i - 1] = "Fizz";
+            }
+        }
+        else if (i % 5 == 0) {
+            v_s[i - 1] = "Buzz";
+        }
+        else {
+            v_s[i - 1] = to_string(i);
+        }
+    }
+    return v_s;
+}
+
+/**
+* similar as fizzBuzz(), but using concatenation of strings to avoid multiple if cases. this is useful in case of more rules added (xes: % 7, % 11..)
+*/
+std::vector<std::string> Solution::fizzBuzz1(int n) {
+    vector<string> v_s(n);
+    for (int i = 1; i <= n; ++i) {
+        string out = "";
+        if (i % 3 == 0)     out += "Fizz";
+        if (i % 5 == 0) out += "Buzz";
+        //to check that none of the previous if conditions were true, just check the string for emptiness
+        if (out.empty()) out = to_string(i);
+        v_s[i - 1] = out;
+    }
+    return v_s;
+}
+
+/**
+* using a vector to store the stringnames along with their number. this is a stylisitc choice which could be helpful in case changes are to be done in the code, adding or removing conditions
+* could even use an hashmap, but in this way there is no need to apply the hashfunction, so I think it should be faster
+*/
+std::vector<std::string> Solution::fizzBuzz2(int n) {
+    vector<string> v_s(n);
+    vector <pair<string, int>> dict;
+    dict.push_back(make_pair("Fizz", 3));
+    dict.push_back(make_pair("Buzz", 5));
+
+    for (int i = 1; i <= n; ++i) {
+        string out = "";
+        //iterate over all the conditions
+        for (auto divisor : dict) {
+            if (i % divisor.second == 0)  out += divisor.first;
+        }
+        if (out.empty()) out += to_string(i);
+        v_s[i - 1] = out;
+    }
+    return v_s;
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
