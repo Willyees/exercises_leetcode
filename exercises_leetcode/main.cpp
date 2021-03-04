@@ -29,7 +29,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	sol.fizzBuzz1(3);
+	sol.countPrimes_sieveEratosthenes(2);
 
 	return 0;
 }

@@ -2032,6 +2032,44 @@ std::vector<std::string> Solution::fizzBuzz2(int n) {
     return v_s;
 }
 
+/**
+* return the count of the prime numbers < param "n"
+* @param n: upper limit which stops the search of prime numbers
+*/
+int Solution::countPrimes(int n) {
+    unsigned int count = 0;
+    for (int i = 0; i <= n; ++i) {
+        if (isPrime(i))
+            ++count;
+    }
+    return count;
+}
+
+/**
+* using the sieve of eratoshenes algorithm: list all the numbers from 2..n; from the smallest available element, cross out all its multiply. repat with the next smallest element 
+*/
+int Solution::countPrimes_sieveEratosthenes(int n) {
+    vector<bool> v(n);//default initalized 'false'
+    //std::iota(v.begin(), v.end(), 2);
+
+    for(int idx = 2; idx < v.size(); ++idx){
+        //int num = idx + 2;//want to start from first prime element, number 2. (0 and 1 are problematic in multiplying)
+        if (v[idx] == false){
+            int multiple = idx;
+            while (multiple + idx <= n) {
+                multiple += idx;
+                v[multiple] = true;
+            }
+        }   
+    }
+    int count = 0;
+    for (int i = 2; i < v.size(); ++i) {
+        if (v[i] == false)
+            ++count;
+    }
+    return count;
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
@@ -2094,6 +2132,9 @@ bool Solution::isPalindrome(string s) {
     return true;
 }
 
+/**
+* all the even numbers are skipped becase already excluded in the first else if. stopping the search at the sqare root of n.
+*/
 bool Solution::isPrime(int n) {
     if (n < 2)
         return false;
