@@ -29,7 +29,8 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	sol.countPrimes_sieveEratosthenes(2);
+	cout << sol.isPowerOfThree_baseconversion(27);
+	cout << sol.isPowerOfThree_log(28);
 
 	return 0;
 }

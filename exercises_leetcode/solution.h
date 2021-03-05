@@ -18,6 +18,7 @@ public:
 	bool nextPermutation(std::string&);
 	bool isPalindrome(std::string);
 	bool isPrime(int);
+	std::string convert_tobase(int n, int base);
 	
 	std::vector<int>::iterator remove_vi(std::vector<int>::iterator, std::vector<int>::iterator, int);//used to move element matching at the end of vector
 	/*interview questions exercises*/
@@ -140,4 +141,9 @@ public:
 	std::vector<std::string> fizzBuzz2(int n);//O(N), O(1), cleaner solution that uses a hashmap to store the pair of n : "stringname"
 	int countPrimes(int n);
 	int countPrimes_sieveEratosthenes(int n);
+	int countPrimes_sieveEratosthenes_optimized(int n);//O(nlog(log n)) space: O(N)
+	bool isPowerOfThree(int n);//O(logn) space: O(1)
+	bool isPowerOfThree_log(int n);
+	bool isPowerOfThree_div(int n);
+	bool isPowerOfThree_baseconversion(int n);//O(log3n). slowest of the bunch, mostly because it has to work with convertion to string
 };

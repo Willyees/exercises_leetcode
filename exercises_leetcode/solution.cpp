@@ -2070,6 +2070,87 @@ int Solution::countPrimes_sieveEratosthenes(int n) {
     return count;
 }
 
+/**
+* optimizing sieve eratosthenes alg. not entirely sure it works perfectly
+* 1. When checking if a number is prime: only check until the square root of the number. This is because after it, all the combinations have already been encountered xes: N= 100. a*b = 100. a=8 b = 12.5; a = 10, b = 10; a = 12.5, b = 8;
+* 2. When checking removing multipliers of a prime number, only start to remove from that prime * itself. This is because all the previous combinations with its previous primes have already been perfomed. xes: prime= 5, all the 5*2, 5*3 have been performed as 2*5, 3*5
+*/
+int Solution::countPrimes_sieveEratosthenes_optimized(int n) {
+    vector<bool> v(n);//default initalized 'false'
+    int s_root = sqrt(n);
+    for (int idx = 2; idx <= s_root; ++idx) {
+        //int num = idx + 2;//want to start from first prime element, number 2. (0 and 1 are problematic in multiplying)
+        if (v[idx] == false) {
+            int multiple = idx * idx;
+            while (multiple < n) {
+                v[multiple] = true;
+                multiple += idx;
+            }
+        }
+    }
+
+    int count = 0;
+    for (int i = 2; i < v.size(); ++i) {
+        if (v[i] == false)
+            ++count;
+    }
+    return count;
+}
+
+/**
+* bruteforce method. keep diving by 3, until 3 found. if different number is found, not power of three
+*/
+bool Solution::isPowerOfThree(int n) {
+    //by keep diving n by 3, there are complications on casting double into int and losing the decimal part xes: 28/ 3 = 9.3; casted to int->9;
+    //best to start from 3 and keep checking if n has been reached
+    int powers = 1;
+    int max_n = numeric_limits<int>::max() / 3;
+    while (n > powers && powers < max_n) {
+        powers *= 3;//have to be careful to overflow
+    }
+    return n == powers;
+}
+
+/**
+* find the power needed apply to the base 3 to get n, then check if they are actually the same number.
+* this method is theoretically correct, but there are rounding down when dealing with doubles, meaning that the n_power will not always be correct to the last decimal value. This will not always output the correct power, ruining the successive calculations (xes: 243, will output power of 4.999, but in reality its log_3(n) should be 5)
+*/
+bool Solution::isPowerOfThree_log(int n) {
+    if (!n)
+        return false;
+    double n_power = log(n) / log(3);//log_3(n) = log(n) / log(3)
+    return pow(3, static_cast<int>(n_power)) == n;
+}
+
+/**
+* similar as the multiplcation method, we keep diving until 1 is not found. need to guard from diving only numbers that are perfectly divisible by 3 (so i think is slower than just multiplication)
+*/
+bool Solution::isPowerOfThree_div(int n) {
+    while (n > 1 && n % 3 == 0) {
+        n /= 3;
+    }
+    return n == 1;
+}
+
+/**
+* by converting the number n into base 3, it can be used the observation that a power of 3 will have a 1 followed by 0 similar as what happens to powers of 10 in base of 10 (xes: 100, 1000, etc..)
+* same relation can be observed in base 2: xes: 10 binary = 2, 100 binary = 4, 1000 binary = 8, etc..
+*/
+bool Solution::isPowerOfThree_baseconversion(int n) {
+    string n_base3 = convert_tobase(n, 3);
+    //check that only first value is 1 and all the others are 0
+    //quick and dirty with loops and while. it could be done with stl
+    auto s_it = n_base3.begin();
+    if (*s_it != '1')
+        return false;
+    while (++s_it != n_base3.end()) {
+        if (*s_it != '0')
+            return false;
+    }
+    return true;
+    //return n == 1 ? true : n == 0 or n % 3 != 0 ? false : isPowerOfThree(n / 3);
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
@@ -2149,6 +2230,21 @@ bool Solution::isPrime(int n) {
             return false;
     }
     return true;
+}
+
+/**
+* convert value n from base 10 to string in base 'base'. recursively
+* @param n: int to be converted (should be base 10); base: base to convert into
+* @return: string: number converted in the 'base' using a string to store its value elements
+*/
+std::string Solution::convert_tobase(int n, int base) {
+    if (n < base)
+        return to_string(n);
+
+    int result = n % base;
+    n /= base;
+    string s = convert_tobase(n, base);
+    return s + to_string(result);
 }
 
 /*implementation of std::remove. it works on the whole vector, cannot specify smaller subsection in it
