@@ -29,7 +29,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.isPowerOfThree_baseconversion(27);
+	cout << sol.isPowerOfThree_maths(27);
 	cout << sol.isPowerOfThree_log(28);
 
 	return 0;

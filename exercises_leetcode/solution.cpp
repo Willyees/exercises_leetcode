@@ -2151,6 +2151,16 @@ bool Solution::isPowerOfThree_baseconversion(int n) {
     //return n == 1 ? true : n == 0 or n % 3 != 0 ? false : isPowerOfThree(n / 3);
 }
 
+/**
+* taking into account the maximum value that n can assume (max_int), find the highest power of 3. by divinding max_power with 'n', if remainder of 0-> 'n' is divisor of max_power and then is a power of 3.
+*/
+bool Solution::isPowerOfThree_maths(int n) {
+    constexpr int max_int = numeric_limits<int>::max();
+    double max_exponent3 = log10(max_int) / log10(3);
+    int max_pow3 = pow(3, static_cast<int>(max_exponent3));//by casting to int, round down the exponent, outputting the maximum perfect exponent that fits in an integer
+    return max_pow3 % n == 0;
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
