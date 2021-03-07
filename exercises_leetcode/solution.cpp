@@ -11,6 +11,7 @@
 #include <iostream>
 #include <numeric>
 #include <sstream>
+#include <bitset>
 #include "datastructures.h"
 
 using namespace std;
@@ -2199,6 +2200,39 @@ int Solution::romanToInt_1(std::string s) {
         }
     }
     return result;
+}
+
+/**
+* returns the numbers of 1 bit into an unsigned int. ignorant solution, by casting to string and then check for character '1'
+* @param n: unsigned int
+* @return: number of 1 bit present into the input
+*/
+int Solution::hammingWeight(uint32_t n) {
+    string s = bitset<32>(n).to_string();
+    auto s_it = s.begin();
+    unsigned count = 0;
+    while (s_it != s.end()) {
+        if (*s_it == '1')
+            count++;
+        ++s_it;
+    }
+    return count;
+}
+
+/**
+* using a bit of bit manipulation. O(N). from least significant bit, work up the bits one by 1 comparing them with && 1 (true)
+*/
+int Solution::hammingWeight_1(uint32_t n) {
+    //n: 10010 && 0001, will output 0000. the last 1 only in case the initial n was 1.
+    uint32_t op = 1;
+    int count = 0;
+    for (int i = 0; i < 32; ++i) {
+        uint32_t result = n & op;
+        if (result == op)
+            ++count;
+        op *= 2;
+    }
+    return count;
 }
 
 

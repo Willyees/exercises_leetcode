@@ -149,4 +149,8 @@ public:
 	bool isPowerOfThree_maths(int n);//O(1), O(1). mathematic method
 	int romanToInt(std::string s);//O(N), O(1)
 	int romanToInt_1(std::string s);//O(N), O(1)
+	
+	/** others **/
+	int hammingWeight(uint32_t n);
+	int hammingWeight_1(uint32_t n);
 };
