@@ -153,4 +153,5 @@ public:
 	/** others **/
 	int hammingWeight(uint32_t n);
 	int hammingWeight_1(uint32_t n);
+	int hammingWeight_2(uint32_t n);
 };

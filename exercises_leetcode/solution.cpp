@@ -2224,13 +2224,29 @@ int Solution::hammingWeight(uint32_t n) {
 */
 int Solution::hammingWeight_1(uint32_t n) {
     //n: 10010 && 0001, will output 0000. the last 1 only in case the initial n was 1.
-    uint32_t op = 1;
+    uint32_t mask = 1;
     int count = 0;
     for (int i = 0; i < 32; ++i) {
-        uint32_t result = n & op;
-        if (result == op)
+        uint32_t result = n & mask;
+        if (result == mask)
             ++count;
-        op *= 2;
+        //mask *= 2;//this will switch the next bit for the next iteration (while also turning down the previous bit. xes: from 010 to 100)
+        mask <<= 1;//shift the next bit left to 1.
+    }
+    return count;
+}
+
+/**
+* flip the least-significant 1 bit and then add 1 to counter. do this until no more 1s are available
+* numbers o 1s can be found by subtracting - 1 from n. this will flip the least-significant 1 and all its previous 0 to 1. After that, n & (n-1) will keep the initial part of n the same but reverse all the 0s that flipped to 1, actually only reversing the least-importance 1 to 0.
+* 
+*/
+int Solution::hammingWeight_2(uint32_t n) {
+    int count = 0;
+    while (n != 0) {
+        uint32_t n_1 = n - 1;
+        n &= n_1;
+        ++count;
     }
     return count;
 }
