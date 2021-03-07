@@ -29,8 +29,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.isPowerOfThree_maths(27);
-	cout << sol.isPowerOfThree_log(28);
+	cout << sol.romanToInt_1("MCMXCIVI");
 
 	return 0;
 }

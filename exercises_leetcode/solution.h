@@ -147,4 +147,6 @@ public:
 	bool isPowerOfThree_div(int n);
 	bool isPowerOfThree_baseconversion(int n);//O(log3n). slowest of the bunch, mostly because it has to work with convertion to string
 	bool isPowerOfThree_maths(int n);//O(1), O(1). mathematic method
+	int romanToInt(std::string s);//O(N), O(1)
+	int romanToInt_1(std::string s);//O(N), O(1)
 };

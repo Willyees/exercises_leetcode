@@ -2161,6 +2161,46 @@ bool Solution::isPowerOfThree_maths(int n) {
     return max_pow3 % n == 0;
 }
 
+/**
+* given a roman number, convert it to integer
+* @param: s: string representation of roman number. available characters: "I= 1, V= 5, X= 10, L= 50, C= 100, D= 500, M= 1000"
+* @return int: integer conversion of the roman number
+*/
+int Solution::romanToInt(std::string s) {
+    unordered_map<char, int> dict = { {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50},{'C',100},{'D',500},{'M',1000} };
+    //xes: LVIII = 58
+    //if the left roman number is lower than the right, perform a subtraction
+    int result = 0;
+    for (int idx = 0; idx < s.length(); ++idx) {
+        if (idx < s.length() - 1 && dict[s[idx]] < dict[s[idx + 1]]) {
+            result += dict[s[idx + 1]] - dict[s[idx]];
+            ++idx;//skipping the second roman value that has been evaluated here alredy
+        }
+        else {
+            result += dict[s[idx]];
+        }
+    }
+    return result;
+}
+
+/**
+* similar method used, but instead of keep checking if the value being viewed is < s.length() -1 (because of out of bounds), all the values can be added if the successive is lower and a value is subtracted if the successive is higher.
+* in this way, there is no need to internally ++idx and other checks
+*/
+int Solution::romanToInt_1(std::string s) {
+    unordered_map<char, int> dict = { {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50},{'C',100},{'D',500},{'M',1000} };
+    int result = 0;
+    for (int idx = 0; idx < s.length(); ++idx) {
+        int curr_val = dict[s[idx]];
+        if (curr_val < dict[s[idx + 1]])
+            result -= curr_val;
+        else {
+            result += curr_val;
+        }
+    }
+    return result;
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
