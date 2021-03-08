@@ -2306,6 +2306,25 @@ int Solution::hammingDistance_3(int x, int y) {
     bitset<sizeof(int)> bs(n);
     return bs.count();
 }
+    
+/**
+* for each bit, extract it and then push it to its mirror position at the other end of the bit represented number.
+* @return: reversed bits of n (if n= 1011, return 1101)
+*/
+uint32_t Solution::reverseBits(uint32_t n) {
+    //get the last bit and first by using bitwise &
+    uint32_t mask = 1;
+    int power = 31;
+    uint32_t result = 0;
+    while (power >=0) {//otherwise could check if 'n' != 0
+        //get right end bit
+        uint32_t bit = n & mask;
+        result += bit << power;
+        --power;
+        n >>= 1;//moving 1 position right 'n', so the mask doesnt need to change every iterations and the power is reducing by 1 every iteration
+    }
+    return result;
+}
 
 
 std::vector<int> Solution::getPermutations(int num) {

@@ -29,7 +29,8 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.hammingDistance_3(1, 4);
+	cout << sol.reverseBits(0b00000010100101000001111010011100);
+	
 
 	return 0;
 }
