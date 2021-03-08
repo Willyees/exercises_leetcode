@@ -2251,6 +2251,26 @@ int Solution::hammingWeight_2(uint32_t n) {
     return count;
 }
 
+/**
+* outputs the number of different bits in the two integers. calculate n1= x&y. calculate n2= x|y. finally !n1&n2
+*/
+int Solution::hammingDistance(int x, int y) {
+    int n1 = x & y;
+    n1 = ~n1;
+    int n2 = x | y;
+    int different = n1 & n2;
+
+    int mask = 1;
+    int count = 0;
+    for (int i = 0; i < sizeof(different) * 8 - 1; ++i) {//have to -1 because undefined behaviour when left shift a negative value. this is becuase when shifting the sign bit, it might create a number higer than INT_MAX (undefined behaviour)
+        if ((mask & different) == mask)//bitwise operators have lower precedence than relational operator (==)
+            count++;
+        mask <<= 1;
+    }
+    return count;
+
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;

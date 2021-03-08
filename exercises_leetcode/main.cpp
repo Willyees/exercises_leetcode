@@ -29,7 +29,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.hammingWeight_2(00000000000000000000000000001011);
+	cout << sol.hammingDistance(1, 4);
 
 	return 0;
 }
