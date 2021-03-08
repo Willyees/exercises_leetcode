@@ -29,7 +29,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.hammingDistance(1, 4);
+	cout << sol.hammingDistance_3(1, 4);
 
 	return 0;
 }

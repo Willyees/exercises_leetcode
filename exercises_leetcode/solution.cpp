@@ -2271,6 +2271,42 @@ int Solution::hammingDistance(int x, int y) {
 
 }
 
+/**
+* similarly as previous, using bit manipulation. This uses XOR bitwise operator, instead of all the multiple &, !, etc..
+* XOR will output a number with 1s in place where x and y bit are different. xes:
+* 10100 XOR
+* 01101 = 
+* 11001
+* Successively, use Brian Kernighan's bit counting alg: switch right-most 1bit and increase counter until 'n' is 0
+*/
+int Solution::hammingDistance_1(int x, int y) {
+    int n = x ^ y;
+    int count = 0;
+    while (n) {
+        int n_1 = n - 1;//switch right-most 1 bit, but also switches all the bits until the right end (0s to 1s)
+        n = n_1 & n;//using n and & to switch all the 1s to 0s that have been swiched in "n-1"
+        ++count;
+    }
+    return count;
+}
+/**
+* using builtin function
+*/
+int Solution::hammingDistance_2(int x, int y) {
+    //get number representing the different bits by comparing x and y
+    unsigned n = x ^ y;//x XOR y
+    //int count = __builtin_popcount(n);//only available on GNU compiler
+    int count = __popcnt(n);//this is actually not working
+    return count;
+    
+}
+
+int Solution::hammingDistance_3(int x, int y) {
+    int n = x ^ y;
+    bitset<sizeof(int)> bs(n);
+    return bs.count();
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;

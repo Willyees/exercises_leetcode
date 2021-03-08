@@ -154,5 +154,8 @@ public:
 	int hammingWeight(uint32_t n);
 	int hammingWeight_1(uint32_t n);
 	int hammingWeight_2(uint32_t n);
-	int hammingDistance(int x, int y);
+	int hammingDistance(int x, int y);//my initial solution
+	int hammingDistance_1(int x, int y);//cleaner
+	int hammingDistance_2(int x, int y);//using builtin function
+	int hammingDistance_3(int x, int y);//using bitset
 };
