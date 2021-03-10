@@ -29,8 +29,15 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.reverseBits(0b00000010100101000001111010011100);
-	
+	vector<vector<int>> v = sol.pascalTriangleRows(4);
+	for (size_t i = 0; i < v.size(); i++)
+	{
+		for (size_t n = 0; n < v[i].size(); n++)
+		{
+			cout << v[i][n];
+		}
+		cout << endl;
+	}
 
 	return 0;
 }

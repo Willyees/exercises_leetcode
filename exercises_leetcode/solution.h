@@ -159,4 +159,5 @@ public:
 	int hammingDistance_2(int x, int y);//using builtin function
 	int hammingDistance_3(int x, int y);//using bitset
 	uint32_t reverseBits(uint32_t n);
+	std::vector<std::vector<int>> pascalTriangleRows(int numRows);
 };

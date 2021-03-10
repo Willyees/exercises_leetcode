@@ -2313,7 +2313,7 @@ int Solution::hammingDistance_3(int x, int y) {
 */
 uint32_t Solution::reverseBits(uint32_t n) {
     //get the last bit and first by using bitwise &
-    uint32_t mask = 1;
+    uint32_t mask = 1;//not needed in a variable because by n >> 1, the mask doesnt need to be shifted
     int power = 31;
     uint32_t result = 0;
     while (power >=0) {//otherwise could check if 'n' != 0
@@ -2326,6 +2326,27 @@ uint32_t Solution::reverseBits(uint32_t n) {
     return result;
 }
 
+/**
+* pascal triangle: each row element is composed by the sum of the two elements above it in the above row
+* each row has number of elements corresponding as the row number
+* @return: the first 'numRows' from the pascal triangle
+*/
+vector<vector<int>> Solution::pascalTriangleRows(int numRows) {
+    vector<vector<int>> result;
+    result.reserve(numRows);//check reserve or resize
+    result.push_back(vector<int> {1});
+    for (int row = 1; row < numRows; ++row) {
+        //element = v[row - 1][i - 1] + v[row -1][i]
+        vector<int> v_row; v_row.reserve(row + 1);
+        v_row.push_back(1);
+        for(int i = 1; i < row; ++i){//this loop skips first and last position (they are both 1, so don't need any checks)
+            v_row.push_back(result[row - 1][i - 1] + result[row - 1][i]);
+        }
+        v_row.push_back(1);
+        result.push_back(v_row);
+    }
+    return result;
+}
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
