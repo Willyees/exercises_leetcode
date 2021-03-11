@@ -160,4 +160,7 @@ public:
 	int hammingDistance_3(int x, int y);//using bitset
 	uint32_t reverseBits(uint32_t n);
 	std::vector<std::vector<int>> pascalTriangleRows(int numRows);
+	bool isValidParentheses(std::string s);
+	bool isValidParentheses_1(std::string s);
+	char isValidParentheses_1_rec(std::string s, int index);
 };

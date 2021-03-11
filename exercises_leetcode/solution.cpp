@@ -2348,6 +2348,63 @@ vector<vector<int>> Solution::pascalTriangleRows(int numRows) {
     return result;
 }
 
+/**
+* check if a string contains the correct sequence of parentheses. using a stack to solve the problem
+*/
+bool Solution::isValidParentheses(std::string s) {
+    stack<char> stack_c;
+    auto it_s = s.begin();
+    while (it_s != s.end()) {
+        
+        //3 types of parentheses (, [, {
+        switch (*it_s){
+        case '}':
+            if (!stack_c.empty() && stack_c.top() == '{')
+                stack_c.pop();
+            else
+                return false;
+            break;
+        case ')':
+            if (!stack_c.empty() && stack_c.top() == '(')
+                stack_c.pop();
+            else
+                return false;
+            break;
+        case ']':
+            if (!stack_c.empty() &&  stack_c.top() == '[')
+                stack_c.pop();
+            else
+                return false;
+            break;
+        default:
+            stack_c.push(*it_s);
+            break;
+        }
+        ++it_s;
+    }
+    return stack_c.empty();
+}
+/**
+* recursive solution, logically same as the stack method
+*/
+bool Solution::isValidParentheses_1(std::string s) {
+    return isValidParentheses_1_rec(s, 0);
+}
+
+char Solution::isValidParentheses_1_rec(std::string s, int index) {
+    if (index == s.length())
+        return s[index];
+    char c = s[index];
+    if (c == '}' || c == ']' || c == ')')//base case
+        return c;//should return the character? but then it owuld not return anymore a boolean, so how to find out if the function was successful?
+    //recursive call here with check parentheses matches
+    //keep recursively call until end of string
+    //if(isValidParentheses_1_rec(s, index + 1) == );
+    
+    return 'c';
+
+}
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;

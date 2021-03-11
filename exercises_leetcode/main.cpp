@@ -29,16 +29,7 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	vector<vector<int>> v = sol.pascalTriangleRows(4);
-	for (size_t i = 0; i < v.size(); i++)
-	{
-		for (size_t n = 0; n < v[i].size(); n++)
-		{
-			cout << v[i][n];
-		}
-		cout << endl;
-	}
-
+	cout << sol.isValidParentheses("()");
 	return 0;
 }
 
