@@ -29,7 +29,8 @@ void f(int i = 5) {
 }
 int main() {
 	Solution sol;
-	cout << sol.isValidParentheses("()");
+	vector<int> v_i{ 0,2,4,1,5 };
+	cout << sol.missingNumber_3(v_i);
 	return 0;
 }
 

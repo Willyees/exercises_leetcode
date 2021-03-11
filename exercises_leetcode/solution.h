@@ -163,4 +163,8 @@ public:
 	bool isValidParentheses(std::string s);
 	bool isValidParentheses_1(std::string s);
 	char isValidParentheses_1_rec(std::string s, int index);
+	int missingNumber(std::vector<int>& nums);//O(2N), space: O(N+1)
+	int missingNumber_1(std::vector<int>& nums);//O(N), space O(1)
+	int missingNumber_2(std::vector<int>& nums);//O(NlogN), space O(1) but modifying the input order data
+	int missingNumber_3(std::vector<int>& nums);//O(N) O(1) bit manipulation
 };

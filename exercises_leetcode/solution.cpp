@@ -2402,7 +2402,64 @@ char Solution::isValidParentheses_1_rec(std::string s, int index) {
     //if(isValidParentheses_1_rec(s, index + 1) == );
     
     return 'c';
+    //tobe finished
+}
 
+/**
+* O(N); space O(N). Use an array to store if the corresponding index is present in the range nums. loop the array to find out which index has not been visited
+* @param nums: vector of int in the range [0..n], no duplicates. 1 number in the range is missing
+* @return: which number in the range is missing
+*/
+int Solution::missingNumber(std::vector<int>& nums) {
+        vector<bool> v_visited(nums.size() + 1);//all vector default initialized as false (i think ?)
+        for (int n : nums) {
+            v_visited[n] = true;
+        }
+        for (int i = 0; i < v_visited.size(); ++i) {
+            if (!v_visited[i])
+                return i;
+        }
+        assert(true && "code should never reach this part because a value should be missing");
+        return -1;//this should never be executed
+}
+
+/**
+* using mathematics method: sum of range [0..n] = n/2 * 3 = 3n/2. O(N) sum all the values in 'nums', then find the difference from the formula. return it as the missing value
+*/
+int Solution::missingNumber_1(std::vector<int>& nums) {
+    int n = nums.size();
+    int tot_sum = (double) (n + 1) / 2 * n;//median = n + 1 / 2. need the cast to double, otherwise division will truncate decimal becuase using int variable
+   
+    int sum_nums = accumulate(nums.begin(), nums.end(), 0);
+    return tot_sum - sum_nums;
+}
+
+/**
+* sorting the data O(NlogN) then find O(N) to find out which value is missing
+*/
+int Solution::missingNumber_2(std::vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int c = 0;
+    for (int n : nums) {
+        if (n != c)
+            return c;
+        ++c;
+    }
+    return c;
+}
+
+/**
+* interestingly, solution can be found using XOR bitwise operator. this operator is commutative, so the order in which the operations are performed will not change the final result (xes 1 ^ 2 ^ 3 == 3 ^ 2 ^ 1)
+* properties of XOR: number XOR itself = 0, number XOR 0 = number 
+* we know that the value nums.size() has replaced a value in the range [0..nums.size() -1]. so if we start by creating a value and XOR it will all the numbers in 'nums' and with all the indexes of nums (0..n), for sure index and same number will xor together and output 0. only the index corresponding to the missing value will not find its xor number and will be the remaining value. genius!
+*/
+int Solution::missingNumber_3(std::vector<int>& nums) {
+    int result = nums.size();
+    for (int i = 0; i < nums.size(); ++i) {
+        result ^= i;
+        result ^= nums[i];
+    }
+    return result;
 }
 
 std::vector<int> Solution::getPermutations(int num) {
