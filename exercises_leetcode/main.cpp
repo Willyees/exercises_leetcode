@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "tests.h"
 #include "solution.h"
+#include "solution_medium.h"
 #include "datastructures.h"
 #include "solution_classes_implementation.h"
 
@@ -28,9 +29,8 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	Solution sol;
-	vector<int> v_i{ 0,2,4,1,5 };
-	cout << sol.missingNumber_3(v_i);
+	vector<int> v{ -1, 2, 3, 5 };
+	helpers::getCombinations(v);
 	return 0;
 }
 
