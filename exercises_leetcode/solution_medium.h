@@ -2,7 +2,7 @@
 #include <vector>
 
 namespace helpers {
-	std::vector<std::vector<int>> getCombinations(std::vector<int>);
+	std::vector<std::vector<int>> getCombinations(std::vector<int>, int r, int start = 0);
 }
 /*medium difficulty collections of solutions to leetcode problems - 1 a day keep the rust at bay*/
 class SolutionMed {

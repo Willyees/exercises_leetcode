@@ -30,7 +30,7 @@ void f(int i = 5) {
 }
 int main() {
 	vector<int> v{ -1, 2, 3, 5 };
-	helpers::getCombinations(v);
+	helpers::getCombinations(v, 3);
 	return 0;
 }
 
