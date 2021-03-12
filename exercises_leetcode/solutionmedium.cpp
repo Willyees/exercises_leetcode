@@ -1,4 +1,7 @@
+#include <numeric>
 #include <iostream>
+#include <algorithm>
+#include <list>
 #include "solution_medium.h"
 using namespace std;
 
@@ -55,14 +58,29 @@ namespace helpers {
 vector<vector<int>> helpers::getCombinations(vector<int> nums, int r, int start) {
 	vector<vector<int>> result;
 	getCombinations_rec_2(nums, vector<int>(), result, start, r);
-	return vector<vector<int>>();
+	return result;
 }
 
 
 /**
+* bruteforce method. find all the possible combinations, then discard the not correct ones
 * @params "nums": vector of ints (positive and negative)
 * @return: triplets of elements from 'nums' which a + b + c = 0. No duplicates triples
 */
 std::vector<std::vector<int>> SolutionMed::threeSum(std::vector<int>& nums) {
-	return vector<vector<int>>();
+	vector<vector<int>> combinations = helpers::getCombinations(nums, 3);
+	list<vector<int>> combinations_l(combinations.begin(), combinations.end());
+	for (auto it = combinations_l.begin(); it != combinations_l.end();) {
+		int sum = accumulate(it->begin(), it->end(), 0);
+		if (sum != 0)
+			it = combinations_l.erase(it);
+		else
+			++it;
+	}
+	/*for (auto i : combinations_l) {
+		for (int v : i)
+			cout << v;
+		cout << endl;
+	}*/
+	return vector<vector<int>>(combinations_l.begin(), combinations_l.end());
 }

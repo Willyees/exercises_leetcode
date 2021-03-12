@@ -29,8 +29,15 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<int> v{ -1, 2, 3, 5 };
-	helpers::getCombinations(v, 3);
+	vector<int> v{ 0, 2, -2, 5 };
+	SolutionMed sol;
+	auto v_i = sol.threeSum(v);
+	cout << "-------" << endl;
+	for (auto e : v_i) {
+		for (int i : e)
+			cout << i;
+		cout << endl;
+	}
 	return 0;
 }
 
