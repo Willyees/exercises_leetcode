@@ -29,9 +29,9 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<int> v{ 0, 2, -2, 5 };
+	vector<int> v{ -2, 0, 0, 2, 2 };
 	SolutionMed sol;
-	auto v_i = sol.threeSum(v);
+	auto v_i = sol.threeSum_2(v);
 	cout << "-------" << endl;
 	for (auto e : v_i) {
 		for (int i : e)
