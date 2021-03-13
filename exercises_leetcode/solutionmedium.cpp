@@ -126,6 +126,8 @@ std::vector<std::vector<int>> SolutionMed::threeSum_2(std::vector<int>& nums) {
 		int second = first + 1;
 		int third = nums.size() - 1;
 		int sum_needed = 0 - nums[first];//the sum of second + third needed to output 0 as final sum
+		if (sum_needed < 0)//breaking here because since the vector is sorted, there are no values higher than 'first' > 0 that their sum would output == 0
+			break;
 		while (second < third) {
 			int sum = nums[second] + nums[third];
 			if (sum > sum_needed)
