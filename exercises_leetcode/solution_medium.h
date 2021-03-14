@@ -12,5 +12,6 @@ public:
 	std::vector<std::vector<int>> threeSum_1(std::vector<int>& nums);
 	std::vector<std::vector<int>> threeSum_2(std::vector<int>& nums);
 	void setZeroesMatrix(std::vector<std::vector<int>>& matrix);
+	void setZeroesMatrix_1(std::vector<std::vector<int>>& matrix);//space O(1)
 
 };

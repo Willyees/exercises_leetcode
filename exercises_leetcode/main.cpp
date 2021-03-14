@@ -29,10 +29,10 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<vector<int>> v{ {0,1,2,0} ,{3,4,5,2},{1,3,1,5} };
+	vector<vector<int>> v  {{-4,-2147483648,6,-7,0},{-8,6,-8,-6,0},{2147483647,2,-9,-6,-10}} ;
 
 	SolutionMed sol;
-	sol.setZeroesMatrix(v);
+	sol.setZeroesMatrix_1(v);
 	for (auto e : v) {
 		for (int i : e)
 			cout << i;

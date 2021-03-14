@@ -179,3 +179,48 @@ void SolutionMed::setZeroesMatrix(vector<vector<int>>& matrix) {
 			matrix[row_idx][col] = 0;
 	}
 }
+
+/**
+* O(1) space solution, storing in the matrix the col and row to be set to 0
+*/
+void SolutionMed::setZeroesMatrix_1(std::vector<std::vector<int>>& matrix) {
+	//find the 0s in the matrix and set the first rows and col to 0 if they have to be modified
+	//have to use extra variable for either row 0 or col 0 because matrix[0][0] is both first row and first col
+	bool isRow0 = false;
+	//special case checking row0
+	for (int col = 0; col < matrix[0].size(); ++col) {
+		if (matrix[0][col] == 0) {
+			isRow0 = true;
+			break;
+		}
+	}
+	for (int row = 1; row < matrix.size(); ++row) {
+		for (int col = 0; col < matrix[row].size(); ++col) {
+			if (matrix[row][col] == 0) {
+				//set the first row and col as 0. it doesnt invalidate the matrix
+				matrix[row][0] = 0;
+				matrix[0][col] = 0;
+			}
+		}
+	}
+	
+	//check the rows for inital 0
+	for (int row = 1; row < matrix.size(); ++row) {
+		if (matrix[row][0] == 0) {
+			for (int col = 0; col < matrix[row].size(); ++col)
+				matrix[row][col] = 0;
+		}
+	}
+	//check the columns for initial 0
+	for (int col = 0; col < matrix[0].size(); ++col) {
+		if (matrix[0][col] == 0) {//set all the columns as 0
+			for (int row = 0; row < matrix.size(); ++row)
+				matrix[row][col] = 0;
+		}
+	}
+	//check for special case row0
+	if (isRow0) {
+		for (int col = 0; col < matrix[0].size(); ++col)
+			matrix[0][col] = 0;
+	}
+}
