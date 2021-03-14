@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <list>
+#include <unordered_set>
 #include "solution_medium.h"
 using namespace std;
 
@@ -126,7 +127,7 @@ std::vector<std::vector<int>> SolutionMed::threeSum_2(std::vector<int>& nums) {
 		int second = first + 1;
 		int third = nums.size() - 1;
 		int sum_needed = 0 - nums[first];//the sum of second + third needed to output 0 as final sum
-		if (sum_needed < 0)//breaking here because since the vector is sorted, there are no values higher than 'first' > 0 that their sum would output == 0
+		if (sum_needed < 0)//breaking here because since the vector is sorted, there are no values higher than 'first' > 0 that their sum would output < 0
 			break;
 		while (second < third) {
 			int sum = nums[second] + nums[third];
@@ -148,4 +149,33 @@ std::vector<std::vector<int>> SolutionMed::threeSum_2(std::vector<int>& nums) {
 			++first;
 	}
 	return result;
+}
+
+/**
+* set row and colum of a matrix containing a cell with value == 0. this method will use extra space to store which rows need to be set to 0
+* straightforward implementation O(row*col). loop throiught the matrix and if found cell == 0, set its column and row to 0. it can be improved
+* care must be taken when setting it to 0 because the matrix is being modified with 0 elements which would start off a new modification themselves (they should not)
+*/
+void SolutionMed::setZeroesMatrix(vector<vector<int>>& matrix) {
+	unordered_set<int> set_row;
+	unordered_set<int> set_col;
+	//iterate over each cell of the matrix
+	for (int row = 0; row < matrix.size(); ++row) {
+		for (int col = 0; col < matrix[row].size(); ++col) {
+			if (matrix[row][col] == 0) {
+				//cant set the row and col to 0 here because it would invalidate the next cells in the matrix (is not possible to distinguish which is a modified 0 and which was 0 before)
+				set_row.insert(row);
+				set_col.insert(col);
+			}
+		}
+	}
+	for (int row : set_row) {
+		for (int col_idx = 0; col_idx < matrix[row].size(); ++col_idx) {//setting all the columns in the 'row' as 0
+			matrix[row][col_idx] = 0;
+		}
+	}
+	for (int col : set_col) {
+		for (int row_idx = 0; row_idx < matrix.size(); ++row_idx)
+			matrix[row_idx][col] = 0;
+	}
 }

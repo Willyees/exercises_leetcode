@@ -29,11 +29,11 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<int> v{ -2, 0, 0, 2, 2 };
+	vector<vector<int>> v{ {0,1,2,0} ,{3,4,5,2},{1,3,1,5} };
+
 	SolutionMed sol;
-	auto v_i = sol.threeSum_2(v);
-	cout << "-------" << endl;
-	for (auto e : v_i) {
+	sol.setZeroesMatrix(v);
+	for (auto e : v) {
 		for (int i : e)
 			cout << i;
 		cout << endl;
