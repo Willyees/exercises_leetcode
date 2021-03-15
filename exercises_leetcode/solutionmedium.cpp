@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <list>
 #include <unordered_set>
+#include <unordered_map>
 #include <map>
 #include "solution_medium.h"
 using namespace std;
@@ -226,13 +227,13 @@ void SolutionMed::setZeroesMatrix_1(std::vector<std::vector<int>>& matrix) {
 	}
 }
 
-/**
+/** O(N KlogK) K:lenght of max string. KlogK to sort each string
 * use a hashmap to easily get the common anagram between different word. anagrams found with permutation of the string, but dont need to find all the permutation, just order the string or use ispermutaion() to find out if they are anagrams
 * @param strs: vector of strings, each word can be anagrammed in different ones
 * @retrun vector of vector in which words that can be anagrammed the same are in the same vector
 */
 std::vector<std::vector<std::string>> SolutionMed::groupAnagrams(vector<string>& strs) {
-	map<string, int> map_words;//map an anagram with the index of the vector to store it
+	unordered_map<string, int> map_words;//map an anagram with the index of the vector to store it
 	vector<vector<string>> anagrams;
 	for (string& word_w : strs) {
 		//find all the anagrams. if one of them is present in map_words, get the index and push it in the anagrams vector. oterwise add a new entry in the map
@@ -246,8 +247,29 @@ std::vector<std::vector<std::string>> SolutionMed::groupAnagrams(vector<string>&
 		else {
 			anagrams[it->second].push_back(word_w);
 		}
-		
-		//is_permutation()
 	}
+	return anagrams;
+}
+
+/**
+* similar approach as groupAnagrams(), but the used is a counting sort, since it is known the small and fixed number of possible characters (lower case english letters from problem description)
+*/
+std::vector<std::vector<std::string>> SolutionMed::groupAnagrams_1(std::vector<std::string>& strs) {
+	unordered_map<string, vector<string>> map_words;//map an anagram with the index of the vector to store it
+	vector<vector<string>> anagrams;
+	for (string& word_w : strs) {
+		int sort_a[26] = { 0 };//default initialized value array to 0, otherwise is garbage values
+		//find all the anagrams. if one of them is present in map_words, get the index and push it in the anagrams vector. oterwise add a new entry in the map
+		for (const char c : word_w) {//O(K) sort
+			++sort_a[c - 'a'];//- 'a' will set the first char 'a' as 0, 'b' to 1, etc..
+		}
+		string word;
+		for (int idx = 0; idx < 26; ++idx) {
+			word += string(sort_a[idx], 'a' + idx);//dont use delimiter and to_string because it is much slower! almost 100ms more. in this way no reallocation of the temporary string
+		}
+		map_words[word].push_back(word_w);//dont need to check if it exists, if it doesnt, it will be automatically added (it is faster to do in this way a whopping 8ms!)
+	}
+	for (auto p : map_words)
+		anagrams.push_back(p.second);
 	return anagrams;
 }

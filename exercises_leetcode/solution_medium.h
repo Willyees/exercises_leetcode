@@ -14,7 +14,8 @@ public:
 	std::vector<std::vector<int>> threeSum_2(std::vector<int>& nums);
 	void setZeroesMatrix(std::vector<std::vector<int>>& matrix);
 	void setZeroesMatrix_1(std::vector<std::vector<int>>& matrix);//space O(1)
-	std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs);
+	std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs);//O(N KlogK)
+	std::vector<std::vector<std::string>> groupAnagrams_1(std::vector<std::string>& strs);//O(NK)
 
 };
 

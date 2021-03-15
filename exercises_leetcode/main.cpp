@@ -29,9 +29,13 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
+	int p = 5;
+
+	cout << p + "#" << endl;
+
 	vector<string> v{ "eat","tea","tan","ate","nat","bat" };
 	SolutionMed sol;
-	vector<vector<string>> v_vs = sol.groupAnagrams(v);
+	vector<vector<string>> v_vs = sol.groupAnagrams_1(v);
 	for (auto e : v_vs) {
 		for (auto i : e)
 			cout << i;
