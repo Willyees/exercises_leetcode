@@ -29,12 +29,11 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<vector<int>> v  {{-4,-2147483648,6,-7,0},{-8,6,-8,-6,0},{2147483647,2,-9,-6,-10}} ;
-
+	vector<string> v{ "eat","tea","tan","ate","nat","bat" };
 	SolutionMed sol;
-	sol.setZeroesMatrix_1(v);
-	for (auto e : v) {
-		for (int i : e)
+	vector<vector<string>> v_vs = sol.groupAnagrams(v);
+	for (auto e : v_vs) {
+		for (auto i : e)
 			cout << i;
 		cout << endl;
 	}

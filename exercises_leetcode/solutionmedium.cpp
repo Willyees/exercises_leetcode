@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <list>
 #include <unordered_set>
+#include <map>
 #include "solution_medium.h"
 using namespace std;
 
@@ -223,4 +224,30 @@ void SolutionMed::setZeroesMatrix_1(std::vector<std::vector<int>>& matrix) {
 		for (int col = 0; col < matrix[0].size(); ++col)
 			matrix[0][col] = 0;
 	}
+}
+
+/**
+* use a hashmap to easily get the common anagram between different word. anagrams found with permutation of the string, but dont need to find all the permutation, just order the string or use ispermutaion() to find out if they are anagrams
+* @param strs: vector of strings, each word can be anagrammed in different ones
+* @retrun vector of vector in which words that can be anagrammed the same are in the same vector
+*/
+std::vector<std::vector<std::string>> SolutionMed::groupAnagrams(vector<string>& strs) {
+	map<string, int> map_words;//map an anagram with the index of the vector to store it
+	vector<vector<string>> anagrams;
+	for (string& word_w : strs) {
+		//find all the anagrams. if one of them is present in map_words, get the index and push it in the anagrams vector. oterwise add a new entry in the map
+		string word(word_w);
+		sort(word.begin(), word.end());
+		auto it = map_words.find(word);
+		if (it == map_words.end()) {
+			map_words.insert(make_pair(word, anagrams.size()));
+			anagrams.push_back(vector<string> {word_w});
+		}
+		else {
+			anagrams[it->second].push_back(word_w);
+		}
+		
+		//is_permutation()
+	}
+	return anagrams;
 }
