@@ -273,3 +273,58 @@ std::vector<std::vector<std::string>> SolutionMed::groupAnagrams_1(std::vector<s
 		anagrams.push_back(p.second);
 	return anagrams;
 }
+
+/** iterative solution
+* once found a repetition, can skip all the characters after the repeted char because no sequent substring will be longer
+* rather slow solution
+* @return: size of the longest substring in 's' without character repeted
+*/
+int SolutionMed::lengthOfLongestSubstring(std::string s) {
+	int idx = 0;
+	int lenght = s.size();
+	int max_length = 0;
+	int count = 0;
+	unordered_set<char> set_c;
+
+	while (idx < lenght) {
+		auto it = set_c.find(s[idx]);
+		if (it != set_c.end()) {//present in the set. reset index, counter
+			if (count > max_length) 
+				max_length = count;
+			//find previous same character and set the idx there + 1
+			const char prev = s[idx];
+			int prev_idx = idx;
+			while (prev != s[--prev_idx]);//this last part is high resource usage, can be improved
+			count = idx - prev_idx;
+			set_c.clear();
+		} 
+		else{
+			++count;
+			set_c.insert(s[idx]);
+		}
+		++idx;
+	}
+	return count > max_length ? count : max_length;
+}
+
+int SolutionMed::lengthOfLongestSubstring_1(std::string s) {
+	int first = 0;
+	int last = 0;
+	int lenght = s.size();
+	int max_length = 0;
+	int count = 0;
+	unordered_set<char> set_c;
+
+	while (last < lenght && first < lenght) {
+		auto it = set_c.find(s[last]);
+		if (it != set_c.end()) {//present in the set. remove the first value. this is the max lenght for the window [first, last)
+			set_c.erase(s[first]);
+			++first;
+		}
+		else {
+			set_c.insert(s[last++]);
+			max_length = max(last - first, max_length);
+		}
+	}
+	return max_length;
+}

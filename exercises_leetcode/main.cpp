@@ -10,6 +10,14 @@
 
 
 using namespace std;
+template <class T>
+void printVectorVector(vector<vector<T>> vv) {
+	for (T e : vv) {
+		for (T i : e)
+			cout << i;
+		cout << endl;
+	}
+}
 
 std::vector<string> similarTransformations(string input, vector<string> wordlist) {
 	vector<string> result;
@@ -29,18 +37,10 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	int p = 5;
-
-	cout << p + "#" << endl;
-
 	vector<string> v{ "eat","tea","tan","ate","nat","bat" };
 	SolutionMed sol;
-	vector<vector<string>> v_vs = sol.groupAnagrams_1(v);
-	for (auto e : v_vs) {
-		for (auto i : e)
-			cout << i;
-		cout << endl;
-	}
+	cout << sol.lengthOfLongestSubstring_1("pwwkew");
+	
 	return 0;
 }
 

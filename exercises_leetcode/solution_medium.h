@@ -16,6 +16,8 @@ public:
 	void setZeroesMatrix_1(std::vector<std::vector<int>>& matrix);//space O(1)
 	std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs);//O(N KlogK)
 	std::vector<std::vector<std::string>> groupAnagrams_1(std::vector<std::string>& strs);//O(NK)
+	int lengthOfLongestSubstring(std::string s);
+	int lengthOfLongestSubstring_1(std::string s);
 
 };
 
