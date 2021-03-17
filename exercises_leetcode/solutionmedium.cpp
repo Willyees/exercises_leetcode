@@ -345,7 +345,7 @@ namespace helpers {
 	pair<size_t, size_t> expandPalindromeMaxLength(std::string& s, size_t left, size_t right) {
 		size_t left_longest = 0;
 		size_t right_longest = 0;
-		string sub_s = s.substr(left, right - left + 1);
+		string sub_s = s.substr(left, right - left + 1);//building the inital string (could be 2 values for even palindromes)
 		while (helpers::isPalindrome(sub_s)) {
 			left_longest = left;
 			right_longest = right;
@@ -354,14 +354,16 @@ namespace helpers {
 				break;
 			--left;
 			++right;
-
-			sub_s = s.substr(left, right - left + 1);//check this, also if it is faster than just using the string constructor to build the string
+			//now only need to check the new characters right and left, so create a string with only them (would be better to directly check them)
+			sub_s = string({ s[left], s[right] });
 		}
 		return pair(left_longest, right_longest);
 	}
 }
 /**
 * iterate over the string and use the position as the central position of the palindrome. if it is a palindrome, keep expanding
+* there are 2 cases when starting to expanding: even palindrome and odd palindrome. the first starts with 2 central values xes: 0 11 0. the second case starts with a single same value xes: 0 1 0 
+* the slow part is the call to the isPalindrome. this is because for each extension we recalculate the palindromity (?) of the whole string, when only the new 2 charactes should be checked
 */
 std::string SolutionMed::longestPalindrome(std::string s) {
 	size_t idx_central = 0;
