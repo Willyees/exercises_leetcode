@@ -6,6 +6,7 @@ namespace helpers {
 	std::vector<std::vector<int>> getCombinations(std::vector<int>, int r, int start = 0);
 	bool isPalindrome(std::string& s);
 	std::pair<size_t, size_t> expandPalindromeMaxLength(std::string& s, size_t left, size_t right);
+	std::pair<size_t, size_t> expandPalindromeMaxLength_1(std::string& s, size_t left, size_t right);
 }
 /*medium difficulty collections of solutions to leetcode problems - 1 a day keep the rust at bay*/
 class SolutionMed {

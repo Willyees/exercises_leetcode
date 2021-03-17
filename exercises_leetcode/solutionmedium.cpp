@@ -359,6 +359,22 @@ namespace helpers {
 		}
 		return pair(left_longest, right_longest);
 	}
+
+	/**
+	* directly checking the char instead of substring and create new string for only 2 of them. 20ms run time instead of 240ms
+	*/
+	std::pair<int, int> expandPalindromeMaxLength_1(std::string& s, int left, int right) {
+		int left_longest = 0;
+		int right_longest = 0;
+
+		while (left >= 0 && right < s.size() && s[left] == s[right]) {
+			left_longest = left;
+			right_longest = right;
+			--left;
+			++right;
+		}
+		return pair(left_longest, right_longest);
+	}
 }
 /**
 * iterate over the string and use the position as the central position of the palindrome. if it is a palindrome, keep expanding
@@ -375,14 +391,14 @@ std::string SolutionMed::longestPalindrome(std::string s) {
 	while (idx_central < s.size()) {
 		//2 cases
 		//case odd (0 1 2)
-		pair<size_t, size_t> lengths = helpers::expandPalindromeMaxLength(s, idx_central, idx_central);
+		auto lengths = helpers::expandPalindromeMaxLength_1(s, (int)idx_central, (int)idx_central);
 		if (lengths.second - lengths.first + 1 > longest_size){
 			longest = s.substr(lengths.first, lengths.second - lengths.first + 1);
 			longest_size = longest.size();
 		}
 		
 		//case even (0 12 3)
-		lengths = helpers::expandPalindromeMaxLength(s, idx_central, idx_central + 1);
+		lengths = helpers::expandPalindromeMaxLength_1(s, (int)idx_central, (int)idx_central + 1);
 		if (lengths.second - lengths.first + 1 > longest_size){
 			longest = s.substr(lengths.first, lengths.second - lengths.first + 1);
 			longest_size = longest.size();
