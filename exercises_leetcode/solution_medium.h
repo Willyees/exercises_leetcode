@@ -4,6 +4,8 @@
 namespace helpers {
 
 	std::vector<std::vector<int>> getCombinations(std::vector<int>, int r, int start = 0);
+	bool isPalindrome(std::string& s);
+	std::pair<size_t, size_t> expandPalindromeMaxLength(std::string& s, size_t left, size_t right);
 }
 /*medium difficulty collections of solutions to leetcode problems - 1 a day keep the rust at bay*/
 class SolutionMed {
@@ -18,7 +20,7 @@ public:
 	std::vector<std::vector<std::string>> groupAnagrams_1(std::vector<std::string>& strs);//O(NK)
 	int lengthOfLongestSubstring(std::string s);
 	int lengthOfLongestSubstring_1(std::string s);
-
+	std::string longestPalindrome(std::string s);
 };
 
 /* template implementations*/

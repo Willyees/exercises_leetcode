@@ -328,3 +328,64 @@ int SolutionMed::lengthOfLongestSubstring_1(std::string s) {
 	}
 	return max_length;
 }
+
+namespace helpers {
+	bool isPalindrome(string& s) {
+		int end  = s.size() - 1;
+		int start = 0;
+		while (start < end) {
+			if (s[start++] != s[end--])
+				return false;
+		}
+		return true;
+	}
+}
+
+namespace helpers {
+	pair<size_t, size_t> expandPalindromeMaxLength(std::string& s, size_t left, size_t right) {
+		size_t left_longest = 0;
+		size_t right_longest = 0;
+		string sub_s = s.substr(left, right - left + 1);
+		while (helpers::isPalindrome(sub_s)) {
+			left_longest = left;
+			right_longest = right;
+			//set up for the next substring
+			if (left == 0 || right >= (int) s.size() - 1)//need to set the max_length for s.size() == 1
+				break;
+			--left;
+			++right;
+
+			sub_s = s.substr(left, right - left + 1);//check this, also if it is faster than just using the string constructor to build the string
+		}
+		return pair(left_longest, right_longest);
+	}
+}
+/**
+* iterate over the string and use the position as the central position of the palindrome. if it is a palindrome, keep expanding
+*/
+std::string SolutionMed::longestPalindrome(std::string s) {
+	size_t idx_central = 0;
+	size_t left = 0;
+	size_t right = 0;
+	string longest = "";
+	size_t longest_size = 0;
+
+	while (idx_central < s.size()) {
+		//2 cases
+		//case odd (0 1 2)
+		pair<size_t, size_t> lengths = helpers::expandPalindromeMaxLength(s, idx_central, idx_central);
+		if (lengths.second - lengths.first + 1 > longest_size){
+			longest = s.substr(lengths.first, lengths.second - lengths.first + 1);
+			longest_size = longest.size();
+		}
+		
+		//case even (0 12 3)
+		lengths = helpers::expandPalindromeMaxLength(s, idx_central, idx_central + 1);
+		if (lengths.second - lengths.first + 1 > longest_size){
+			longest = s.substr(lengths.first, lengths.second - lengths.first + 1);
+			longest_size = longest.size();
+		}
+		++idx_central;
+	}
+	return longest;
+}

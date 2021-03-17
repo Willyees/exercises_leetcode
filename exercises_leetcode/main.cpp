@@ -38,8 +38,11 @@ void f(int i = 5) {
 }
 int main() {
 	vector<string> v{ "eat","tea","tan","ate","nat","bat" };
+	string s = "ac";
 	SolutionMed sol;
-	cout << sol.lengthOfLongestSubstring_1("pwwkew");
+	//auto p = helpers::expandPalindromeMaxLength(s, 1, 1);
+	
+	cout << sol.longestPalindrome(s);
 	
 	return 0;
 }
