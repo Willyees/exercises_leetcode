@@ -66,6 +66,11 @@ void Graph::addEdges(std::vector<string>& v) {
 		}
 	}
 }
+//prefix
+ListNode* ListNode::operator++() {
+	cout << "prefix op listnode" << endl;
+	return next;
+}
 
 void ListNode::clear(ListNode* h) {
 	while (h != nullptr) {

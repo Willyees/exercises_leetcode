@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include "datastructures.h"
 
 namespace helpers {
 
@@ -22,7 +23,10 @@ public:
 	int lengthOfLongestSubstring(std::string s);
 	int lengthOfLongestSubstring_1(std::string s);
 	std::string longestPalindrome(std::string s);
-	bool increasingTriplet(std::vector<int>& nums);
+	bool increasingTriplet(std::vector<int>& nums);//O(N) O(1)
+
+	/** linked lists**/
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
 };
 
 /* template implementations*/

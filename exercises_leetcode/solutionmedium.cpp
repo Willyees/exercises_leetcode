@@ -410,6 +410,7 @@ std::string SolutionMed::longestPalindrome(std::string s) {
 
 /*
 * find at least 3 elements in nums which are increasing. triples are not required to be consequent
+* using if branches to find increasing values. if gets to the else branch, it means that both n1 and n2 were found and n3 is > n2
 */
 bool SolutionMed::increasingTriplet(std::vector<int>& nums) {
 	int n1 = numeric_limits<int>::max();
@@ -423,4 +424,45 @@ bool SolutionMed::increasingTriplet(std::vector<int>& nums) {
 			return true;
 	}
 	return false;
+}
+
+ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {
+	ListNode* dummy = new ListNode();
+	ListNode* head = dummy;//keep the head of the linkedlist 
+	bool remaining = false;
+	while (l1 != nullptr && l2 != nullptr) {
+		//int sum_nodes = base10_mult * (l1->val + l2->val + remaining);//remaining false = 0, true = 1
+		int sum_nodes = l1->val + l2->val + remaining;//remaining false = 0, true = 1
+		//result->val = sum_nodes % base10_mult;//set the unit value
+		ListNode* result = new ListNode(sum_nodes % 10);//set the unit value
+		//check if there was remaining deciaml value
+		//sum_nodes / base10_mult > 0 ? remaining = true : remaining = false;
+		sum_nodes / 10 > 0 ? remaining = true : remaining = false;
+		l1 = l1->next;//l1 = ++*l1
+		l2 = l2->next;
+		dummy->next = result;
+		dummy = result;
+	}
+	//consider the remaining and which l1 or l2 is not finished
+	ListNode* l = nullptr;
+	if (l1 != nullptr) {//copy all the l2
+		l = l1;
+	}
+	else if (l2 != nullptr)
+		l = l2;
+	//else : both are nullptr so keep l as nullptr
+	while (l != nullptr) {
+		int val = l->val + remaining;
+		ListNode* result = new ListNode(val % 10);
+		dummy->next = result;
+		dummy = result;
+		l = l->next;
+		val / 10 > 0 ? remaining = true : remaining = false;
+	}
+	if (remaining) {
+		ListNode* result = new ListNode(remaining);//remaining = 1
+		dummy->next = result;
+	}
+	//ListNode::print(head->next);
+	return head->next;
 }

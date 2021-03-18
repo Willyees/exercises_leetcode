@@ -40,9 +40,11 @@ int main() {
 	vector<int> v {1,2,3,4,5 };
 	SolutionMed sol;
 	//auto p = helpers::expandPalindromeMaxLength(s, 1, 1);
-	
-	cout << sol.increasingTriplet(v);
-	
+	ListNode* l1 = createLinkedList(vector<int> {9,9,9});
+	ListNode* l2 = createLinkedList(vector<int> {1,1});
+	ListNode::print(sol.addTwoNumbers(l1, l2));
+	ListNode::clear(l1);
+	ListNode::clear(l2);
 	return 0;
 }
 
