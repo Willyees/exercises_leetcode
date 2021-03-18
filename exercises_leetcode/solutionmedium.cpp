@@ -407,3 +407,20 @@ std::string SolutionMed::longestPalindrome(std::string s) {
 	}
 	return longest;
 }
+
+/*
+* find at least 3 elements in nums which are increasing. triples are not required to be consequent
+*/
+bool SolutionMed::increasingTriplet(std::vector<int>& nums) {
+	int n1 = numeric_limits<int>::max();
+	int n2 = n1;
+	for (int n : nums) {
+		if (n <= n1)
+			n1 = n;
+		else if (n <= n2)// <= to skip the same value cases (xes 1221) the '2' will be set as n2 instead of letting skip to the else branch
+			n2 = n;
+		else //get here after found a value n1, a value > n1, and a final value > n2
+			return true;
+	}
+	return false;
+}

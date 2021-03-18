@@ -6,7 +6,7 @@ namespace helpers {
 	std::vector<std::vector<int>> getCombinations(std::vector<int>, int r, int start = 0);
 	bool isPalindrome(std::string& s);
 	std::pair<size_t, size_t> expandPalindromeMaxLength(std::string& s, size_t left, size_t right);
-	std::pair<size_t, size_t> expandPalindromeMaxLength_1(std::string& s, size_t left, size_t right);
+	std::pair<int, int> expandPalindromeMaxLength_1(std::string& s, int left, int right);
 }
 /*medium difficulty collections of solutions to leetcode problems - 1 a day keep the rust at bay*/
 class SolutionMed {
@@ -22,6 +22,7 @@ public:
 	int lengthOfLongestSubstring(std::string s);
 	int lengthOfLongestSubstring_1(std::string s);
 	std::string longestPalindrome(std::string s);
+	bool increasingTriplet(std::vector<int>& nums);
 };
 
 /* template implementations*/

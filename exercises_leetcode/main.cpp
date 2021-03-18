@@ -37,12 +37,11 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<string> v{ "eat","tea","tan","ate","nat","bat" };
-	string s = "babad";
+	vector<int> v {1,2,3,4,5 };
 	SolutionMed sol;
 	//auto p = helpers::expandPalindromeMaxLength(s, 1, 1);
 	
-	cout << sol.longestPalindrome(s);
+	cout << sol.increasingTriplet(v);
 	
 	return 0;
 }
