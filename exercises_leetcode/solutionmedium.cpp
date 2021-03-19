@@ -427,16 +427,13 @@ bool SolutionMed::increasingTriplet(std::vector<int>& nums) {
 }
 
 ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {
-	ListNode* dummy = new ListNode();
-	ListNode* head = dummy;//keep the head of the linkedlist 
+	ListNode head;//keep the head of the linkedlist 
+	ListNode* dummy = &head;
 	bool remaining = false;
 	while (l1 != nullptr && l2 != nullptr) {
-		//int sum_nodes = base10_mult * (l1->val + l2->val + remaining);//remaining false = 0, true = 1
 		int sum_nodes = l1->val + l2->val + remaining;//remaining false = 0, true = 1
-		//result->val = sum_nodes % base10_mult;//set the unit value
 		ListNode* result = new ListNode(sum_nodes % 10);//set the unit value
 		//check if there was remaining deciaml value
-		//sum_nodes / base10_mult > 0 ? remaining = true : remaining = false;
 		sum_nodes / 10 > 0 ? remaining = true : remaining = false;
 		l1 = l1->next;//l1 = ++*l1
 		l2 = l2->next;
@@ -464,5 +461,48 @@ ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {
 		dummy->next = result;
 	}
 	//ListNode::print(head->next);
-	return head->next;
+	return head.next;
+}
+
+/**
+* find the point of intersection between 2 linked lists. it might not exist
+* idea: find sum of each list. check the highest sum (doenst mean it is the longest), start iterating by reducing the higest by current node. check new sum if it is the same as the other list, otherwise continue reducing highest
+* this solution seemed a nice idea. doenst work for all the cases. especially for long lists, is possible that the sum will lead to wrong position, missing the common intersection
+* 
+*/
+ListNode* SolutionMed::getIntersectionNode(ListNode* headA, ListNode* headB){
+	int sumA = 0, sumB = 0;
+	ListNode* a = headA, *b = headB;
+	while (a != nullptr) {
+		sumA += a->val;
+		a = a->next;
+	}
+	while (b != nullptr) {
+		sumB += b->val;
+		b = b->next;
+	}
+	int* maxSum = sumA == sumB ? &sumA : nullptr;
+	ListNode* highestList = sumA == sumB ? headA : nullptr;
+	while (headA != headB && headA != nullptr && headB != nullptr) {
+		if (sumA > sumB) {
+			maxSum = &sumA;
+			highestList = headA;
+			headA = headA->next;
+			*maxSum -= highestList->val;
+
+		}
+		else if (sumB > sumA) {
+			maxSum = &sumB;
+			highestList = headB;
+			headB = headB->next;
+			*maxSum -= highestList->val;
+
+		}
+		else {//sumA == sumB
+			//add return nullptr in case either is nullptr
+			headA = headA->next;
+			headB = headB->next;
+		}
+	}
+	return headA != headB ? nullptr : headA;
 }

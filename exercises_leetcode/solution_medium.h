@@ -27,6 +27,7 @@ public:
 
 	/** linked lists**/
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
+	ListNode* getIntersectionNode(ListNode* headA, ListNode* headB);
 };
 
 /* template implementations*/
