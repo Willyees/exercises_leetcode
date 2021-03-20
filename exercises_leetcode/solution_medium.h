@@ -31,6 +31,8 @@ public:
 	ListNode* getIntersectionNode_1(ListNode* headA, ListNode* headB);//hashmap method
 	ListNode* getIntersectionNode_2(ListNode* headA, ListNode* headB);//pointers method
 	ListNode* getIntersectionNode_3(ListNode* headA, ListNode* headB);//pointers method 1 pass
+	ListNode* oddEvenList(ListNode* head);//O(2N), O(N)
+	ListNode* oddEvenList_1(ListNode* head);//O(2N), O(1)
 };
 
 /* template implementations*/

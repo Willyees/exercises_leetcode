@@ -578,3 +578,71 @@ ListNode* SolutionMed::getIntersectionNode_3(ListNode* headA, ListNode* headB) {
 	}
 	return a;
 }
+
+/** simple solution using additional space. iterate over the list and store the evens and odds in different containers. if the node contained multiple variables, the containers should have a copy of the listnode. here they contain olnly 1 integer
+* reorder the linkedlist by moving the odds indexes first and then the evens. internal order should not be modified
+* this solution will invalidate any pointers to the nodes, because their values are being modified
+*/
+ListNode* SolutionMed::oddEvenList(ListNode* head) {
+	if (!head)//guard from nullptr head
+		return nullptr;
+	vector<decltype(head->val)> evens, odds;
+	ListNode* l = head;
+	bool odd = true;
+	//load the containers with copy of the values
+	while (l != nullptr) {
+		if (odd)
+			odds.push_back(l->val);
+		else
+			evens.push_back(l->val);
+		odd = !odd;
+		l = l->next;
+	}
+	l = head;
+	auto it = odds.begin();
+	while (it != odds.end()) {
+		l->val = *it;
+		l = l->next;
+		++it;
+	}
+	it = evens.begin();
+	while (it != evens.end()) {
+		l->val = *it;
+		l = l->next;
+		++it;
+	}
+	return head;
+}
+
+/*
+* attempting O(1) space solution by only modifying the next pointer, while iterating over the ll, modify the even links to point to the next evens. same goes for the odds. at the end modify the last odd to point to the first even
+*/
+ListNode* SolutionMed::oddEvenList_1(ListNode* head) {
+	if (!head)
+		return nullptr;
+	ListNode* l = head, *head_even = nullptr;
+	ListNode dummy;
+	ListNode* previous_odd = &dummy;//try the temp val what happens &ListNode()
+	head_even = l->next;
+	bool odd = true;
+	ListNode* last_even = &dummy;
+	
+	while (l != nullptr) {
+		if (odd) {
+			previous_odd->next = l;
+			previous_odd = l;
+		}
+		else{
+			last_even->next = l;
+			last_even = l;
+		}
+		odd = !odd;
+		l = l->next;
+	}
+
+	//now previous points to the last inserted odd, so using it to link to the even chain
+	previous_odd->next = head_even;
+	last_even->next = nullptr;
+
+	return head;
+}
