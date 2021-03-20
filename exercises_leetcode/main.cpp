@@ -46,7 +46,7 @@ int main() {
 	while (l2->val != 41) l2 = l2->next;
 	while (l1->val != 39) l1 = l1->next;
 	l1->next = l2;
-	cout << sol.getIntersectionNode(l1_c, l2_c)->val << endl;
+	cout << sol.getIntersectionNode_3(l1_c, l2_c)->val << endl;
 	ListNode::clear(l1);
 	ListNode::clear(l2);
 	return 0;

@@ -499,10 +499,82 @@ ListNode* SolutionMed::getIntersectionNode(ListNode* headA, ListNode* headB){
 
 		}
 		else {//sumA == sumB
-			//add return nullptr in case either is nullptr
 			headA = headA->next;
 			headB = headB->next;
 		}
 	}
 	return headA != headB ? nullptr : headA;
+}
+
+/**time: O(l_a + l_b), space: O(l_a)
+* using a hashmap to store one of the list, then check the other list addresses against it
+*/
+ListNode* SolutionMed::getIntersectionNode_1(ListNode* headA, ListNode* headB) {
+	unordered_set<ListNode*> set_nodes;
+	ListNode* a = headA;
+	while (a != nullptr) {
+		set_nodes.insert(a);
+		a = a->next;
+	}
+	while (headB != nullptr) {
+		auto it = set_nodes.find(headB);
+		if (it != set_nodes.end())
+			return *it;
+		headB = headB->next;
+	}
+	return nullptr;
+}
+
+/*
+* the tail starting from the shared node must be of the same length. find the shortest linkedlist and from there keep checking if the other list has the same node address
+*/
+ListNode* SolutionMed::getIntersectionNode_2(ListNode* headA, ListNode* headB){
+	int a_length = 0, b_length = 0;
+	ListNode* l = headA;
+	while (l != nullptr) {//get length headA
+		++a_length;
+		l = l->next;
+	}
+
+	l = headB;
+	while (l != nullptr) {//get lenght linked list b
+		++b_length;
+		l = l->next;
+	}
+
+	ListNode* longest = nullptr, * shortest = nullptr;
+	if (a_length > b_length) {
+		longest = headA;
+		shortest = headB;
+	}
+	else {
+		longest = headB;
+		shortest = headA;
+	}
+
+	for (int i = abs(a_length - b_length); i != 0; --i) {
+		longest = longest->next;
+	}
+
+	while (longest != nullptr && shortest != nullptr) {
+		if (longest == shortest)
+			return longest;
+		longest = longest->next;
+		shortest = shortest->next;
+	}
+	return nullptr;
+}
+
+/*
+* same concept of _2, but insted of iterating over the linkedlists just to find the length, both find the length and in the meantime check for same pointers.
+* this is acheived by pointer 1: iterate list_a, shared_tail, then list_b. pointer 2: list_b, shared_tail, then list_a. the pointer iterating over the shortest list will set the inital point in the longest list when switching to that list iteration
+*/
+ListNode* SolutionMed::getIntersectionNode_3(ListNode* headA, ListNode* headB) {
+	ListNode* a = headA, * b = headB;
+	while (a != b) {
+		//dont need to check if both of them are nullptr. if they are while ends and return will nullptr as expected
+		a = a == nullptr ? headB : a->next;//these fancy ifs are very handy in this case
+		b = b == nullptr ? headA : b->next;
+	}
+	return a;
 }
