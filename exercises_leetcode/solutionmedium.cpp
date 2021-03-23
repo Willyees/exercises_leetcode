@@ -1,3 +1,4 @@
+#include <stack>
 #include <numeric>
 #include <iostream>
 #include <algorithm>
@@ -616,6 +617,7 @@ ListNode* SolutionMed::oddEvenList(ListNode* head) {
 
 /*
 * attempting O(1) space solution by only modifying the next pointer, while iterating over the ll, modify the even links to point to the next evens. same goes for the odds. at the end modify the last odd to point to the first even
+* the code could be cleaned up by setting in a single iteration both the even and odd: even->next = odd->next; odd = odd->next; odd->next = even->next
 */
 ListNode* SolutionMed::oddEvenList_1(ListNode* head) {
 	if (!head)
@@ -645,4 +647,32 @@ ListNode* SolutionMed::oddEvenList_1(ListNode* head) {
 	last_even->next = nullptr;
 
 	return head;
+}
+
+/**already done in the treenode class, but is good to practice it again to consolidate memory
+* remember to not specifically mimic the recursive method because the stack and the call stack are not exactly the same as logic functionality
+* print a binary tree in inorder (left, right, parent). iterative
+* the main trick is to NOT push based on the condition that a left or right children exist and is not nullptr. if doing so, it will create an endless loop.
+* instead, push an entire left subtree, then each iteration pop latest and set the new node for next iteration as the right (so it will push the entire left part of the right children). keep popping 1 at each iteration without check on nullptr of existance of right or left
+*/
+vector<int> SolutionMed::inorderTraversal(TreeNode* root) {
+	vector<int> result;
+	if (root == nullptr)
+		return result;
+	//use stack to load the children in order
+	stack<TreeNode*> s_nodes;
+	s_nodes.push(root);//stack is used to load all the left subtree from current node
+	TreeNode* node = root;
+	while (node != nullptr && !s_nodes.empty()) {
+		while(node){//push all the left subtree until a leaf is found
+			s_nodes.push(node);
+			node = node->left;
+		}
+		//if nullptr node, the next node from the stack is used and popped
+		node = s_nodes.top();//the top of the stack (last inserted element) is the new node. this because the node could be nullptr from previous iteration, so setting it again here. enables the unwinding of the stack as well
+		s_nodes.pop();
+		result.push_back(node->val);
+		node = node->right;//set the node as the right children. if no children, it will be set as nullptr and it will skip the second while not loading with anything
+	}
+	return result;
 }

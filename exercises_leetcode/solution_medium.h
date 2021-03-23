@@ -33,6 +33,9 @@ public:
 	ListNode* getIntersectionNode_3(ListNode* headA, ListNode* headB);//pointers method 1 pass
 	ListNode* oddEvenList(ListNode* head);//O(2N), O(N)
 	ListNode* oddEvenList_1(ListNode* head);//O(2N), O(1)
+
+	/** trees **/
+	std::vector<int> inorderTraversal(TreeNode* root);
 };
 
 /* template implementations*/
