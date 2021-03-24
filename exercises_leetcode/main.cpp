@@ -37,12 +37,10 @@ void f(int i = 5) {
 	cout << i;
 }
 int main() {
-	vector<int> v {1,2,3,4,5 };
 	SolutionMed sol;
-	//auto p = helpers::expandPalindromeMaxLength(s, 1, 1);
-	ListNode* l1 = createLinkedList(vector<int> {1,2,3,4,5});
-	ListNode::print(sol.oddEvenList_1(l1));
-	ListNode::clear(l1);
+	vector<int> v{ 3,9,20,nil_t,nil_t,15,7 };
+	TreeNode* root = createBinarySearchTree(v);
+	vector<vector<int>> r = sol.zigzagLevelOrder(root);
 	return 0;
 }
 

@@ -36,6 +36,7 @@ public:
 
 	/** trees **/
 	std::vector<int> inorderTraversal(TreeNode* root);
+	std::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root);
 };
 
 /* template implementations*/

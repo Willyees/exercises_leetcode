@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <map>
+#include <deque>
 #include "solution_medium.h"
 using namespace std;
 
@@ -661,7 +662,6 @@ vector<int> SolutionMed::inorderTraversal(TreeNode* root) {
 		return result;
 	//use stack to load the children in order
 	stack<TreeNode*> s_nodes;
-	s_nodes.push(root);//stack is used to load all the left subtree from current node
 	TreeNode* node = root;
 	while (node != nullptr && !s_nodes.empty()) {
 		while(node){//push all the left subtree until a leaf is found
@@ -674,5 +674,53 @@ vector<int> SolutionMed::inorderTraversal(TreeNode* root) {
 		result.push_back(node->val);
 		node = node->right;//set the node as the right children. if no children, it will be set as nullptr and it will skip the second while not loading with anything
 	}
+	return result;
+}
+
+/**return level order zigzag: for each level start leftside, next level righside
+* "return: vector of vector. each inner container is a different level
+*/
+std::vector<std::vector<int>> SolutionMed::zigzagLevelOrder(TreeNode* root) {
+	vector<vector<int>> result;
+	if (!root)
+		return result;
+	deque<TreeNode*> d;
+	d.push_back(root);
+	bool left_side = true;//used to keep track of which side to start from (right or left)
+	while (!d.empty()) {
+		vector<int> level;
+		for (int i = d.size(); i > 0; --i) {//process all the nodes in the current level
+			TreeNode* node = nullptr;
+			if (left_side) {
+				node = d.front();
+				d.pop_front();
+			}
+			else {
+				node = d.back();
+				d.pop_back();
+			}
+			if (node == nullptr)
+				continue;
+			level.push_back(node->val);
+
+			//push the children different direction 
+			if (left_side) {
+				if(node->left)
+					d.push_back(node->left);
+				if(node->right)
+					d.push_back(node->right);
+			}
+			else {
+				if (node->right)
+					d.push_front(node->right);
+				if (node->left)
+					d.push_front(node->left);
+			}
+			
+		}
+		result.push_back(level);
+		left_side = !left_side;
+	}
+	
 	return result;
 }
