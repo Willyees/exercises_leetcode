@@ -724,3 +724,39 @@ std::vector<std::vector<int>> SolutionMed::zigzagLevelOrder(TreeNode* root) {
 	
 	return result;
 }
+
+/*both preorder and inorder provided becuase the empty nodes are not listed in the vectors, so have to use the 2 different representations to understand where nodes are missing
+*/
+TreeNode* SolutionMed::buildTree(std::vector<int>& preorder, std::vector<int>& inorder) {
+	TreeNode* root = buildTree_rec(preorder, inorder, 0, 0, preorder.size() - 1);
+	return root;
+}
+
+/*
+* use the preorder to initalize the nodes and the inorder to set the left and right nodes
+* @param 'idx': current root idx;	'left_idx': inital idx part of the current tree; 'right_idx': end idx of the current tree
+*/
+TreeNode* SolutionMed::buildTree_rec(std::vector<int>& preorder, std::vector<int>& inorder, int idx, int left_idx, int right_idx) {
+	//preorder (level order): root, left, right
+	//preorder current item is the root, initalize it and later, when all its right and left children are initialized (recursion tree is unwinding), set the right and left pointers
+	if (left_idx >= right_idx)
+		return nullptr;
+	int val = preorder[idx];
+	TreeNode* node = new TreeNode(val);
+	//left and right idx are relative to the inorder vector. have to find the root in there from the preorder
+	vector<int>::iterator it = find(inorder.begin() + left_idx, inorder.begin() + right_idx + 1, val);//check this, might need + 1 in the right
+	int root_idx_preorder = it - inorder.begin();//get the index
+	TreeNode* left = buildTree_rec(preorder, inorder, idx + 1, left_idx, root_idx_preorder);
+	node->left = left;
+	TreeNode* right = buildTree_rec(preorder, inorder, idx + 2, root_idx_preorder + 1, right_idx);
+	node->right = right;
+	return node;
+}
+
+/*I already created this method in the testing section because it was very helpful for testing. doing it again because is a solution to a question
+* @param: pre: elements of tree in level order, left to right.
+*/
+TreeNode* SolutionMed::buildTreePreorder(std::vector<int>& pre) {
+	//using property of level order: left child of node at pos i->
+	return nullptr;
+}

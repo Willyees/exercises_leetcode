@@ -38,9 +38,10 @@ void f(int i = 5) {
 }
 int main() {
 	SolutionMed sol;
-	vector<int> v{ 3,9,20,nil_t,nil_t,15,7 };
-	TreeNode* root = createBinarySearchTree(v);
-	vector<vector<int>> r = sol.zigzagLevelOrder(root);
+	vector<int> preorder{ 3,9,20,15,7 };
+	vector<int> inorder{ 9, 3, 15, 20, 7 };
+	TreeNode* root = sol.buildTree(preorder, inorder);
+	TreeNode::printInOrder(root);
 	return 0;
 }
 
