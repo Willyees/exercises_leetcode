@@ -728,7 +728,8 @@ std::vector<std::vector<int>> SolutionMed::zigzagLevelOrder(TreeNode* root) {
 /*both preorder and inorder provided becuase the empty nodes are not listed in the vectors, so have to use the 2 different representations to understand where nodes are missing
 */
 TreeNode* SolutionMed::buildTree(std::vector<int>& preorder, std::vector<int>& inorder) {
-	TreeNode* root = buildTree_rec(preorder, inorder, 0, preorder.size() - 1);
+	int idx = 0;//passing it by reference, similar as using a static value but it thread safer and reccomended way in recursive functions
+	TreeNode* root = buildTree_rec(preorder, inorder, idx, 0, preorder.size() - 1);
 	return root;
 }
 
@@ -736,10 +737,9 @@ TreeNode* SolutionMed::buildTree(std::vector<int>& preorder, std::vector<int>& i
 * use the preorder to initalize the nodes and the inorder to set the left and right nodes
 * @param 'idx': current root idx;	'left_idx': inital idx part of the current tree; 'right_idx': end idx of the current tree
 */
-TreeNode* SolutionMed::buildTree_rec(std::vector<int>& preorder, std::vector<int>& inorder, int left_idx, int right_idx) {
+TreeNode* SolutionMed::buildTree_rec(std::vector<int>& preorder, std::vector<int>& inorder, int& idx, int left_idx, int right_idx) {
 	//preorder (deph first): root, left, right
 	//preorder current item is the root, initalize it and later, when all its right and left children are initialized (recursion tree is unwinding), set the right and left pointers
-	static int idx = 0;
 	if (left_idx > right_idx)
 		return nullptr;
 	int val = preorder[idx];
@@ -751,13 +751,13 @@ TreeNode* SolutionMed::buildTree_rec(std::vector<int>& preorder, std::vector<int
 			throw -1;
 	}
 	catch (int e) {
-		cout << "problem" << endl;
+		cout << "root was not found in the inorder vector, problem" << endl;
 	}
 	int root_idx_inorder = it - inorder.begin();//get the index
 	++idx;
-	TreeNode* left = buildTree_rec(preorder, inorder, left_idx, root_idx_inorder - 1);
+	TreeNode* left = buildTree_rec(preorder, inorder, idx, left_idx, root_idx_inorder - 1);
 	node->left = left;
-	TreeNode* right = buildTree_rec(preorder, inorder, root_idx_inorder + 1, right_idx);
+	TreeNode* right = buildTree_rec(preorder, inorder, idx, root_idx_inorder + 1, right_idx);
 	node->right = right;
 	return node;
 }

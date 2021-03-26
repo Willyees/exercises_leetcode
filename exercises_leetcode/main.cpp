@@ -33,16 +33,19 @@ std::vector<string> similarTransformations(string input, vector<string> wordlist
 	return result;
 }
 
-void f(int i = 5) {
-	cout << i;
+void f(int& i) {
+	static int p = 0;
+	cout << p++ << " ";
+	if (p == 5)
+		return;
+	f(i);
+	
 }
 int main() {
 	SolutionMed sol;
-	vector<int> preorder{ -1};
-	vector<int> inorder{ -1 };
-	TreeNode* root = sol.buildTree(preorder, inorder);
-	TreeNode::printInOrder(root);
-	TreeNode::clear(root);
+	int i = 0;
+	f(i);
+	f(i);
 	return 0;
 }
 
