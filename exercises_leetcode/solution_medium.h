@@ -38,7 +38,7 @@ public:
 	std::vector<int> inorderTraversal(TreeNode* root);
 	std::vector<std::vector<int>> zigzagLevelOrder(TreeNode* root);
 	TreeNode* buildTree(std::vector<int>& preorder, std::vector<int>& inorder);
-	TreeNode* buildTree_rec(std::vector<int>& preorder, std::vector<int>& inorder, int idx, int left_idx, int right_idx);
+	TreeNode* buildTree_rec(std::vector<int>& preorder, std::vector<int>& inorder, int left_idx, int right_idx);
 	TreeNode* buildTreePreorder(std::vector<int>& pre);
 	TreeNode* buildTreeInorder(std::vector<int>& in);
 };

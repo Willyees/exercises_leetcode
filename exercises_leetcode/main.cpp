@@ -38,10 +38,11 @@ void f(int i = 5) {
 }
 int main() {
 	SolutionMed sol;
-	vector<int> preorder{ 3,9,20,15,7 };
-	vector<int> inorder{ 9, 3, 15, 20, 7 };
+	vector<int> preorder{ -1};
+	vector<int> inorder{ -1 };
 	TreeNode* root = sol.buildTree(preorder, inorder);
 	TreeNode::printInOrder(root);
+	TreeNode::clear(root);
 	return 0;
 }
 
