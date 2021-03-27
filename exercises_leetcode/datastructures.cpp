@@ -4,6 +4,13 @@
 
 using namespace std;
 
+Node::Node() : val(0), left(nullptr), right(nullptr), next(nullptr) {}
+
+Node::Node(int _val) : val(_val), left(nullptr), right(nullptr), next(nullptr) {}
+
+Node::Node(int _val, Node* _left, Node* _right, Node* _next)
+	: val(_val), left(_left), right(_right), next(_next) {}
+
 void Graph::breathFirstSearchHelper() {
 	
 }

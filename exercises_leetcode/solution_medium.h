@@ -40,7 +40,9 @@ public:
 	TreeNode* buildTree(std::vector<int>& preorder, std::vector<int>& inorder);
 	TreeNode* buildTree_rec(std::vector<int>& preorder, std::vector<int>& inorder, int& idx, int left_idx, int right_idx);
 	TreeNode* buildTreePreorder(std::vector<int>& pre);
-	TreeNode* buildTreeInorder(std::vector<int>& in);
+	Node* connect(Node* root);
+	Node* connect_it(Node* root);
+	Node* connect_rec(Node* root);//space O(N)
 };
 
 /* template implementations*/

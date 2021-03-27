@@ -39,13 +39,13 @@ void f(int& i) {
 	if (p == 5)
 		return;
 	f(i);
-	
 }
 int main() {
 	SolutionMed sol;
-	int i = 0;
-	f(i);
-	f(i);
+	vector<int> v{ 1,2,3,4,5,6,7 };
+	Node* root = createBinarySearchTree_t<Node>(v);
+	sol.connect_it(root);
+	
 	return 0;
 }
 

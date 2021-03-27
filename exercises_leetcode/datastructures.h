@@ -4,6 +4,35 @@
 #include <unordered_map>
 #include <iostream>
 
+struct TreeNode {
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode() : val(0), left(nullptr), right(nullptr) {};
+	TreeNode(int val) : val(val), left(nullptr), right(nullptr) {};
+	TreeNode(int val, TreeNode* left, TreeNode* right) : val(val), left(left), right(right) {};
+
+	void static printInOrder(TreeNode* r);
+	void static clear(TreeNode*& r);//passing as reference because need to reset the pointer r to nullptr
+	static constexpr int nil = -101;
+
+};
+inline const int& nil_t = TreeNode::nil;
+
+//class used for perfect binary tree exercises. (next points to right node in the tree, or nullptr)
+class Node : TreeNode {
+public:
+	int val;
+	Node* left;
+	Node* right;
+	Node* next;
+
+	Node();
+	Node(int val);
+	Node(int _val, Node* _left, Node* _right, Node* _next);
+	//Node(TreeNode* root);
+};
+
 class Edge {
 public:
 	int distance;
@@ -44,20 +73,7 @@ struct ListNode {
 	static void print(ListNode*);
 };
 
-struct TreeNode {
-	int val;
-	TreeNode* left;
-	TreeNode* right;
-	TreeNode() : val(0), left(nullptr), right(nullptr) {};
-	TreeNode(int val) : val(val), left(nullptr), right(nullptr) {};
-	TreeNode(int val, TreeNode* left, TreeNode* right) : val(val), left(left), right(right) {};
-	
-	void static printInOrder(TreeNode* r);
-	void static clear(TreeNode*& r);//passing as reference because need to reset the pointer r to nullptr
-	static constexpr int nil = -101;
 
-};
-inline const int& nil_t = TreeNode::nil;
 
 
 

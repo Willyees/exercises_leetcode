@@ -48,6 +48,8 @@ TreeNode* createBinarySearchTree(std::vector<int>& vals, int index) {
 	node->right = createBinarySearchTree(vals, index * 2 + 2);//create right
 	return node;	
 }
+
+
 /*******/
 
 bool twoSum() {

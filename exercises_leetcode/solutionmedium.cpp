@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <map>
 #include <deque>
+#include <queue>
 #include "solution_medium.h"
 using namespace std;
 
@@ -767,5 +768,40 @@ TreeNode* SolutionMed::buildTree_rec(std::vector<int>& preorder, std::vector<int
 */
 TreeNode* SolutionMed::buildTreePreorder(std::vector<int>& pre) {
 	//using property of level order: left child of node at pos i->
+	return nullptr;
+}
+
+/** 
+* @param: 'root': all the nodes are already created on the heap. root has '.next' member set to nullptr
+* @return: set all the nodes in the perfect binary tree to point their right node as the '.next' member
+*/
+Node* SolutionMed::connect(Node* root) {
+	
+	return nullptr;
+}
+
+Node* SolutionMed::connect_it(Node* root) {
+	queue<Node*> level_q;
+	level_q.push(root);
+	Node* node = nullptr;
+	while (!level_q.empty()) {
+		for (int i = level_q.size(); i > 0 ; --i) {
+			Node* node_q = level_q.front();
+			node_q->next = node;
+			node = node_q;
+			level_q.pop();
+			if(node_q->right)
+				level_q.push(node_q->right);//inverted push, so when iterating, the nodes are popped from right to left
+			if (node_q->left)
+				level_q.push(node_q->left);
+		}
+		node = nullptr;
+	}
+	return root;
+}
+
+/**breadth first traversal (level order). once end level is reached, start unwinding and set the previous node next as the currenta
+*/
+Node* SolutionMed::connect_rec(Node* root) {
 	return nullptr;
 }
