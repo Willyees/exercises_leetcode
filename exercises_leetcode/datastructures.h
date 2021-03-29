@@ -20,12 +20,13 @@ struct TreeNode {
 inline const int& nil_t = TreeNode::nil;
 
 //class used for perfect binary tree exercises. (next points to right node in the tree, or nullptr)
-class Node : public TreeNode {
+//thought it could be the child of the TreeNode since it seems a specialization of it with just added pointer to next, but all these pointers are towards NODE classes. If inheriting they would point to TreeNode which is not intended
+class Node {
 public:
-	//int val;
-	//Node* left;
-	//Node* right;
-	TreeNode* next;
+	int val;
+	Node* left;
+	Node* right;
+	Node* next;
 
 	Node();
 	Node(int val);
