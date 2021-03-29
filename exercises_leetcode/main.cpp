@@ -44,6 +44,7 @@ int main() {
 	SolutionMed sol;
 	vector<int> v{ 1,2,3,4,5,6,7 };
 	Node* root = createBinarySearchTree_t<Node>(v);
+	//int* root_i = createBinarySearchTree_t<int>(v);
 	sol.connect_it(root);
 	
 	return 0;

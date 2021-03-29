@@ -780,6 +780,8 @@ Node* SolutionMed::connect(Node* root) {
 	return nullptr;
 }
 
+/*using extra space for the queue O(N) space for very skewed tree, otherwise is the latest level elements number
+*/
 Node* SolutionMed::connect_it(Node* root) {
 	queue<Node*> level_q;
 	level_q.push(root);

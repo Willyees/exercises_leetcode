@@ -20,12 +20,12 @@ struct TreeNode {
 inline const int& nil_t = TreeNode::nil;
 
 //class used for perfect binary tree exercises. (next points to right node in the tree, or nullptr)
-class Node : TreeNode {
+class Node : public TreeNode {
 public:
-	int val;
-	Node* left;
-	Node* right;
-	Node* next;
+	//int val;
+	//Node* left;
+	//Node* right;
+	TreeNode* next;
 
 	Node();
 	Node(int val);

@@ -1,4 +1,5 @@
 #pragma once
+#include <type_traits>
 #include "solution.h"
 #include "datastructures.h"
 
@@ -57,6 +58,7 @@ bool firstBadVersion();
 */
 template<class T = TreeNode>
 typename T* createBinarySearchTree_t(std::vector<int>& vals, int index = 0) {
+	static_assert(std::is_same_v<T, TreeNode> || std::is_same_v<T, Node>, "only treenodes and nodes allowed");
 	//2*i + 1 left child; 2*i + 2 right child
 	if (index >= vals.size())
 		return nullptr;
