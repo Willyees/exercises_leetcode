@@ -42,11 +42,11 @@ void f(int& i) {
 }
 int main() {
 	SolutionMed sol;
-	vector<int> v{ 1,2,3,4,5,6,7 };
-	Node* root = createBinarySearchTree_t<Node>(v);
+	vector<int> v{ 3,1,4,nil_t,2 };
+	TreeNode* root = createBinarySearchTree_t<TreeNode>(v);
 	//int* root_i = createBinarySearchTree_t<int>(v);
-	sol.connect_it(root);
-	
+	cout << sol.kthSmallest_1(root, 3) << endl;
+	TreeNode::clear(root);
 	return 0;
 }
 

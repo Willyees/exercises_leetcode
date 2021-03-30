@@ -56,7 +56,7 @@ bool firstBadVersion();
 /*trying to create a template version of createBinarySearchTree(), but only limit the usage to the TreeNode hierarchy with its children. This version will allow template calls of any type (xes: int)
 * possible solution: static_assert and check that the type passed is actually a TreeNode or child, otherwise declare but dont define base type and define only the specialized. will result in linker error
 */
-template<class T = TreeNode>
+template<class T>
 typename T* createBinarySearchTree_t(std::vector<int>& vals, int index = 0) {
 	static_assert(std::is_same_v<T, TreeNode> || std::is_same_v<T, Node>, "only treenodes and nodes allowed");
 	//2*i + 1 left child; 2*i + 2 right child

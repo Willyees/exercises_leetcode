@@ -807,3 +807,48 @@ Node* SolutionMed::connect_it(Node* root) {
 Node* SolutionMed::connect_rec(Node* root) {
 	return nullptr;
 }
+
+/* iterative version. inorder search with a counter. when counter == k, return. O(2N) time
+* @param: 'root': root of binary tree; 'k': kth smallest item to return
+* @return: the kth smallest value stored in the binary tree
+*/
+int SolutionMed::kthSmallest(TreeNode* root, int k) {
+	if (!root)
+		return -1;
+	stack<TreeNode*> nodes_s;
+	TreeNode* node = root;
+	while (!nodes_s.empty() || node != nullptr) {
+		//keep adding left until left subtree is exhausted
+		while (node != nullptr) {
+			nodes_s.push(node);
+			node = node->left;
+		}
+		//while ended, so latest pushed is a leaf, print it
+		node = nodes_s.top();
+		nodes_s.pop();
+		
+		if (--k == 0)
+			return node->val;
+		//next node is either the right or a nullptr, which will let the stack undiwnd of 1 position
+		node = node->right;//nodes_s.push(node->right);//dont push here, jsut set the node. it will be pushed at the beginning of the while loop
+	}
+	cout << "k selected is too high, not enough elements in the tree\n";
+	return -1;
+}
+
+//recursive implementation
+int SolutionMed::kthSmallest_1(TreeNode* root, int k) {
+	int sol = -1;//default value for the solution
+	kthSmallest_1_rec(root, k, sol);
+	return sol;
+}
+
+TreeNode* SolutionMed::kthSmallest_1_rec(TreeNode* root, int& k, int& sol) {
+	if (!root)
+		return root;
+	//left, right, root
+	kthSmallest_1_rec(root->left, k, sol);
+	--k != 0 ? k : sol = root->val;
+	kthSmallest_1_rec(root->right, k, sol);
+	return root;
+}

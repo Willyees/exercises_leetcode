@@ -43,6 +43,10 @@ public:
 	Node* connect(Node* root);
 	Node* connect_it(Node* root);
 	Node* connect_rec(Node* root);//space O(N)
+	int kthSmallest(TreeNode* root, int k);
+	int kthSmallest_1(TreeNode* root, int k);
+	TreeNode* kthSmallest_1_rec(TreeNode* root, int& k, int& sol);
+
 };
 
 /* template implementations*/
