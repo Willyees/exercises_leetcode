@@ -47,6 +47,9 @@ public:
 	int kthSmallest_1(TreeNode* root, int k);
 	TreeNode* kthSmallest_1_rec(TreeNode* root, int& k, int& sol);
 
+	/** backtracking **/
+	std::vector<std::string> letterCombinations(std::string digits);
+	void letterCombinations_rec(const std::string digits, std::string current, std::vector<std::string>& sol);
 };
 
 /* template implementations*/

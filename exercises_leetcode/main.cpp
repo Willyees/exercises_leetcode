@@ -42,11 +42,10 @@ void f(int& i) {
 }
 int main() {
 	SolutionMed sol;
-	vector<int> v{ 3,1,4,nil_t,2 };
-	TreeNode* root = createBinarySearchTree_t<TreeNode>(v);
-	//int* root_i = createBinarySearchTree_t<int>(v);
-	cout << sol.kthSmallest_1(root, 3) << endl;
-	TreeNode::clear(root);
+	auto v_s = sol.letterCombinations("23");
+	for (string s : v_s) {
+		cout << s << endl;
+	}
 	return 0;
 }
 

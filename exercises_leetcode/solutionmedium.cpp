@@ -8,6 +8,7 @@
 #include <map>
 #include <deque>
 #include <queue>
+#include <array>
 #include "solution_medium.h"
 using namespace std;
 
@@ -851,4 +852,35 @@ TreeNode* SolutionMed::kthSmallest_1_rec(TreeNode* root, int& k, int& sol) {
 	--k != 0 ? k : sol = root->val;
 	kthSmallest_1_rec(root->right, k, sol);
 	return root;
+}
+const map<const char, vector<char>> telephone_digits_map = { {'2', vector<char> { 'a', 'b', 'c' }}, {'3', vector<char> {'d','e','f'}}, {'4', vector<char> {'g','h','i'}}, {'5', vector<char> {'j','k','l'}}, {'6', vector<char> {'m', 'n', 'o'}}, {'7', vector<char> {'p','q','r','s'}}, {'8', vector<char> {'t','u','v'}}, {'9', vector<char> {'w','x','y','z'}} };
+
+/*given a string of digits [2,9] similar to a telephone keyboard, return all the combinations possible using the letter corresponding to the number xes: 2:a,b,c
+*
+*/
+std::vector<std::string> SolutionMed::letterCombinations(std::string digits) {
+	//orders matter: find all the permutation with length == digits.lenght
+	if (digits.empty())
+		return vector<string>();
+	vector<string> sol;
+	
+	letterCombinations_rec(digits, "", sol);
+	return sol;
+}
+
+/**
+* @params: idx: current index of the letter to use for the permutation
+*/
+void SolutionMed::letterCombinations_rec(const std::string digits, string current, vector<string>& sol) {
+	if (current.size() == digits.size()){
+		sol.push_back(current);
+		return;
+	}
+	vector<char> pool(telephone_digits_map.at(digits.at(current.size())));
+
+	for (int i = 0; i < pool.size(); ++i) {
+		char c = pool[i];
+		string temp = current + string(1, c);
+		letterCombinations_rec(digits, temp, sol);
+	}
 }
