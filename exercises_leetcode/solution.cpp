@@ -1971,6 +1971,34 @@ int Solution::maxSubArray(std::vector<int>& nums) {
 }
 
 /**
+* @params: a, b: string representation of binary values
+*/
+std::string Solution::addBinary(std::string a, std::string b) {
+    stack<char> result;
+    int idx = 0, a_l = a.size(), b_l = b.size(), carry = 0;
+    while (a_l > idx || b_l > idx) {
+        int sum = carry;
+        if (a_l > idx)
+            sum += a[idx] - '0';//convert from char to int -> subtract '0'
+        if (b_l > idx)
+            sum += b[idx] - '0';
+        result.push(sum % 2 + '0');//convert from int to char -> add '0'
+        carry = sum / 2;
+        idx++;
+    }
+    
+    if (carry != 0)
+        result.push(carry + '0');
+    string output;
+    while (!result.empty()) {
+        output.push_back(result.top());
+        result.pop();
+    }
+
+    return output;
+}
+
+/**
 * output string representation of 1 .. "n". if current number is multiple of 3, output "fizz", if of 5 "buzz", if both 3 and 5 "fizzbuzz"
 * @param n: int number final output. needed to check for his multiples and output string based on rules explained above.
 */

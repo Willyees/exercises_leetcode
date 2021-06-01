@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <assert.h>
+#include <bitset>
 #include <algorithm>
 #include "tests.h"
 #include "solution.h"
@@ -41,11 +42,8 @@ void f(int& i) {
 	f(i);
 }
 int main() {
-	SolutionMed sol;
-	auto v_s = sol.letterCombinations("23");
-	for (string s : v_s) {
-		cout << s << endl;
-	}
+	Solution sol;
+	cout << sol.addBinary("0101", "1111");
 	return 0;
 }
 
