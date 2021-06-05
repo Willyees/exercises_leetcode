@@ -2490,6 +2490,32 @@ int Solution::missingNumber_3(std::vector<int>& nums) {
     return result;
 }
 
+/**
+* happy number: sum the power of all the digits of 'num'. keep doing until either final sum == 1-> return true. if endless loop->return false
+*/
+bool Solution::isHappy(int n) {
+    set<int> sums;
+    int sum = 0;
+    while(sums.find(sum) == sums.end()){
+        //split 'n' into digits and apply alg to find sum
+        sums.insert(sum);
+        sum = 0;
+        int sum_single_digits = 0;
+        while (n != 0) {
+            int digit = n % 10;
+            sum += pow(digit, 2);
+            n /= 10;
+            sum_single_digits += digit;
+        }
+        n = sum;
+        if (sum_single_digits == 1)
+            return true;
+            
+        //check sum digits == 1
+    }
+    return false;
+}
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;

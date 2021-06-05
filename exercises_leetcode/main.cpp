@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	cout << sol.addBinary("0101", "1111");
+	sol.isHappy(19);
 	return 0;
 }
 
