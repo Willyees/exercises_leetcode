@@ -2494,6 +2494,7 @@ int Solution::missingNumber_3(std::vector<int>& nums) {
 * happy number: sum the power of all the digits of 'num'. keep doing until either final sum == 1-> return true. if endless loop->return false
 */
 bool Solution::isHappy(int n) {
+    //set used to keep track of already seen numbers
     set<int> sums;
     while(sums.find(n) == sums.end()){
         //split 'n' into digits and apply alg to find sum
@@ -2508,6 +2509,32 @@ bool Solution::isHappy(int n) {
         if (n == 1)
             return true;
     }
+    return false;
+}
+
+int getDigitsSumHappyAlg(int n) {
+    int sum = 0;
+    while (n != 0) {
+        int digit = n % 10;
+        sum += pow(digit, 2);
+        n /= 10;
+    }
+    return sum;
+}
+/**
+* using the Floyd Cycle detection algoritm to understand if the sequence of digits are infite
+*/
+bool Solution::isHappy_1(int n) {
+    //using two ints as slow and fast pointers
+    int slow = n, fast = n;
+
+    do {
+        slow = getDigitsSumHappyAlg(slow);
+        fast = getDigitsSumHappyAlg(getDigitsSumHappyAlg(fast));
+        //fast will get first to == 1, and then get stuck on it. so best to check it
+        if (fast == 1)
+            return true;
+    } while (slow != fast);
     return false;
 }
 

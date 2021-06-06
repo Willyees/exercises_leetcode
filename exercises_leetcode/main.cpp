@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	sol.isHappy(19);
+	cout << sol.isHappy_1(19);
 	return 0;
 }
 

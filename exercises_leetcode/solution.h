@@ -5,6 +5,7 @@
 
 namespace helpers {
 	std::vector<std::string> similarTransformations(std::string input, std::vector<std::string> wordlist);
+
 }
 class Solution {
 private:
@@ -169,4 +170,5 @@ public:
 	int missingNumber_2(std::vector<int>& nums);//O(NlogN), space O(1) but modifying the input order data
 	int missingNumber_3(std::vector<int>& nums);//O(N) O(1) bit manipulation
 	bool isHappy(int n);//202. Happy number
+	bool isHappy_1(int n);//202. Happy number, Floyd Cycle detection
 };
