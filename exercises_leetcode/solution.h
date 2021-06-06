@@ -94,6 +94,9 @@ public:
 	bool isPalindrome(ListNode* head);
 	bool hasCycle(ListNode* head);
 	bool hasCycle_1(ListNode* head);
+	ListNode* removeElements(ListNode* head, int val);//203.
+	ListNode* removeElements_1(ListNode* head, int val);//203.
+
 	/*trees*/
 	std::vector<int> inorder_it(TreeNode* root);//O(N), O(N)
 	std::vector<int> inorder_rec(TreeNode* root);

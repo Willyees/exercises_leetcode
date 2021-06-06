@@ -1380,6 +1380,9 @@ bool Solution::hasCycle_1(ListNode* head) {
     return false;
 }
 
+/**
+* using 2 pointers: previos and current. prev is used to update the '.next' in case of found val to be deleted
+*/
 ListNode* Solution::removeElements(ListNode* head, int val) {
     //using dummy to avoid head removal edge cases. in case head is removed, dummy will point to second node
     ListNode dummy(-1, head);
@@ -1397,6 +1400,26 @@ ListNode* Solution::removeElements(ListNode* head, int val) {
         }
     }
 
+    return dummy.next;
+}
+
+
+/*
+* using a single pointer and dummy initial node
+*/
+ListNode* Solution::removeElements_1(ListNode* head, int val) {
+    ListNode dummy(-1, head);
+    ListNode* node = &dummy;
+    while (node->next != nullptr) {
+        if (node->next->val == val) {
+            ListNode* to_delete = node->next;
+            node->next = node->next->next;
+            delete to_delete;
+        }
+        else {
+            node = node->next;
+        }
+    }
     return dummy.next;
 }
 
