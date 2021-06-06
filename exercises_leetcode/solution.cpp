@@ -1380,6 +1380,26 @@ bool Solution::hasCycle_1(ListNode* head) {
     return false;
 }
 
+ListNode* Solution::removeElements(ListNode* head, int val) {
+    //using dummy to avoid head removal edge cases. in case head is removed, dummy will point to second node
+    ListNode dummy(-1, head);
+    ListNode* prev = &dummy;
+    while (head != nullptr) {
+        if (head->val == val) {
+            ListNode* to_delete = head;
+            head = head->next;
+            delete to_delete;
+            prev->next = head;
+        }
+        else{
+            prev = head;
+            head = head->next;
+        }
+    }
+
+    return dummy.next;
+}
+
 /*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves
 STACK, push a*/
 std::vector<int> Solution::inorder_it(TreeNode* root) {
@@ -2495,7 +2515,7 @@ int Solution::missingNumber_3(std::vector<int>& nums) {
 */
 bool Solution::isHappy(int n) {
     //set used to keep track of already seen numbers
-    set<int> sums;
+    unordered_set<int> sums;
     while(sums.find(n) == sums.end()){
         //split 'n' into digits and apply alg to find sum
         sums.insert(n);
