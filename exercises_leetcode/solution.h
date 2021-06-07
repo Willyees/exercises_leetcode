@@ -174,4 +174,8 @@ public:
 	int missingNumber_3(std::vector<int>& nums);//O(N) O(1) bit manipulation
 	bool isHappy(int n);//202. Happy number
 	bool isHappy_1(int n);//202. Happy number, Floyd Cycle detection
+	int addDigits(int num);//258. O(N)
+	bool wordPattern(std::string pattern, std::string s);//290.
+	bool wordPattern_1(std::string pattern, std::string s);//290.
+
 };

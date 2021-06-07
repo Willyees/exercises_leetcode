@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	cout << sol.isHappy_1(19);
+	cout << sol.wordPattern("abba", "dog cat cat dog");
 	return 0;
 }
 

@@ -2581,6 +2581,72 @@ bool Solution::isHappy_1(int n) {
     return false;
 }
 
+/*
+* keep adding digits until only 1 digit is left
+*/
+int Solution::addDigits(int num) {
+    while(num > 9 || num < 0) {
+        int sum = 0;
+        while (num != 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        num = sum;
+    }
+    return num;
+}
+
+/**
+* check if there is a bijection relation between characters in the 'pattern' and single words in 's'
+* @param: 'pattern': string of english lowercase characters
+*/
+bool Solution::wordPattern(string pattern, string s) {
+    unordered_map<char, string> map_pattern2s;
+    unordered_map<string, char> map_s2pattern;
+    stringstream ss(s);
+    unsigned idx = 0;
+    const unsigned pattern_length = pattern.size();
+    for (string single_word; getline(ss, single_word, ' '); ++idx) {
+        
+        unordered_map<char, string>::iterator map_pattern2s_it = map_pattern2s.find(pattern[idx]);
+        unordered_map<string, char>::iterator map_s2pattern_it = map_s2pattern.find(single_word);
+        
+        if (map_pattern2s_it != map_pattern2s.end()) {
+            if (map_pattern2s_it->second != single_word)
+                return false;
+        }
+        //nothing is mapped yet, checking if the string is already mapped with a different char (using second map)
+        else if (map_s2pattern_it != map_s2pattern.end()) {
+            //something is mapped to the string
+            //this means that the string is already mapped with a different char, cannot be mapped with anything else, return false
+            return false;
+        }
+        else {
+            map_pattern2s.insert(make_pair(pattern[idx], single_word));
+            map_s2pattern.insert(make_pair(single_word, pattern[idx]));
+        }
+    }
+    return idx == pattern.size();
+}
+
+/**
+* using an array of 26 length instead of hashmap
+*/
+bool Solution::wordPattern_1(string pattern, string s) {
+    //26 letters in english alphabet
+    char a[26] = {};//pos 0: a, pos 25:z
+    string::iterator s_it = s.begin();
+    string::const_iterator s_it_e = s.cend();
+    while (s_it != s_it_e) {
+        if (a[*s_it - 'a'] != 0) {
+
+        }
+        ++s_it;
+    }
+    return true;
+}
+
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;
