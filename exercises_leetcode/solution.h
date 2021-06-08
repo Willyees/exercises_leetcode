@@ -176,6 +176,6 @@ public:
 	bool isHappy_1(int n);//202. Happy number, Floyd Cycle detection
 	int addDigits(int num);//258. O(N)
 	bool wordPattern(std::string pattern, std::string s);//290.
-	bool wordPattern_1(std::string pattern, std::string s);//290.
+	bool canWinNim(int n);//292.
 
 };

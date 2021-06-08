@@ -2630,20 +2630,15 @@ bool Solution::wordPattern(string pattern, string s) {
 }
 
 /**
-* using an array of 26 length instead of hashmap
+* nim is game played by 2 players taking off stacked stones. each player can take off 1 to 3 stones. last one to take off last stone wins.
+* find out if player can win
+* @params: n: number of stones on the stack
 */
-bool Solution::wordPattern_1(string pattern, string s) {
-    //26 letters in english alphabet
-    char a[26] = {};//pos 0: a, pos 25:z
-    string::iterator s_it = s.begin();
-    string::const_iterator s_it_e = s.cend();
-    while (s_it != s_it_e) {
-        if (a[*s_it - 'a'] != 0) {
+bool Solution::canWinNim(int n) {
+    //player can win for sure if stones 1-3 (take them all)
 
-        }
-        ++s_it;
-    }
-    return true;
+    //player will lose for sure if stones == 4 or one of its multiplies -> other player will match the number of stones to reduce to final 1-3 and then take them all
+    return(n % 4 != 0);
 }
 
 
