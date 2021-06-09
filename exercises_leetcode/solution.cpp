@@ -2641,6 +2641,24 @@ bool Solution::canWinNim(int n) {
     return(n % 4 != 0);
 }
 
+/*
+* code on leetcode sets this function as constructor of a class. here simply using as a function, it is a bit wacky. just for showing purposes
+*/
+void Solution::calcSumRange(std::vector<int>& nums, int left, int right) {
+    sumRange(nums, left, right);
+}
+
+/*
+* calculate the sum of vector from inclusive left and right. bruteforce O(N)
+*/
+int Solution::sumRange(vector<int>& nums, int left, int right) {
+    int sum = 0;
+    for (; left <= right; ++left) {
+        sum += nums[left];
+    }
+    return sum;
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;

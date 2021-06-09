@@ -177,5 +177,7 @@ public:
 	int addDigits(int num);//258. O(N)
 	bool wordPattern(std::string pattern, std::string s);//290.
 	bool canWinNim(int n);//292.
+	void calcSumRange(std::vector<int>& nums, int left, int right);
+	int sumRange(std::vector<int>& nums, int left, int right);
 
 };
