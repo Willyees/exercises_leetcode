@@ -2696,6 +2696,28 @@ int Solution::sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, i
     return sum;
 }
 
+/*
+* using a vector to store the cumulative sums O(N). Utilise it to figure out sums that are lower and upper bounded O(1) to access. Improvement from _2 being O(logN)
+*/
+void Solution::calcSumRange_3(std::vector<int>& nums, int left, int right) {
+    //calculate sums with previous num
+    vector<int> sums(nums.size());
+    auto sums_it = sums.begin();
+    int prev = 0;
+    for (int n : nums) {
+        *sums_it = n + prev;
+        prev = *sums_it;
+        ++sums_it;
+    }
+
+    sumRange_3(sums, left, right);
+}
+
+int Solution::sumRange_3(std::vector<int> sums, int left, int right) {
+    //sum(left, right) = sum(0,right) - sum(0, left)
+    return sums[right] - (left == 0 ? 0 : sums[left - 1]);
+}
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;

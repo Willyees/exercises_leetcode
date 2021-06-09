@@ -181,7 +181,9 @@ public:
 	int sumRange(std::vector<int>& nums, int left, int right);//303.
 	void calcSumRange_1(std::vector<int>& nums, int left, int right);
 	int sumRange_1(std::vector<int>& nums, std::map<std::pair<int, int>, int>&, int left, int right);
-	int sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, int>&,int left, int right);
+	int sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, int>&, int left, int right);
+	void calcSumRange_3(std::vector<int>& nums, int left, int right);
+	int sumRange_3(std::vector<int> sums,int left, int right);
 
 
 };
