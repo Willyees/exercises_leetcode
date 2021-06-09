@@ -178,6 +178,9 @@ public:
 	bool wordPattern(std::string pattern, std::string s);//290.
 	bool canWinNim(int n);//292.
 	void calcSumRange(std::vector<int>& nums, int left, int right);
-	int sumRange(std::vector<int>& nums, int left, int right);
+	int sumRange(std::vector<int>& nums, int left, int right);//303.
+	void calcSumRange_1(std::vector<int>& nums, int left, int right);
+	int sumRange_1(std::vector<int>& nums, std::map<std::pair<int, int>, int>&,int left, int right);
+
 
 };

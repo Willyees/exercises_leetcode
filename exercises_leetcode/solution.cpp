@@ -2659,6 +2659,28 @@ int Solution::sumRange(vector<int>& nums, int left, int right) {
     return sum;
 }
 
+/*
+* optimization based on the fact that sumRange could be called many times usign the same parameters. storing the sum in a cache-> O(N) space more. Cache is precalculated O(N^2)
+* Might be good solution for loading times, where all the calcualtions are done at the beginning, then O(1) access. Here is not really O(1) because map has O(logN) access
+*/
+void Solution::calcSumRange_1(std::vector<int>& nums, int left, int right) {
+    //cannot use default unordered_map<pair<int,int>,int>> because hash is not default defined for pair<T,P>
+    map<pair<int, int>, int>p;
+    const int nums_size = nums.size();
+    for (int start_idx = 0; start_idx < nums_size; ++start_idx) {
+        int sum = 0;
+        for (int end_idx = 0; end_idx < nums_size; ++end_idx) {
+            sum += nums[start_idx];
+            p.insert(make_pair(make_pair(start_idx, end_idx), sum));
+        }
+        
+    }
+}
+
+int Solution::sumRange_1(std::vector<int>& nums, map<pair<int,int>,int>& p,int left, int right) {
+    return p[make_pair(left, right)];
+}
+
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
