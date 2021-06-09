@@ -2665,22 +2665,36 @@ int Solution::sumRange(vector<int>& nums, int left, int right) {
 */
 void Solution::calcSumRange_1(std::vector<int>& nums, int left, int right) {
     //cannot use default unordered_map<pair<int,int>,int>> because hash is not default defined for pair<T,P>
-    map<pair<int, int>, int>p;
+    map<pair<int, int>, int> cache;
     const int nums_size = nums.size();
     for (int start_idx = 0; start_idx < nums_size; ++start_idx) {
         int sum = 0;
         for (int end_idx = 0; end_idx < nums_size; ++end_idx) {
             sum += nums[start_idx];
-            p.insert(make_pair(make_pair(start_idx, end_idx), sum));
+            cache.insert(make_pair(make_pair(start_idx, end_idx), sum));
         }
         
     }
 }
 
-int Solution::sumRange_1(std::vector<int>& nums, map<pair<int,int>,int>& p,int left, int right) {
-    return p[make_pair(left, right)];
+int Solution::sumRange_1(std::vector<int>& nums, map<pair<int,int>,int>& cache,int left, int right) {
+    return cache[make_pair(left, right)];
 }
 
+/*
+* similar as sumrange1, but not precalculating all the combinations. adding only the ones used
+*/
+int Solution::sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, int>& cache, int left, int right) {
+    auto cache_it = cache.find(make_pair(left, right));
+    if (cache_it != cache.end())
+        return cache_it->second;
+    int sum = 0;
+    for (; left <= right; ++left) {
+        sum += nums[left];
+    }
+    cache[make_pair(left, right)] = sum;
+    return sum;
+}
 
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
