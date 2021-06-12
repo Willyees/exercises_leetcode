@@ -2736,6 +2736,14 @@ vector<int> Solution::countBits(int n) {
     return result;
 }
 
+std::vector<int> Solution::countBits_1(int n) {
+    vector<int> result(n + 1);
+    for (int i = 0; i <= n; ++i) {
+        bitset<32> bit(i);
+        result[i] = bit.count();
+    }
+    return result;
+}
 
 int Solution::sumRange_3(std::vector<int> sums, int left, int right) {
     //sum(left, right) = sum(0,right) - sum(0, left)

@@ -157,7 +157,7 @@ public:
 	
 	/** binary manipulations **/
 	std::vector<int> countBits(int n);//338. O(nlogN)
-	
+	std::vector<int> countBits_1(int n);//using stl functionalities
 
 
 	/** others **/
