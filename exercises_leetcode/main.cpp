@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	sol.countBits_1(5);
+	vector<int> v(sol.countBits_2(8));
 	return 0;
 }
 

@@ -2234,6 +2234,16 @@ bool Solution::isPowerOfThree_maths(int n) {
 }
 
 /**
+* different methods available: keep dividing until 1 is not found->power of 2; keep multiply by 2 until num >= n; find power of 2 to get n, static_cast and then check they otuput the sum number n when power of base 3 is applied;
+* here using binary manipualtion method: power of 2 has only 1 bit set, so - 1 will give the previous bit repersentation (all bit set), bitwise AND with 0. if == 0, all the bits were set to 0
+*/
+bool Solution::isPowerOfTwo(int n) {
+    if (n == 0)
+        return false;
+    return (n & (n - 1)) == 0;
+}
+
+/**
 * given a roman number, convert it to integer
 * @param: s: string representation of roman number. available characters: "I= 1, V= 5, X= 10, L= 50, C= 100, D= 500, M= 1000"
 * @return int: integer conversion of the roman number
@@ -2741,6 +2751,27 @@ std::vector<int> Solution::countBits_1(int n) {
     for (int i = 0; i <= n; ++i) {
         bitset<32> bit(i);
         result[i] = bit.count();
+    }
+    return result;
+}
+
+/**
+* attempt using dinamic programming to get O(N).
+* By intuition and by lsiting all numbers in sequence, it can be seen that there is a pattern: every decimal power of 2 has only 1 1s. The successive numbers are built upon the previous ones, for example:
+* 8 = 1 1s; 9 = 8 + 1 = 1 1s+ 1 1s (dp[1]); 10 = 8 + 2 = dp[0] + dp[2] 
+*/
+std::vector<int> Solution::countBits_2(int n) {
+    vector<int> result{ 0,1 };
+    result.resize(n + 1);
+    int closest_pow2 = 0;
+    //sum[i] = sum[closest power of 2] + sum[i - closestpower of 2]
+    for (int i = 2; i <= n; ++i) {
+        if (isPowerOfTwo(i)){
+            result[i] = 1;
+            closest_pow2 = i;
+            continue;
+        }
+        result[i] = result[closest_pow2] + result[i - closest_pow2];
     }
     return result;
 }

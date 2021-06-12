@@ -152,12 +152,14 @@ public:
 	bool isPowerOfThree_div(int n);
 	bool isPowerOfThree_baseconversion(int n);//O(log3n). slowest of the bunch, mostly because it has to work with convertion to string
 	bool isPowerOfThree_maths(int n);//O(1), O(1). mathematic method
+	bool isPowerOfTwo(int n);
 	int romanToInt(std::string s);//O(N), O(1)
 	int romanToInt_1(std::string s);//O(N), O(1)
 	
 	/** binary manipulations **/
 	std::vector<int> countBits(int n);//338. O(nlogN)
 	std::vector<int> countBits_1(int n);//using stl functionalities
+	std::vector<int> countBits_2(int n);//using stl functionalities
 
 
 	/** others **/
