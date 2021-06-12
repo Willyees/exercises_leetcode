@@ -43,8 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	vector p ({ 1,2,3,4 });
-	sol.calcSumRange_3(p, 2, 3);
+	sol.countBits_1(5);
 	return 0;
 }
 

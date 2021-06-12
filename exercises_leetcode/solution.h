@@ -155,6 +155,11 @@ public:
 	int romanToInt(std::string s);//O(N), O(1)
 	int romanToInt_1(std::string s);//O(N), O(1)
 	
+	/** binary manipulations **/
+	std::vector<int> countBits(int n);//338. O(nlogN)
+	
+
+
 	/** others **/
 	int hammingWeight(uint32_t n);
 	int hammingWeight_1(uint32_t n);
@@ -184,6 +189,5 @@ public:
 	int sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, int>&, int left, int right);
 	void calcSumRange_3(std::vector<int>& nums, int left, int right);
 	int sumRange_3(std::vector<int> sums,int left, int right);
-
 
 };

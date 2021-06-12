@@ -2683,6 +2683,7 @@ int Solution::sumRange_1(std::vector<int>& nums, map<pair<int,int>,int>& cache,i
 
 /*
 * similar as sumrange1, but not precalculating all the combinations. adding only the ones used
+* 
 */
 int Solution::sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, int>& cache, int left, int right) {
     auto cache_it = cache.find(make_pair(left, right));
@@ -2712,6 +2713,29 @@ void Solution::calcSumRange_3(std::vector<int>& nums, int left, int right) {
 
     sumRange_3(sums, left, right);
 }
+
+/**
+* count the numbers of 1s in the binary representation of int from 0..n
+* brute force approach, doesnt matter any time complexity
+* @return vector (size:n+1) of count of 1s 
+*/
+vector<int> Solution::countBits(int n) {
+    vector<int> result(n + 1);
+    //transform int into binary while counting the number of 1s
+    for (int i = 0; i <= n; ++i) {
+        int num = i;
+        int count = 0;
+        while (num != 0) {
+            //transform to binary. if remainder is present, a 1 should be inserted in the binary representation
+            if (num % 2 == 1)
+                ++count;
+            num /= 2;
+        }
+        result[i] = count;
+    }
+    return result;
+}
+
 
 int Solution::sumRange_3(std::vector<int> sums, int left, int right) {
     //sum(left, right) = sum(0,right) - sum(0, left)
