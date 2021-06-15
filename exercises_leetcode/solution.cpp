@@ -1149,6 +1149,33 @@ std::string Solution::longestCommonPrefix(std::vector<std::string>& strs) {
     return strs[0].substr(0, i);//must all be the same strings
 }
 
+/**
+* isomorphic: all the characters can be replaced and string t is outputted. xes: 'egg', 'add'
+*/
+bool Solution::isIsomorphic(std::string s, std::string t) {
+    if (s.size() != t.size())
+        if (s.size() != t.size())
+            return false;
+    unordered_map<char, char> map_st;
+    unordered_map<char, char> map_ts;
+    unsigned s_size = s.size();
+    for (unsigned idx = 0; idx < s_size; ++idx) {
+        auto it_st = map_st.find(s[idx]);
+        auto it_ts = map_ts.find(t[idx]);
+
+        if (it_st == map_st.end() && it_ts == map_ts.end()) {//char is not present in map
+            map_st[s[idx]] = t[idx];
+            map_ts[t[idx]] = s[idx];
+        }
+        else if (it_st == map_st.end() || it_ts == map_ts.end())//making sure none of them are end iterator
+            return false;
+        else
+            if (it_st->second != t[idx] || it_ts->second != s[idx])
+                return false;
+    }
+    return true;
+}
+
 /*delete node pointed in a singly linked list. no head is provided
 O(N). A normal deletion in linked list would be O(1) if provided witht he head*/
 

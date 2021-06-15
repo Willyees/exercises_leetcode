@@ -82,6 +82,10 @@ public:
 	std::string countAndSay_helper(int n);
 	std::string countAndSay_find_cont(std::string n);
 	std::string longestCommonPrefix(std::vector<std::string>& strs);
+
+	/* strings */
+	bool isIsomorphic(std::string s, std::string t);
+
 	/*linkedlist*/
 	void deleteNode(ListNode* node);//O(N). accepted method, but it is not the best
 	void deleteNode_1(ListNode* node);//O(1)
