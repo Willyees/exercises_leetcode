@@ -1175,6 +1175,38 @@ bool Solution::isIsomorphic(std::string s, std::string t) {
     }
     return true;
 }
+/**
+* intuition: 2 strings are isomorphic if each character is transformed and output the same string
+*/
+bool Solution::isIsomorphic_1(std::string s, std::string t) {
+    if (s.size() != t.size())
+        return false;
+
+    unordered_map<char, int> m;
+    //transform s
+    for (size_t idx = 0; idx < s.size(); ++idx) {
+        auto it = m.find(s[idx]);
+        if (it != m.end())
+            s[idx] = it->second;
+        else{
+            m[s[idx]] = idx;
+            s[idx] = idx + '0';
+        }
+    }
+    m.clear();
+    for (size_t idx = 0; idx < t.size(); ++idx) {
+        auto it = m.find(t[idx]);
+        if (it != m.end())
+            t[idx] = it->second;
+        else{
+            m[t[idx]] = idx;
+            t[idx] = idx + '0';
+        }
+    }
+    return s == t;
+
+
+}
 
 /*delete node pointed in a singly linked list. no head is provided
 O(N). A normal deletion in linked list would be O(1) if provided witht he head*/

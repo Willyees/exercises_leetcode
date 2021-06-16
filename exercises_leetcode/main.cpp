@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	vector<int> v(sol.countBits_2(8));
+	sol.isIsomorphic_1("foo", "bar");
 	return 0;
 }
 

@@ -85,6 +85,7 @@ public:
 
 	/* strings */
 	bool isIsomorphic(std::string s, std::string t);
+	bool isIsomorphic_1(std::string s, std::string t);//transformation method
 
 	/*linkedlist*/
 	void deleteNode(ListNode* node);//O(N). accepted method, but it is not the best
