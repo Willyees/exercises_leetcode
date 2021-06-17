@@ -2854,14 +2854,10 @@ std::vector<int> Solution::intersection(std::vector<int>& nums1, std::vector<int
     for (size_t i = 0; i < shortest->size(); ++i) {
         int elem = shortest->at(i);
         //also need to check that no duplication is present in the output vector
-        bool present = false;
         for (int inter : inters)
-            if (inter == elem){
-                present = true;
-                break;
-            }
-        if (present)
-            continue;
+            if (inter == elem)
+                goto OUTER;
+
         //iterate for each element of nums1 and check if it is prensent in nums2
         for (size_t longest_i = 0; longest_i < longest->size(); ++longest_i) {
             if (elem == longest->at(longest_i)) {
@@ -2869,6 +2865,8 @@ std::vector<int> Solution::intersection(std::vector<int>& nums1, std::vector<int
                 break;
             }
         }
+    OUTER:;
+
     }
     return inters;
 }
