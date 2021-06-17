@@ -43,7 +43,8 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	sol.isIsomorphic_1("foo", "bar");
+	vector<int> v1{ 1, 2, 2, 1 }; vector<int> v2{ 2, 2,3 };
+	sol.intersection(v1, v2);
 	return 0;
 }
 

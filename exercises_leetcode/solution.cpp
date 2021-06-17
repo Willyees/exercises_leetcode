@@ -2840,6 +2840,39 @@ int Solution::sumRange_3(std::vector<int> sums, int left, int right) {
     return sums[right] - (left == 0 ? 0 : sums[left - 1]);
 }
 
+/**
+* return the intersection (same elements) between 2 vectors, not duplicated.
+* Bruteforce O(N^2)
+*/
+std::vector<int> Solution::intersection(std::vector<int>& nums1, std::vector<int>& nums2) {
+    //they might be different sizes. only iterate over the length of shortest
+    const vector<int>* shortest = nums1.size() < nums2.size() ? &nums1 : &nums2;
+    const vector<int>* longest = nums1.size() >= nums2.size() ? &nums1 : &nums2;
+    vector<int> inters;
+
+    
+    for (size_t i = 0; i < shortest->size(); ++i) {
+        int elem = shortest->at(i);
+        //also need to check that no duplication is present in the output vector
+        bool present = false;
+        for (int inter : inters)
+            if (inter == elem){
+                present = true;
+                break;
+            }
+        if (present)
+            continue;
+        //iterate for each element of nums1 and check if it is prensent in nums2
+        for (size_t longest_i = 0; longest_i < longest->size(); ++longest_i) {
+            if (elem == longest->at(longest_i)) {
+                inters.push_back(elem);
+                break;
+            }
+        }
+    }
+    return inters;
+}
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;
