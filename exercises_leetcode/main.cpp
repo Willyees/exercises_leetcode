@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	sol.mySqrt(8);
+	sol.mySqrt(4);
 	return 0;
 }
 
