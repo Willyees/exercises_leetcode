@@ -605,7 +605,7 @@ int Solution::singleNumber_3(std::vector<int>& nums) {
     return out;
 }
 
-/*find intersection between 2 vectors. no ordered, return as many items as are intersected
+/*find intersection between 2 vectors.only works for ordered vectors
 bruteforce*/
 vector<int> Solution::intersect(vector<int>& nums1, vector<int>& nums2) {
     //for each items in nums1 check if it is present in nums2 and then return them all
@@ -2849,8 +2849,7 @@ std::vector<int> Solution::intersection(std::vector<int>& nums1, std::vector<int
     const vector<int>* shortest = nums1.size() < nums2.size() ? &nums1 : &nums2;
     const vector<int>* longest = nums1.size() >= nums2.size() ? &nums1 : &nums2;
     vector<int> inters;
-
-    
+       
     for (size_t i = 0; i < shortest->size(); ++i) {
         int elem = shortest->at(i);
         //also need to check that no duplication is present in the output vector
@@ -2869,6 +2868,34 @@ std::vector<int> Solution::intersection(std::vector<int>& nums1, std::vector<int
 
     }
     return inters;
+}
+
+std::vector<int> Solution::intersection_1(std::vector<int>&, std::vector<int>&) {
+    return std::vector<int>();
+}
+
+/** binary search method:
+* @return integer part, decimal is truncated
+*/
+int Solution::mySqrt(unsigned x) {
+    if (x == 0)
+        return 0;
+    size_t left = 0, right = x, mid;
+    int out = 0;
+    while (left <= right) {
+        mid = (left + right) / 2;
+        //keep moving the pointers (are actual numbers), based on the power of the mid pointer. if i *i > x -> the correct i, must be in the left section. otherwise in the right
+        unsigned pow_mid = mid * mid;
+        if (mid * mid > x)
+            right = mid - 1;
+        else if (mid * mid < x)
+            left = mid + 1;
+        else{
+            out = mid;
+            left = right;
+        }
+    }
+    return out;
 }
 
 std::vector<int> Solution::getPermutations(int num) {

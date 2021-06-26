@@ -196,6 +196,7 @@ public:
 	int sumRange_2(std::vector<int>& nums, std::map<std::pair<int, int>, int>&, int left, int right);
 	void calcSumRange_3(std::vector<int>& nums, int left, int right);
 	int sumRange_3(std::vector<int> sums,int left, int right);
-	std::vector<int> intersection(std::vector<int>& nums1, std::vector<int>& nums2);
-
+	std::vector<int> intersection(std::vector<int>&, std::vector<int>&);
+	std::vector<int> intersection_1(std::vector<int>&, std::vector<int>&);
+	int mySqrt(unsigned x);
 };
