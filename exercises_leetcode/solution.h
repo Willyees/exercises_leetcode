@@ -101,6 +101,7 @@ public:
 	bool hasCycle_1(ListNode* head);
 	ListNode* removeElements(ListNode* head, int val);//203.
 	ListNode* removeElements_1(ListNode* head, int val);//203.
+	ListNode* deleteDuplicates(ListNode* head);//83.
 
 	/*trees*/
 	std::vector<int> inorder_it(TreeNode* root);//O(N), O(N)

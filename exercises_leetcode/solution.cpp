@@ -1482,6 +1482,34 @@ ListNode* Solution::removeElements_1(ListNode* head, int val) {
     return dummy.next;
 }
 
+/*remove all the duplicates in the linkedlist
+* @param head: pointer to head of sorted linked list
+* @return sorted and unique linked list
+*/
+ListNode* Solution::deleteDuplicates(ListNode* head) {
+    //keep pointer to first element. keep deleting until new element is not found. set the next pointer accordingly
+    ListNode* static_head = head;
+    if (!head)
+        return static_head;
+    ListNode* first = head;
+    while (head->next) {
+        
+        if (head->next->val == first->val) {
+            //implement delete head with temp
+        }
+        else {
+            first->next = head->next;
+            first = first->next;
+        }
+        head = head->next;
+    }
+    if (head->val == first->val)
+        first->next = nullptr;
+
+    return static_head;
+
+}
+
 /*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves
 STACK, push a*/
 std::vector<int> Solution::inorder_it(TreeNode* root) {

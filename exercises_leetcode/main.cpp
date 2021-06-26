@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	cout << sol.mySqrt(5);
+	sol.deleteDuplicates(createLinkedList(vector<int> {1,1, 2, 2,3, 3}));
 	return 0;
 }
 
