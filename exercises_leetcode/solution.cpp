@@ -2882,7 +2882,7 @@ int Solution::mySqrt(unsigned x) {
         return 0;
     size_t left = 1, right = x, mid;
     int out = 0;
-    while (left < right) {
+    while (left <= right) {
         //mid = (left + right) / 2; //this calculation could overflow for x = math.max_value
         mid = left + (right - left) / 2;
         //keep moving the pointers (are actual numbers), based on the power of the mid pointer. if i *i > x -> the correct i, must be in the left section. otherwise in the right
@@ -2890,9 +2890,9 @@ int Solution::mySqrt(unsigned x) {
         unsigned mid_factor = x / mid;
 
         if (mid > mid_factor) {
-            right = mid;
+            right = mid - 1;
         }
-        else {
+        else {//lowebound case, stores the result beacause contains also the mid == mid case
             left = mid + 1;
             out = mid;
         }

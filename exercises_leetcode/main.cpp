@@ -43,7 +43,7 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	sol.mySqrt(4);
+	cout << sol.mySqrt(5);
 	return 0;
 }
 
