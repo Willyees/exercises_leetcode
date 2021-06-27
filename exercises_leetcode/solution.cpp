@@ -1487,26 +1487,24 @@ ListNode* Solution::removeElements_1(ListNode* head, int val) {
 * @return sorted and unique linked list
 */
 ListNode* Solution::deleteDuplicates(ListNode* head) {
-    //keep pointer to first element. keep deleting until new element is not found. set the next pointer accordingly
-    ListNode* static_head = head;
+    //keep changing the next head pointer of current node to next until a different value node is found. in the meantime keep deleting duplicate nodes
     if (!head)
-        return static_head;
-    ListNode* first = head;
+        return head;
+    ListNode* first = head;//keep track of inital head
     while (head->next) {
-        
-        if (head->next->val == first->val) {
-            //implement delete head with temp
+        //same values -> skip this node and delete it
+        if (head->next->val == head->val) {
+            ListNode* temp_del = head->next;
+            head->next = head->next->next;
+            delete temp_del;
         }
         else {
-            first->next = head->next;
-            first = first->next;
+            //only set current head when no duplicates were found
+            head = head->next;
         }
-        head = head->next;
     }
-    if (head->val == first->val)
-        first->next = nullptr;
 
-    return static_head;
+    return first;
 
 }
 
