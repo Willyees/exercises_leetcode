@@ -1508,8 +1508,16 @@ ListNode* Solution::deleteDuplicates(ListNode* head) {
 
 }
 
+/**recursive method
+* removing the duplicate nodes from the tail. only keep the last unique (head might change in case of duplicate head)
+*/
 ListNode* Solution::deleteDuplicates_1(ListNode* head) {
-    return head;
+    if (!head || !head->next)
+        return head;
+    head->next = deleteDuplicates_1(head->next);
+    //returning the current node if this node value is different from the next. otherwise, they are the same and this node must be skipped. return the next node which will be set as the .next in the previous node
+    //doing so, the last node (unique) is carried up the stack, until a new unique node is found
+    return head->val == head->next->val ? head->next : head;
 }
 
 /*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves

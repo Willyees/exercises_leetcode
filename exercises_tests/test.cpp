@@ -19,6 +19,30 @@ TEST(DeleteDuplicates, Iterative) {
 TEST(DeleteDuplicates, IterativeFail) {
 	ListNode* head = sol.deleteDuplicates(createLinkedList(vector<int> {1, 1, 2, 2, 3, 3}));
 	//load them into vector
+	vector<int> v; 
+	while (head) {
+		v.push_back(head->val);
+		head = head->next;
+	}
+	vector<int> exp{ 1,2 };
+	ASSERT_NE(v, exp);
+}
+
+TEST(DeleteDuplicates, Recursion) {
+	ListNode* head = sol.deleteDuplicates_1(createLinkedList(vector<int> {1, 1, 2, 2, 3, 3}));
+	//load them into vector
+	vector<int> v;
+	while (head) {
+		v.push_back(head->val);
+		head = head->next;
+	}
+	vector<int> exp{ 1,2,3 };
+	ASSERT_EQ(v, exp);
+}
+
+TEST(DeleteDuplicates, RecursionFail) {
+	ListNode* head = sol.deleteDuplicates_1(createLinkedList(vector<int> {1, 1, 2, 2, 3, 3}));
+	//load them into vector
 	vector<int> v;
 	while (head) {
 		v.push_back(head->val);
