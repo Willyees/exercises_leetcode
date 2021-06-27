@@ -1508,6 +1508,10 @@ ListNode* Solution::deleteDuplicates(ListNode* head) {
 
 }
 
+ListNode* Solution::deleteDuplicates_1(ListNode* head) {
+    return head;
+}
+
 /*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves
 STACK, push a*/
 std::vector<int> Solution::inorder_it(TreeNode* root) {
