@@ -12,6 +12,7 @@
 #include <numeric>
 #include <sstream>
 #include <bitset>
+#include <exception>
 #include "datastructures.h"
 
 using namespace std;
@@ -1989,6 +1990,37 @@ bool Solution::isSameTree_it(TreeNode* p, TreeNode* q) {
     }
     return true;
 }
+
+/**
+* @return bool tree is balanced: left and right subtree of every node differ at max of 1 height
+*/
+bool Solution::isBalanced_rec(TreeNode* root) {
+    return false;
+}
+
+/**helper function. calculates the height of left subtree rooted at 'node'
+* @param direction: string <'left', 'right'>. used to decide which subtree to calculate the height. default = "left"
+*/
+int Solution::isBalanced_rec_height(TreeNode* node, string direction) {
+    if (node == nullptr)
+        return 0;
+    int height;
+    try{
+    if (direction == "left")
+        height = isBalanced_rec_height(node->left) + 1;
+    else if (direction == "right")
+        height = isBalanced_rec_height(node->right) + 1;
+    else throw invalid_argument("direction was not either left or right");
+    }
+    catch(const invalid_argument& e){
+        cerr << e.what();
+        throw;
+    }
+    return height;
+    
+
+}
+
 
 /*sorting and searching*/
 

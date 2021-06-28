@@ -81,3 +81,16 @@ TEST(isSameTree, iterative) {
 	TreeNode::clear(p);
 	TreeNode::clear(q);
 }
+
+TEST(isbalancedrec, helper_height) {
+	TreeNode* p = createBinarySearchTree(vector<int> {1, 2,3,4,5,6,7});
+	int height = sol.isBalanced_rec_height(p);//check how deep is the tree in its left subtree
+	ASSERT_EQ(height, 3);
+	TreeNode::clear(p);
+
+	p = createBinarySearchTree(vector<int> {1, 2});
+	height = sol.isBalanced_rec_height(p);//check how deep is the tree in its left subtree
+	ASSERT_EQ(height, 2);
+	ASSERT_NE(height, 1);//test fail
+	TreeNode::clear(p);
+}

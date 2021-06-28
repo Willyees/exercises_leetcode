@@ -138,6 +138,8 @@ public:
 	TreeNode* sortedArrayToBST_helper(std::vector<int>&, int, int);
 	bool isSameTree_rec(TreeNode* p, TreeNode* q);//100.
 	bool isSameTree_it(TreeNode* p, TreeNode* q);//100.
+	bool isBalanced_rec(TreeNode* root);//110.
+	int isBalanced_rec_height(TreeNode* root, std::string direction = "left");//110.
 
 	/*sorting and searching*/
 	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);//O(N^2)

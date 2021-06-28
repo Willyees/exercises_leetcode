@@ -53,7 +53,8 @@ int main() {
 	Solution sol;
 	vector<int> v1 = vector<int>{ 1, 1 };
 	auto v2 = vector<int>{ 1, nil_t, 1 };
-	printVectorVector(sol.levelOrder(createBinarySearchTree(v2)));
+	TreeNode* t = new TreeNode();
+	sol.isBalanced_rec_height(t, "asd");
 }
 
 
