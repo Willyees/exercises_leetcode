@@ -1995,7 +1995,11 @@ bool Solution::isSameTree_it(TreeNode* p, TreeNode* q) {
 * @return bool tree is balanced: left and right subtree of every node differ at max of 1 height
 */
 bool Solution::isBalanced_rec(TreeNode* root) {
-    return false;
+    if (root == nullptr)
+        return true;
+    int left = isBalanced_rec_heightmax(root);
+    int right = isBalanced_rec_heightmax(root);
+    return left == right && isBalanced_rec(root->left) && isBalanced_rec(root->right);
 }
 
 /**helper function. calculates the height of left subtree rooted at 'node'
@@ -2007,9 +2011,9 @@ int Solution::isBalanced_rec_height(TreeNode* node, string direction) {
     int height;
     try{
     if (direction == "left")
-        height = isBalanced_rec_height(node->left) + 1;
+        height = isBalanced_rec_height(node->left, "left") + 1;
     else if (direction == "right")
-        height = isBalanced_rec_height(node->right) + 1;
+        height = isBalanced_rec_height(node->right, "right") + 1;
     else throw invalid_argument("direction was not either left or right");
     }
     catch(const invalid_argument& e){
@@ -2017,8 +2021,13 @@ int Solution::isBalanced_rec_height(TreeNode* node, string direction) {
         throw;
     }
     return height;
-    
+}
 
+int Solution::isBalanced_rec_heightmax(TreeNode* node) {
+    if (!node)
+        return 0;
+    int height = 1 + max(isBalanced_rec_heightmax(node->left), isBalanced_rec_heightmax(node->right));
+    return height;
 }
 
 
