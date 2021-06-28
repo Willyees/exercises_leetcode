@@ -1999,7 +1999,7 @@ bool Solution::isBalanced_rec(TreeNode* root) {
         return true;
     int left = isBalanced_rec_heightmax(root);
     int right = isBalanced_rec_heightmax(root);
-    return left == right && isBalanced_rec(root->left) && isBalanced_rec(root->right);
+    return abs(left - right) <= 1 && isBalanced_rec(root->left) && isBalanced_rec(root->right);
 }
 
 /**helper function. calculates the height of left subtree rooted at 'node'
