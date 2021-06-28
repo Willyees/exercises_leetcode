@@ -13,11 +13,19 @@
 using namespace std;
 template <class T>
 void printVectorVector(vector<vector<T>> vv) {
-	for (T e : vv) {
+	for (vector<T> e : vv) {
 		for (T i : e)
 			cout << i;
 		cout << endl;
 	}
+}
+
+template<class T>
+void printVector(vector<T> v) {
+	for (T e : v) {
+		cout << e;
+	}
+	cout << endl;
 }
 
 std::vector<string> similarTransformations(string input, vector<string> wordlist) {
@@ -45,9 +53,7 @@ int main() {
 	Solution sol;
 	vector<int> v1 = vector<int>{ 1, 1 };
 	auto v2 = vector<int>{ 1, nil_t, 1 };
-	TreeNode* p = createBinarySearchTree(v1);
-	TreeNode* q = createBinarySearchTree(v2);
-	sol.isSameTree_1(p, q);
+	printVectorVector(sol.levelOrder(createBinarySearchTree(v2)));
 }
 
 
