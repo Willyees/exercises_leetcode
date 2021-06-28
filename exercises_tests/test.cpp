@@ -56,21 +56,28 @@ TEST(DeleteDuplicates, RecursionFail) {
 	ASSERT_NE(v, exp);
 }
 
-TEST(isSameTree, levelorder) {
+TEST(isSameTree, recursive) {
 	TreeNode* p = createBinarySearchTree(vector<int> {1, 1});
 	TreeNode* q = createBinarySearchTree(vector<int> {1, nil_t, 1});
-	sol.isSameTree(p, q);
-}
-
-TEST(isSameTree, queue) {
-	TreeNode* p = createBinarySearchTree(vector<int> {1, 1});
-	TreeNode* q = createBinarySearchTree(vector<int> {1, nil_t, 1});
-	//ASSERT_FALSE(sol.isSameTree_1(p, q));
+	ASSERT_FALSE(sol.isSameTree_rec(p, q));
 	TreeNode::clear(p);
 	TreeNode::clear(q);
 	p = createBinarySearchTree(vector<int> {1, 2, 3});
 	q = createBinarySearchTree(vector<int> {1, 2, 3});
-	ASSERT_TRUE(sol.isSameTree_1(p, q));
+	ASSERT_TRUE(sol.isSameTree_rec(p, q));
+	TreeNode::clear(p);
+	TreeNode::clear(q);
+}
+
+TEST(isSameTree, iterative) {
+	TreeNode* p = createBinarySearchTree(vector<int> {1, 1});
+	TreeNode* q = createBinarySearchTree(vector<int> {1, nil_t, 1});
+	ASSERT_FALSE(sol.isSameTree_it(p, q));
+	TreeNode::clear(p);
+	TreeNode::clear(q);
+	p = createBinarySearchTree(vector<int> {1, 2, 3});
+	q = createBinarySearchTree(vector<int> {1, 2, 3});
+	ASSERT_TRUE(sol.isSameTree_it(p, q));
 	TreeNode::clear(p);
 	TreeNode::clear(q);
 }

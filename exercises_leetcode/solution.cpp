@@ -1945,16 +1945,22 @@ TreeNode* Solution::sortedArrayToBST_helper(std::vector<int>& v, int index_b, in
 * calculate the level order (breadth order) of both tree and match them.
 * @param p, q: binary tree
 */
-bool Solution::isSameTree(TreeNode* p, TreeNode* q) {
-    vector<int> p_inorder = inorder_it(p);
-    vector<int> q_inorder = inorder_it(q);
-    return p_inorder == q_inorder;//doesnt work for q: 1,1 p: 1, nil, 1
+bool Solution::isSameTree_rec(TreeNode* p, TreeNode* q) {
+    
+    if (p == nullptr && q == nullptr)
+        return true;//return because cannot be more children after two nullptr nodes
+    if (p == nullptr || q == nullptr)
+        return false;//return false because these 2 nodes are different
+    bool same_left = isSameTree_rec(p->left, q->left);//this bool refers to the entire left tree. so at each unwinding of the stack will be updated to take into account new node and previos left tree (return contains left + right + current node)
+    bool same_right = isSameTree_rec(p->right, q->right);
+
+    return same_left && same_right && (p->val == q->val);
 }
 
 /**
-* similar to inorder method, but using a queue to store all the nodes
+* similar to inorder method, but using a queue to store all the nodes O(N): all nodes at max visited once. O(logn) space for balanced trees
 */
-bool Solution::isSameTree_1(TreeNode* p, TreeNode* q) {
+bool Solution::isSameTree_it(TreeNode* p, TreeNode* q) {
     queue<TreeNode*> queue_p;
     queue<TreeNode*> queue_q;
     queue_p.push(p);
