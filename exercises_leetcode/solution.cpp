@@ -1515,9 +1515,16 @@ ListNode* Solution::deleteDuplicates_1(ListNode* head) {
     if (!head || !head->next)
         return head;
     head->next = deleteDuplicates_1(head->next);
+
     //returning the current node if this node value is different from the next. otherwise, they are the same and this node must be skipped. return the next node which will be set as the .next in the previous node
     //doing so, the last node (unique) is carried up the stack, until a new unique node is found
-    return head->val == head->next->val ? head->next : head;
+    if(head->val == head->next->val){
+        ListNode* head_next = head->next;
+        delete head;
+        return head_next;
+    }
+    else
+        return head;
 }
 
 /*cant mimic the recursive method because is not easy to write condition to print out middle values that are not leaves
@@ -1934,6 +1941,48 @@ TreeNode* Solution::sortedArrayToBST_helper(std::vector<int>& v, int index_b, in
     return node;
 }
 
+/**check if two tree are the same
+* calculate the level order (breadth order) of both tree and match them.
+* @param p, q: binary tree
+*/
+bool Solution::isSameTree(TreeNode* p, TreeNode* q) {
+    vector<int> p_inorder = inorder_it(p);
+    vector<int> q_inorder = inorder_it(q);
+    return p_inorder == q_inorder;//doesnt work for q: 1,1 p: 1, nil, 1
+}
+
+/**
+* similar to inorder method, but using a queue to store all the nodes
+*/
+bool Solution::isSameTree_1(TreeNode* p, TreeNode* q) {
+    queue<TreeNode*> queue_p;
+    queue<TreeNode*> queue_q;
+    queue_p.push(p);
+    queue_q.push(q);
+
+    while (!queue_p.empty() || !queue_q.empty()) {
+        for (int i = queue_p.size(); i > 0; --i) {
+            TreeNode* p_front = queue_p.front(), * q_front = queue_q.front();
+            
+            //both null ptr-> true
+            //only 1 nullptr -> false
+            //both not nullptr -> true
+            if (p_front == nullptr != (q_front == nullptr)) return false;
+            if (p_front != nullptr && q_front != nullptr && p_front->val != q_front->val) return false;
+            if(p_front){
+                queue_p.push(p_front->left);
+                queue_p.push(p_front->right);
+            }
+            if(q_front){
+                queue_q.push(q_front->left);
+                queue_q.push(q_front->right);
+            }
+            queue_p.pop();
+            queue_q.pop();
+        }
+    }
+    return true;
+}
 
 /*sorting and searching*/
 

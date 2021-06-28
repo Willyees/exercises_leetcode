@@ -13,6 +13,7 @@ TEST(DeleteDuplicates, Iterative) {
 		head = head->next;
 	}
 	vector<int> exp{ 1,2,3 };
+	ListNode::clear(head);//clearing before asserting. in case of fail, no lines after are executed
 	ASSERT_EQ(v, exp);
 }
 
@@ -25,6 +26,7 @@ TEST(DeleteDuplicates, IterativeFail) {
 		head = head->next;
 	}
 	vector<int> exp{ 1,2 };
+	ListNode::clear(head);
 	ASSERT_NE(v, exp);
 }
 
@@ -37,6 +39,7 @@ TEST(DeleteDuplicates, Recursion) {
 		head = head->next;
 	}
 	vector<int> exp{ 1,2,3 };
+	ListNode::clear(head);
 	ASSERT_EQ(v, exp);
 }
 
@@ -49,5 +52,25 @@ TEST(DeleteDuplicates, RecursionFail) {
 		head = head->next;
 	}
 	vector<int> exp{ 1,2 };
+	ListNode::clear(head);
 	ASSERT_NE(v, exp);
+}
+
+TEST(isSameTree, levelorder) {
+	TreeNode* p = createBinarySearchTree(vector<int> {1, 1});
+	TreeNode* q = createBinarySearchTree(vector<int> {1, nil_t, 1});
+	sol.isSameTree(p, q);
+}
+
+TEST(isSameTree, queue) {
+	TreeNode* p = createBinarySearchTree(vector<int> {1, 1});
+	TreeNode* q = createBinarySearchTree(vector<int> {1, nil_t, 1});
+	//ASSERT_FALSE(sol.isSameTree_1(p, q));
+	TreeNode::clear(p);
+	TreeNode::clear(q);
+	p = createBinarySearchTree(vector<int> {1, 2, 3});
+	q = createBinarySearchTree(vector<int> {1, 2, 3});
+	ASSERT_TRUE(sol.isSameTree_1(p, q));
+	TreeNode::clear(p);
+	TreeNode::clear(q);
 }

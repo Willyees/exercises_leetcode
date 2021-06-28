@@ -43,8 +43,11 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
-	sol.deleteDuplicates(createLinkedList(vector<int> {1,1, 2, 2,3, 3}));
-	return 0;
+	vector<int> v1 = vector<int>{ 1, 1 };
+	auto v2 = vector<int>{ 1, nil_t, 1 };
+	TreeNode* p = createBinarySearchTree(v1);
+	TreeNode* q = createBinarySearchTree(v2);
+	sol.isSameTree_1(p, q);
 }
 
 

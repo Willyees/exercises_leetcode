@@ -136,6 +136,9 @@ public:
 	void levelOrder_preorder_helper(TreeNode*, int, std::vector<std::vector<int>>&);//using preorder to traverse the tree, then print in levelorder
 	TreeNode* sortedArrayToBST(std::vector<int>&);//O(N)
 	TreeNode* sortedArrayToBST_helper(std::vector<int>&, int, int);
+	bool isSameTree(TreeNode* p, TreeNode* q);//100.
+	bool isSameTree_1(TreeNode* p, TreeNode* q);//100.
+
 	/*sorting and searching*/
 	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);//O(N^2)
 	int firstBadVersion(int n);//bruteforce O(N)
