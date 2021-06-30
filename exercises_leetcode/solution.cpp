@@ -1997,8 +1997,8 @@ bool Solution::isSameTree_it(TreeNode* p, TreeNode* q) {
 bool Solution::isBalanced_rec(TreeNode* root) {
     if (root == nullptr)
         return true;
-    int left = isBalanced_rec_heightmax(root);
-    int right = isBalanced_rec_heightmax(root);
+    int left = isBalanced_rec_heightmax(root->left);
+    int right = isBalanced_rec_heightmax(root->right);
     return abs(left - right) <= 1 && isBalanced_rec(root->left) && isBalanced_rec(root->right);
 }
 

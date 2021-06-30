@@ -94,3 +94,9 @@ TEST(isbalancedrec, helper_height) {
 	ASSERT_NE(height, 1);//test fail
 	TreeNode::clear(p);
 }
+
+TEST(isbalancedrec, height) {
+	TreeNode* root = createBinarySearchTree(vector<int> {1, 2, 2, 3, 3, nil_t, nil_t, 4, 4});
+	ASSERT_FALSE(sol.isBalanced_rec(root));
+
+}
