@@ -2043,6 +2043,30 @@ int Solution::minDepth(TreeNode* root) {
     return 1 + (left && right ? min(left, right) : max(left, right));//return the shortest to leaf
 }
 
+/**iterative solution, BFS
+*/
+int Solution::minDepth_it(TreeNode* root) {
+    int depth = 0;
+    queue<TreeNode*> q;
+    //keep a counter for every line evaluated. this can be used to track how many parents haven been traversed from the root until the current node
+    q.push(root);
+    while (!q.empty()) {
+        depth++;//incarease at beginning, otherwise will return with lower value (yields incorrect solution)
+        for (int i = q.size(); i > 0; --i) {
+            TreeNode* t = q.front();
+            if (!t->left && !t->right)//both are nullptr, so this node is a leaf.
+                return depth;//this depth doesnt need checks to find out which is the minumum. by checking level by level it is guaranteed to be the lowest
+            if (t->right)
+                q.push(t->right);
+            if (t->left)
+                q.push(t->left);
+            q.pop();
+        }
+    }
+    assert(false && "should not arrive here");
+    return depth;
+}
+
 
 /*sorting and searching*/
 

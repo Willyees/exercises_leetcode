@@ -141,7 +141,8 @@ public:
 	bool isBalanced_rec(TreeNode* root);//110.
 	int isBalanced_rec_height(TreeNode* root, std::string direction = "left");
 	int isBalanced_rec_heightmax(TreeNode* root);//finds the max height either left or right
-	int minDepth(TreeNode* root);
+	int minDepth(TreeNode* root);//111. DFS
+	int minDepth_it(TreeNode* root);///111. BFS iterative
 
 
 	/*sorting and searching*/

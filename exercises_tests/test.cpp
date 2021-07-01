@@ -97,14 +97,24 @@ TEST(isbalancedrec, helper_height) {
 
 TEST(isbalancedrec, height) {
 	TreeNode* root = createBinarySearchTree(vector<int> {1, 2, 2, 3, 3, nil_t, nil_t, 4, 4});
+	bool actual = sol.isBalanced_rec(root);
 	TreeNode::clear(root);
-	ASSERT_FALSE(sol.isBalanced_rec(root));
+	ASSERT_FALSE(actual);
 }
 
 
-TEST(minDepth, rootLeaf) {
+TEST(minDepth, rootLeaf_rec) {
 	//root cannot be a leaf, so for a completely unbalanced, mindepth cannot be 1, but it is the long unbalanced chain
 	TreeNode* root = createBinarySearchTree(vector<int> {2, nil_t, 3, nil_t, nil_t, nil_t, 4});
+	int actual = sol.minDepth(root);
 	TreeNode::clear(root);
-	ASSERT_EQ(3, sol.minDepth(root));
+	ASSERT_EQ(3, actual);
+}
+
+TEST(minDepth, rootLeaf_it) {
+	//root cannot be a leaf, so for a completely unbalanced, mindepth cannot be 1, but it is the long unbalanced chain
+	TreeNode* root = createBinarySearchTree(vector<int> {2, nil_t, 3, nil_t, nil_t, nil_t, 4});
+	int actual = sol.minDepth_it(root);
+	TreeNode::clear(root);
+	ASSERT_EQ(3, actual);
 }
