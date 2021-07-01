@@ -85,18 +85,19 @@ TEST(isSameTree, iterative) {
 TEST(isbalancedrec, helper_height) {
 	TreeNode* p = createBinarySearchTree(vector<int> {1, 2,3,4,5,6,7});
 	int height = sol.isBalanced_rec_height(p);//check how deep is the tree in its left subtree
-	ASSERT_EQ(height, 3);
 	TreeNode::clear(p);
+	ASSERT_EQ(height, 3);
 
 	p = createBinarySearchTree(vector<int> {1, 2});
 	height = sol.isBalanced_rec_height(p);//check how deep is the tree in its left subtree
 	ASSERT_EQ(height, 2);
-	ASSERT_NE(height, 1);//test fail
 	TreeNode::clear(p);
+	ASSERT_NE(height, 1);//test fail
 }
 
 TEST(isbalancedrec, height) {
 	TreeNode* root = createBinarySearchTree(vector<int> {1, 2, 2, 3, 3, nil_t, nil_t, 4, 4});
+	TreeNode::clear(root);
 	ASSERT_FALSE(sol.isBalanced_rec(root));
 }
 
@@ -104,5 +105,6 @@ TEST(isbalancedrec, height) {
 TEST(minDepth, rootLeaf) {
 	//root cannot be a leaf, so for a completely unbalanced, mindepth cannot be 1, but it is the long unbalanced chain
 	TreeNode* root = createBinarySearchTree(vector<int> {2, nil_t, 3, nil_t, nil_t, nil_t, 4});
+	TreeNode::clear(root);
 	ASSERT_EQ(3, sol.minDepth(root));
 }
