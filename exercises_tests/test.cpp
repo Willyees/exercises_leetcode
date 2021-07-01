@@ -118,3 +118,20 @@ TEST(minDepth, rootLeaf_it) {
 	TreeNode::clear(root);
 	ASSERT_EQ(3, actual);
 }
+
+TEST(hasPathSum, recursive_balanced) {
+	TreeNode* root = createBinarySearchTree(vector<int> {1,2,3});
+	bool actual = sol.hasPathSum_rec(root, 3);
+	EXPECT_TRUE(actual);
+
+	actual = sol.hasPathSum_rec(root, 5);
+	TreeNode::clear(root);
+	EXPECT_FALSE(actual);
+}
+
+TEST(hasPathSum, recursive_unbalanced) {
+	TreeNode* root = createBinarySearchTree(vector<int> {5, 4, 8, 11, nil_t, 13, 4, 7, 2, nil_t, nil_t, nil_t, 1});
+	bool actual = sol.hasPathSum_rec(root, 22);
+	TreeNode::clear(root);
+	EXPECT_TRUE(actual);
+}

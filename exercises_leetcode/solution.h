@@ -143,6 +143,9 @@ public:
 	int isBalanced_rec_heightmax(TreeNode* root);//finds the max height either left or right
 	int minDepth(TreeNode* root);//111. DFS
 	int minDepth_it(TreeNode* root);///111. BFS iterative
+	bool hasPathSum_it(TreeNode* root, int targetSum);
+	bool hasPathSum_rec(TreeNode* root, int targetSum);
+	bool hasPathSum_rec_helper(TreeNode* root, const int& targetSum, int currentSum);
 
 
 	/*sorting and searching*/

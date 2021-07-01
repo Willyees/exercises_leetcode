@@ -2063,8 +2063,62 @@ int Solution::minDepth_it(TreeNode* root) {
             q.pop();
         }
     }
-    assert(false && "should not arrive here");
-    return depth;
+    return depth;//get here in case of root nullptr
+}
+
+/** find a path root-leaf where targetSum is found
+* leaf: node with NO children
+* DP using Depth first search, preorder
+*/
+bool Solution::hasPathSum_it(TreeNode* root, int targetSum) {
+    if (!root)
+        return targetSum == 0;
+    stack<TreeNode*> s;
+    s.push(root);
+    int sum = 0;
+    TreeNode* node = root;
+    while (node && !s.empty()) {
+            
+
+            sum += node->val;
+        if (node->right)
+            s.push(node->right);
+        if (node->left)
+            s.push(node->left);
+
+        if (!node->left && !node->right) {
+            if (sum == targetSum)
+                return true;
+            sum -= node->val;
+            //pop node?
+        }
+
+    }
+    return false;
+}
+
+/**recursive, pre order
+*/
+bool Solution::hasPathSum_rec(TreeNode* root, int targetSum) {
+    return hasPathSum_rec_helper(root, targetSum, 0);
+}
+
+bool Solution::hasPathSum_rec_helper(TreeNode* root, const int& targetSum, int currentSum) {
+    //nullptr node doesnt need to increase the current sum, just use it to break recursion and start unwinding
+    if (!root)
+        return false;
+
+    currentSum += root->val;
+
+    //base case to check for leaf node
+    if (!root->right && !root->left)
+        return targetSum == currentSum;
+
+
+
+    bool l = hasPathSum_rec_helper(root->left, targetSum, currentSum);
+    bool r = hasPathSum_rec_helper(root->right, targetSum, currentSum);
+    return l || r;
 }
 
 
