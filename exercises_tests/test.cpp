@@ -98,5 +98,11 @@ TEST(isbalancedrec, helper_height) {
 TEST(isbalancedrec, height) {
 	TreeNode* root = createBinarySearchTree(vector<int> {1, 2, 2, 3, 3, nil_t, nil_t, 4, 4});
 	ASSERT_FALSE(sol.isBalanced_rec(root));
+}
 
+
+TEST(minDepth, rootLeaf) {
+	//root cannot be a leaf, so for a completely unbalanced, mindepth cannot be 1, but it is the long unbalanced chain
+	TreeNode* root = createBinarySearchTree(vector<int> {2, nil_t, 3, nil_t, nil_t, nil_t, 4});
+	ASSERT_EQ(3, sol.minDepth(root));
 }

@@ -2030,6 +2030,19 @@ int Solution::isBalanced_rec_heightmax(TreeNode* node) {
     return height;
 }
 
+/**mindepth is the number of nodes in the shortest path from root to the nearest leaf. root cannot be a leaf node. recursion solution
+* A leaf node is a node with NO children. A node with a single node is not a leaf node.
+*/
+int Solution::minDepth(TreeNode* root) {
+    if (!root)
+        return 0;
+    int left = minDepth(root->left);//visit whole left subtree and return its minimum length
+    int right = minDepth(root->right);
+    //if only 1 is 0, it means that this node is not a leaf, return the longest chain (using max)
+    //using && will evaluate false when both are length 0 (leaf node), that is ok. it should return 0 anyways and is also guarded by base case
+    return 1 + (left && right ? min(left, right) : max(left, right));//return the shortest to leaf
+}
+
 
 /*sorting and searching*/
 

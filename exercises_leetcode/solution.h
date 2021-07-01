@@ -141,6 +141,8 @@ public:
 	bool isBalanced_rec(TreeNode* root);//110.
 	int isBalanced_rec_height(TreeNode* root, std::string direction = "left");
 	int isBalanced_rec_heightmax(TreeNode* root);//finds the max height either left or right
+	int minDepth(TreeNode* root);
+
 
 	/*sorting and searching*/
 	void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n);//O(N^2)
