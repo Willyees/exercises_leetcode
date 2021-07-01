@@ -146,6 +146,7 @@ public:
 	bool hasPathSum_it(TreeNode* root, int targetSum);
 	bool hasPathSum_rec(TreeNode* root, int targetSum);
 	bool hasPathSum_rec_helper(TreeNode* root, const int& targetSum, int currentSum);
+	bool hasPathSum_rec_1(TreeNode* root, int targetSum);
 
 
 	/*sorting and searching*/

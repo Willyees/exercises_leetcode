@@ -2121,6 +2121,17 @@ bool Solution::hasPathSum_rec_helper(TreeNode* root, const int& targetSum, int c
     return l || r;
 }
 
+/** not using a counter 'currentSum', but decreasing the targetSum. if it is == 0, path is found
+*/
+bool Solution::hasPathSum_rec_1(TreeNode* root, int targetSum) {
+    if (!root)
+        return false;
+    targetSum -= root->val;
+    if (!root->left && !root->right)
+        return targetSum == 0;
+    return hasPathSum_rec_1(root->left, targetSum) || hasPathSum_rec_1(root->right, targetSum);
+}
+
 
 /*sorting and searching*/
 
