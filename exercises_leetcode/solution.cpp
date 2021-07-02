@@ -2128,7 +2128,7 @@ bool Solution::hasPathSum_rec_1(TreeNode* root, int targetSum) {
         return false;
     targetSum -= root->val;
     if (!root->left && !root->right)
-        return targetSum == 0;
+        return targetSum == 0;  
     return hasPathSum_rec_1(root->left, targetSum) || hasPathSum_rec_1(root->right, targetSum);
 }
 
@@ -3134,6 +3134,29 @@ int Solution::mySqrt(unsigned x) {
         }
     }
     return out;
+}
+
+/**pascal triangle. 
+* @return the vector of [0th, .., rowIndexTh] values in the pascal triangle
+*/
+std::vector<int> Solution::getRow(int rowIndex) {
+    //build pascal triangle
+    //number of items in each row == currentRow
+    //1st and last element are 1
+    //[row][col] elem = [row - 1][col - 1] + [row - 1][col]
+    vector<vector<int>> triangle;
+    triangle.push_back(vector<int> {1});
+    for (int row = 1; row <= rowIndex; ++row){//0based
+        vector<int> triangle_row;
+        triangle_row.push_back(1);//add first 1 
+        for (int col = 1; col < row; ++col) {//0based
+            triangle_row.push_back(triangle[row - 1][col - 1] + triangle[row - 1][col]);
+        }
+        triangle_row.push_back(1);//add last row 1
+        triangle.push_back(triangle_row);
+    }
+    
+    return triangle[rowIndex];
 }
 
 std::vector<int> Solution::getPermutations(int num) {

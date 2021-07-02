@@ -214,4 +214,5 @@ public:
 	std::vector<int> intersection(std::vector<int>&, std::vector<int>&);
 	std::vector<int> intersection_1(std::vector<int>&, std::vector<int>&);
 	int mySqrt(unsigned x);
+	std::vector<int> getRow(int rowIndex);//119
 };
