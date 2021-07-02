@@ -149,3 +149,17 @@ TEST(getRow, pascal_triangle_check_validity) {
 	expect = vector<int>{ 1, 1 };
 	EXPECT_EQ(actual, expect);
 }
+
+TEST(getRow, pascal_triangle_check_ONspace) {
+	vector<int> actual = sol.getRow_1(3);
+	auto expect = vector<int>{ 1,3,3,1 };
+	EXPECT_EQ(actual, expect);
+
+	actual = sol.getRow_1(0);
+	expect = vector<int>{ 1 };
+	EXPECT_EQ(actual, expect);
+
+	actual = sol.getRow_1(1);
+	expect = vector<int>{ 1, 1 };
+	EXPECT_EQ(actual, expect);
+}

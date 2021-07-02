@@ -3136,7 +3136,7 @@ int Solution::mySqrt(unsigned x) {
     return out;
 }
 
-/**pascal triangle. 
+/**pascal triangle. space: > O(N)
 * @return the vector of [0th, .., rowIndexTh] values in the pascal triangle
 */
 std::vector<int> Solution::getRow(int rowIndex) {
@@ -3157,6 +3157,26 @@ std::vector<int> Solution::getRow(int rowIndex) {
     }
     
     return triangle[rowIndex];
+}
+
+/**O(N) space. onyl keep a single vector which stores an entire row (previos)
+*/
+std::vector<int> Solution::getRow_1(int rowIndex) {
+    vector<int> out(rowIndex + 1);//use this vector to load it with rows from 0 to current. they will be overwritten until rowIndex is reached
+    
+    out[0] = 1; //set first row, so not need any checks for out of bound
+    //out[out.size() - 1] = 1;
+    for (int row = 1; row <= rowIndex; ++row) {
+        //use the out vector which stores the previous row values. 
+
+
+        for (int col = row; col > 0; --col) {//skip first and last position for each row (they are both 1 and dont change)
+            //perform it backwards because the usual triangle is made by i = [prevrow - 1][col - 1] + [prevrow - 1][col]
+            //this means that if we operate backwards, the col - 1 will not be overwritten until it is not needed anymore. otherwise if we operate normally, it is overwritten, but then it would be needed in the next ith + 1 value
+            out[col] = out[col - 1] + out[col];
+        }
+    }
+    return out;
 }
 
 std::vector<int> Solution::getPermutations(int num) {
