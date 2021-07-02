@@ -135,3 +135,17 @@ TEST(hasPathSum, recursive_unbalanced) {
 	TreeNode::clear(root);
 	EXPECT_TRUE(actual);
 }
+
+TEST(getRow, pascal_triangle_check_validity) {
+	vector<int> actual = sol.getRow(3);
+	auto expect = vector<int>{ 1,3,3,1 };
+	EXPECT_EQ(actual, expect);
+	
+	actual = sol.getRow(0);
+	expect = vector<int>{ 1 };
+	EXPECT_EQ(actual, expect);
+
+	actual = sol.getRow(1);
+	expect = vector<int>{ 1, 1 };
+	EXPECT_EQ(actual, expect);
+}
