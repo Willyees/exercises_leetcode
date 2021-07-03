@@ -2578,7 +2578,7 @@ int Solution::romanToInt_1(std::string s) {
     return result;
 }
 
-/** obvious solution is O(N^2). This has improvement, by stopping at target - numbers[idx] >= numbers[idx]
+/** obvious solution is O(N^2). This has improvement, by stopping at target - numbers[idx] >= numbers[idx] and skipping already tested values (last while loop)
 * @param numbers: vector of non-decreasing integers
 * target: target to be found the sum for
 * @return vector size 2 of indexes of 2 values which their sum == target (1-indexed)
@@ -2593,7 +2593,11 @@ std::vector<int> Solution::twoSumII(std::vector<int>& numbers, int target) {
                 sol[1] = idx2 + 1;
             }
         }
-        ++idx;
+        int t_idx = idx;
+        while (t_idx < numbers.size() && numbers[t_idx] == numbers[idx]) {
+            ++t_idx;
+        }
+        idx = t_idx;
     }
     return sol;
 }
