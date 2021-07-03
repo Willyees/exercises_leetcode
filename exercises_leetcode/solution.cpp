@@ -2578,6 +2578,26 @@ int Solution::romanToInt_1(std::string s) {
     return result;
 }
 
+/** obvious solution is O(N^2). This has improvement, by stopping at target - numbers[idx] >= numbers[idx]
+* @param numbers: vector of non-decreasing integers
+* target: target to be found the sum for
+* @return vector size 2 of indexes of 2 values which their sum == target (1-indexed)
+*/
+std::vector<int> Solution::twoSumII(std::vector<int>& numbers, int target) {
+    vector<int> sol(2, 0);
+    size_t idx = 0;
+    while (idx < numbers.size() && target - numbers[idx] >= numbers[idx]) {
+        for (size_t idx2 = idx + 1; idx2 < numbers.size(); ++idx2) {
+            if (numbers[idx] + numbers[idx2] == target) {
+                sol[0] = idx + 1;
+                sol[1] = idx2 + 1;
+            }
+        }
+        ++idx;
+    }
+    return sol;
+}
+
 /**
 * returns the numbers of 1 bit into an unsigned int. ignorant solution, by casting to string and then check for character '1'
 * @param n: unsigned int

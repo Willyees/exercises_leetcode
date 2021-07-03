@@ -175,6 +175,7 @@ public:
 	bool isPowerOfTwo(int n);
 	int romanToInt(std::string s);//O(N), O(1)
 	int romanToInt_1(std::string s);//O(N), O(1)
+	std::vector<int> twoSumII(std::vector<int>& numbers, int target);
 	
 	/** binary manipulations **/
 	std::vector<int> countBits(int n);//338. O(nlogN)

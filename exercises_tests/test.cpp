@@ -163,3 +163,21 @@ TEST(getRow, pascal_triangle_check_ONspace) {
 	expect = vector<int>{ 1, 1 };
 	EXPECT_EQ(actual, expect);
 }
+
+TEST(twoSumII, testTwoSumII) {
+	vector<int> input = { 2,7,9,10,12 };
+	vector<int> actual = sol.twoSumII(input, 18);
+	vector<int> expected = { 0, 0 };
+	EXPECT_EQ(actual, expected);
+
+
+}
+
+TEST(twoSumII, manySameValues) {
+	vector<int> input = { 2,2,2,2,2,7 };
+	vector<int> actual = sol.twoSumII(input, 9);
+	vector<int> expected = { 1, 6 };
+	EXPECT_EQ(actual, expected);
+
+
+}
