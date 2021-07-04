@@ -2606,17 +2606,16 @@ std::vector<int> Solution::twoSumII(std::vector<int>& numbers, int target) {
 * 
 */
 std::vector<int> Solution::twoSumII_1(std::vector<int>& numbers, int target) {
-    int* l, * h;//could use iterators. ok using pointers as long as the vector is not modified, otherwise they are invalidated
-    l = &numbers.front();
-    h = &numbers.back();
+    int l = 0, h = numbers.size() - 1;
     while (l != h) {
-        int sum_num = *l + *h;
+        int sum_num = numbers[l] + numbers[h];
         if (sum_num > target)
             --h;
         else if (sum_num < target)
             ++l;
-        else // ==
-            return vector<int> {*l, * h};
+        else {// ==
+            return vector<int> {l + 1, h + 1};
+        }
     }
 
     return vector<int> {};
