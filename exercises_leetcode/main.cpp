@@ -51,7 +51,14 @@ void f(int& i) {
 }
 int main() {
 	Solution sol;
+	vector<int> v{ 1,2,3,4 };
+	int* p = &v.front();
+	int* last = &v.back();
+	for (int i = 5; i < 15; ++i)
+		v.push_back(i);
+	while (p != last) cout << *p++ << endl;
 
+	return 0;
 }
 
 

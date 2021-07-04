@@ -181,3 +181,10 @@ TEST(twoSumII, manySameValues) {
 
 
 }
+
+TEST(twoSumII_1, testTwoSumII) {
+	vector<int> input = { 2,7,9,10,12 };
+	vector<int> actual = sol.twoSumII_1(input, 17);
+	vector<int> expected = { 7, 10 };
+	EXPECT_EQ(actual, expected);
+}

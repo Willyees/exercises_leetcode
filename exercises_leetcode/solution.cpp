@@ -2602,6 +2602,26 @@ std::vector<int> Solution::twoSumII(std::vector<int>& numbers, int target) {
     return sol;
 }
 
+/** O(N) solution using 2 pointers
+* 
+*/
+std::vector<int> Solution::twoSumII_1(std::vector<int>& numbers, int target) {
+    int* l, * h;//could use iterators. ok using pointers as long as the vector is not modified, otherwise they are invalidated
+    l = &numbers.front();
+    h = &numbers.back();
+    while (l != h) {
+        int sum_num = *l + *h;
+        if (sum_num > target)
+            --h;
+        else if (sum_num < target)
+            ++l;
+        else // ==
+            return vector<int> {*l, * h};
+    }
+
+    return vector<int> {};
+}
+
 /**
 * returns the numbers of 1 bit into an unsigned int. ignorant solution, by casting to string and then check for character '1'
 * @param n: unsigned int
