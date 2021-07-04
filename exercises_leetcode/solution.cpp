@@ -2602,7 +2602,7 @@ std::vector<int> Solution::twoSumII(std::vector<int>& numbers, int target) {
     return sol;
 }
 
-/** O(N) solution using 2 pointers
+/** O(N) solution using 2 pointers. useful solution for sorted collections
 * 
 */
 std::vector<int> Solution::twoSumII_1(std::vector<int>& numbers, int target) {
@@ -2615,6 +2615,29 @@ std::vector<int> Solution::twoSumII_1(std::vector<int>& numbers, int target) {
             ++l;
         else {// ==
             return vector<int> {l + 1, h + 1};
+        }
+    }
+
+    return vector<int> {};
+}
+
+/**
+* different solution using binary search. For each value, search for its complement to get to the target O(logN). Do this for all the values : O(NlogN) worst case 
+*/
+std::vector<int> Solution::twoSumII_2(std::vector<int>& numbers, int target) {
+    int right = numbers.size() - 1;
+    for (int idx = 0; idx < numbers.size(); ++idx) {
+        int complement = target - numbers[idx];
+        //search for the target using binary search O(logN)
+        int left = idx + 1;
+        while(left <= right){
+            int mid = (right - left) / 2 + left;
+            if (numbers[mid] > complement)
+                right = mid - 1;
+            else if (numbers[mid] < complement)
+                left = mid + 1;
+            else// == complement
+                return vector<int> {idx + 1, mid + 1};
         }
     }
 

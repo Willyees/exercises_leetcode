@@ -188,3 +188,10 @@ TEST(twoSumII_1, testTwoSumII) {
 	vector<int> expected = { 1,2 };
 	EXPECT_EQ(actual, expected);
 }
+
+TEST(twoSumII_2, testTwoSumII) {
+	vector<int> input = { 2,7,9,10,12 };
+	vector<int> actual = sol.twoSumII_2(input, 9);
+	vector<int> expected = { 1,2 };
+	EXPECT_EQ(actual, expected);
+}

@@ -177,6 +177,7 @@ public:
 	int romanToInt_1(std::string s);//O(N), O(1)
 	std::vector<int> twoSumII(std::vector<int>& numbers, int target);//167.
 	std::vector<int> twoSumII_1(std::vector<int>& numbers, int target);
+	std::vector<int> twoSumII_2(std::vector<int>& numbers, int target);
 	
 	/** binary manipulations **/
 	std::vector<int> countBits(int n);//338. O(nlogN)
