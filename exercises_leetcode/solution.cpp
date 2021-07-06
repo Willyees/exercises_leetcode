@@ -3245,6 +3245,35 @@ std::vector<int> Solution::getRow_1(int rowIndex) {
     return out;
 }
 
+/**
+* majority: element that is prensent [n/2] times
+*/
+int Solution::majorityElement(std::vector<int>& nums) {
+    //keep track of all counters
+    //keep pointer to highest, if new is higher, overwrite it
+    if (nums.empty())
+        return -1;
+    int* highest = &nums.at(0);
+    int count_high = 0;
+    int n = nums.size();
+    map<int, int> counter;//<num, count>
+    for (int& num : nums) {
+        auto it = counter.find(num);
+        if (it == counter.end()) { //is not present
+            counter.insert(make_pair(num, 0));
+        }
+        else {
+            if (++it->second > count_high) {
+                count_high = it->second;
+                highest = &num;
+            }
+        }
+        if (count_high > n)
+            return *highest;
+    }
+    return *highest;
+}
+
 std::vector<int> Solution::getPermutations(int num) {
     vector<string> results_s;
     vector<int> results_i;
