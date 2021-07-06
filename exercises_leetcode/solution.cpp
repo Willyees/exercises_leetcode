@@ -3275,21 +3275,11 @@ int Solution::majorityElement(std::vector<int>& nums) {
     return *highest;
 }
 
-/** to save in space, sort all the elements, then count how many for each element are present.
+/** to save in space, sort all the elements. dont need to count the elements, because the majority element will be at index n /2.
 */
 int Solution::majorityElement_1(std::vector<int>& nums) {
     sort(nums.begin(), nums.end());
-    int majority = nums.at(0);
-    int majority_count = 0;
-    int& current = nums.at(0);
-    for (const int& num : nums) {
-        int count = 0;
-        if (current == num) ++count;
-        else current = num, count = 0;
-        if (count > majority_count) majority = num, majority_count = count;
-    }
-
-    return majority;
+    return nums.at(nums.size() / 2);//return elem at n/2 index because majority elem frequency will be > n/2 size, so it will be either starting, finsihing or passing through the middle of the sorted container
 }
 
 std::vector<int> Solution::getPermutations(int num) {
