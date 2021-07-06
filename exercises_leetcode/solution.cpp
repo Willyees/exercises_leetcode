@@ -3251,6 +3251,7 @@ std::vector<int> Solution::getRow_1(int rowIndex) {
 int Solution::majorityElement(std::vector<int>& nums) {
     //keep track of all counters
     //keep pointer to highest, if new is higher, overwrite it
+    const int n = nums.size();
     if (nums.empty())
         return -1;
     int* highest = &nums.at(0);
@@ -3267,6 +3268,8 @@ int Solution::majorityElement(std::vector<int>& nums) {
                 count_high = it->second;
                 highest = &num;
             }
+            if (count_high > n)
+                return *highest;
         }
     }
     return *highest;
