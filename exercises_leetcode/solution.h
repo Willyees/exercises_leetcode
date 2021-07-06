@@ -219,4 +219,6 @@ public:
 	int mySqrt(unsigned x);
 	std::vector<int> getRow(int rowIndex);//119 > O(N) space
 	std::vector<int> getRow_1(int rowIndex);//119 O(N) space
+	int majorityElement(std::vector<int>& nums);//169.
+	int majorityElement_1(std::vector<int>& nums);//169. O(NlogN + N) time, O(1) space
 };

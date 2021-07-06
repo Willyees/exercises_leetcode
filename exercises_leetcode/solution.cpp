@@ -3246,7 +3246,7 @@ std::vector<int> Solution::getRow_1(int rowIndex) {
 }
 
 /**
-* majority: element that is prensent [n/2] times
+* majority: element that is prensent [n/2] times. O(N) time, O(N) space. this method looks for the most frequent, which must be the majority element
 */
 int Solution::majorityElement(std::vector<int>& nums) {
     //keep track of all counters
@@ -3268,10 +3268,25 @@ int Solution::majorityElement(std::vector<int>& nums) {
                 highest = &num;
             }
         }
-        if (count_high > n)
-            return *highest;
     }
     return *highest;
+}
+
+/** to save in space, sort all the elements, then count how many for each element are present.
+*/
+int Solution::majorityElement_1(std::vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int majority = nums.at(0);
+    int majority_count = 0;
+    int& current = nums.at(0);
+    for (const int& num : nums) {
+        int count = 0;
+        if (current == num) ++count;
+        else current = num, count = 0;
+        if (count > majority_count) majority = num, majority_count = count;
+    }
+
+    return majority;
 }
 
 std::vector<int> Solution::getPermutations(int num) {
