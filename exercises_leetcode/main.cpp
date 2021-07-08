@@ -49,12 +49,12 @@ void f(int& i) {
 		return;
 	f(i);
 }
+
+
+
 int main() {
 	Solution sol;
-	vector<int> input = { 2,7,9,10,12 };
-	vector<int> actual = sol.twoSumII_2(input, 9);
-	vector<int> expected = { 1,2 };
-
+	sol.trailingZeroes(5);
 	return 0;
 }
 

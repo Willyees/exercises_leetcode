@@ -2644,6 +2644,22 @@ std::vector<int> Solution::twoSumII_2(std::vector<int>& numbers, int target) {
     return vector<int> {};
 }
 
+/**this solution will overflow for n > 12
+*/
+int Solution::trailingZeroes(int n) {
+    int output = 1;
+    while (n > 1) {
+        output *= n--;
+    }
+    //check for trailing 0
+    int trail = 0;
+    while (output % 10 == 0) {
+        ++trail;
+        output /= 10;
+    }
+    return trail;
+}
+
 /**
 * returns the numbers of 1 bit into an unsigned int. ignorant solution, by casting to string and then check for character '1'
 * @param n: unsigned int
