@@ -179,6 +179,7 @@ public:
 	std::vector<int> twoSumII_1(std::vector<int>& numbers, int target);
 	std::vector<int> twoSumII_2(std::vector<int>& numbers, int target);
 	int trailingZeroes(int n);//172.
+	int trailingZeroes_1(int n);//172.
 	
 	/** binary manipulations **/
 	std::vector<int> countBits(int n);//338. O(nlogN)

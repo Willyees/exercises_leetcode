@@ -2660,6 +2660,22 @@ int Solution::trailingZeroes(int n) {
     return trail;
 }
 
+/** not overflowing. count all the pair of 5 * 2 factors in the factorials. this pair equals to 10 which ouputs a final 0. the more 10s factors are in the factorial, the more trailing 0. not my solution
+*/
+int Solution::trailingZeroes_1(int n) {
+    int count_5 = 0;
+    while (n > 1) {
+        int t = n;
+        while (t % 5 == 0 && t > 0) {
+            ++count_5;
+            t /= 5;
+        }
+        --n;
+    }
+    //assuming there is at least 1 matching pair of 2 from every 5 found
+    return count_5;
+}
+
 /**
 * returns the numbers of 1 bit into an unsigned int. ignorant solution, by casting to string and then check for character '1'
 * @param n: unsigned int
@@ -3272,7 +3288,6 @@ int Solution::majorityElement(std::vector<int>& nums) {
         return -1;
     int* highest = &nums.at(0);
     int count_high = 0;
-    int n = nums.size();
     map<int, int> counter;//<num, count>
     for (int& num : nums) {
         auto it = counter.find(num);

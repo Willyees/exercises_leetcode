@@ -195,3 +195,13 @@ TEST(twoSumII_2, testTwoSumII) {
 	vector<int> expected = { 1,2 };
 	EXPECT_EQ(actual, expected);
 }
+
+TEST(trailingZeros_1, notOverflow) {
+	int actual = sol.trailingZeroes_1(5);
+	EXPECT_EQ(actual, 1);
+	actual = sol.trailingZeroes_1(9);
+	EXPECT_EQ(actual, 1);
+	actual = sol.trailingZeroes_1(10);
+	EXPECT_EQ(actual, 2);
+
+}
