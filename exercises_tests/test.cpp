@@ -205,3 +205,13 @@ TEST(trailingZeros_1, notOverflow) {
 	EXPECT_EQ(actual, 2);
 
 }
+
+TEST(trailingZeros_2, notOverflow) {
+	int actual = sol.trailingZeroes_2(5);
+	EXPECT_EQ(actual, 1);
+	actual = sol.trailingZeroes_2(9);
+	EXPECT_EQ(actual, 1);
+	actual = sol.trailingZeroes_2(10);
+	EXPECT_EQ(actual, 2);
+
+}

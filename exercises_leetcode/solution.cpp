@@ -2673,6 +2673,18 @@ int Solution::trailingZeroes_1(int n) {
     return n_5_multiples;
 }
 
+/** previous solution will overflow. this ensure there is no overflow, but not sure how it works
+*/
+int Solution::trailingZeroes_2(int n) {
+    int trailing_zeros = 0;
+    while (n / 5 > 0) {
+        int n_5_multiples = n / 5;
+        trailing_zeros += n_5_multiples;
+        n = n_5_multiples;
+    }
+    return trailing_zeros;
+}
+
 /**
 * returns the numbers of 1 bit into an unsigned int. ignorant solution, by casting to string and then check for character '1'
 * @param n: unsigned int
