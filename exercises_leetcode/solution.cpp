@@ -2663,17 +2663,14 @@ int Solution::trailingZeroes(int n) {
 /** not overflowing. count all the pair of 5 * 2 factors in the factorials. this pair equals to 10 which ouputs a final 0. the more 10s factors are in the factorial, the more trailing 0. not my solution
 */
 int Solution::trailingZeroes_1(int n) {
-    int count_5 = 0;
-    while (n > 1) {
-        int t = n;
-        while (t % 5 == 0 && t > 0) {
-            ++count_5;
-            t /= 5;
-        }
-        --n;
+    int n_5_multiples = 0;
+    for (int pow_5 = 1; pow(5, pow_5) <= n; pow_5++) {
+        //number of 5 multiples [1..n] is easily n / 5. xes: 100 / 5 = 20. there are 20 multiples of 5 between [1..100]
+        //have to take care of the multiples of power of 5. they contains more 5 factors. xes: 25 = 5*5; 50 = 25*2
+        n_5_multiples += n / pow(5, pow_5);
     }
     //assuming there is at least 1 matching pair of 2 from every 5 found
-    return count_5;
+    return n_5_multiples;
 }
 
 /**
