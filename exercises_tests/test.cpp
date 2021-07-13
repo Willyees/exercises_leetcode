@@ -215,3 +215,25 @@ TEST(trailingZeros_2, notOverflow) {
 	EXPECT_EQ(actual, 2);
 
 }
+
+TEST(findDisappearedNumbers, tests) {
+	vector<int> input{ 1,2,2,5,5 };
+	vector<int> expected{ 3,4 };
+	vector<int> actual = sol.findDisappearedNumbers(input);
+	EXPECT_EQ(actual, expected);
+	input = { 4,3,2,7,8,2,3,1 };
+	expected = { 5,6 };
+	actual = sol.findDisappearedNumbers(input);
+	EXPECT_EQ(actual, expected);
+}
+
+TEST(findDisappearedNumbers_1, tests) {
+	vector<int> input{ 1,2,2,5,5 };
+	vector<int> expected{ 3,4 };
+	vector<int> actual = sol.findDisappearedNumbers_1(input);
+	EXPECT_EQ(actual, expected);
+	input = { 4,3,2,7,8,2,3,1 };
+	expected = { 5,6 };
+	actual = sol.findDisappearedNumbers_1(input);
+	EXPECT_EQ(actual, expected);
+}

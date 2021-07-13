@@ -82,6 +82,8 @@ public:
 	std::string countAndSay_helper(int n);
 	std::string countAndSay_find_cont(std::string n);
 	std::string longestCommonPrefix(std::vector<std::string>& strs);
+	std::vector<int> findDisappearedNumbers(std::vector<int>& nums);
+	std::vector<int> findDisappearedNumbers_1(std::vector<int>& nums);
 
 	/* strings */
 	bool isIsomorphic(std::string s, std::string t);

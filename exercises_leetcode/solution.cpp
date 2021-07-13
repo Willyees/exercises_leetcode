@@ -1150,6 +1150,57 @@ std::string Solution::longestCommonPrefix(std::vector<std::string>& strs) {
     return strs[0].substr(0, i);//must all be the same strings
 }
 
+/**sort solution: O(NlogN)
+*/
+std::vector<int> Solution::findDisappearedNumbers(std::vector<int>& nums) {
+    vector<int> out;
+    sort(nums.begin(), nums.end());
+    int i = 1;//expected value
+    int prev = 0;
+    size_t idx = 0;
+    while (idx < nums.size()) {
+        if (nums[idx] == prev) {
+            ++idx;
+        }
+        else if (nums[idx] != i) {
+            out.push_back(i);
+            prev = nums[idx];
+            ++i;
+        }
+        else if (nums[idx] == i){
+            ++idx;
+            ++i;
+            prev = nums[idx];
+        }
+    }
+
+    for (int n = i; n < nums.size(); ++n)
+        out.push_back(n);
+
+    return out;
+}
+
+
+/**sort input. check 2 by 2 elements, loop until second item is found
+* this solution uses 2 pointers, checks if the distance between them is > 1, if so insert the sucessive start pointer and keep looping
+*/
+std::vector<int> Solution::findDisappearedNumbers_1(std::vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    int start = 1;
+    vector<int> out;
+    for (const int& n : nums) {
+        const int& end = n;
+        while (start < end -1) 
+            out.push_back(++start);
+        start = n;
+    }
+    int end = nums.size();
+    while (start < end)
+        out.push_back(start++);
+
+    return out;
+}
+
 /**
 * isomorphic: all the characters can be replaced and string t is outputted. xes: 'egg', 'add'
 */
