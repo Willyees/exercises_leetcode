@@ -1,8 +1,12 @@
 ﻿#include "pch.h"
 #include "../exercises_leetcode/solution.h"
+#include "../exercises_leetcode/solution_medium.h"
 #include "../exercises_leetcode/tests.cpp"
+#include <iostream>
+#include <stdexcept>
 
 Solution sol;
+SolutionMed solMed;
 
 TEST(DeleteDuplicates, Iterative) {
 	ListNode* head = sol.deleteDuplicates(createLinkedList(vector<int> {1, 1, 2, 2, 3, 3}));
@@ -236,4 +240,17 @@ TEST(findDisappearedNumbers_1, tests) {
 	expected = { 5,6 };
 	actual = sol.findDisappearedNumbers_1(input);
 	EXPECT_EQ(actual, expected);
+}
+
+TEST(productExceptSelf_1, tests) {
+	vector<int> input {1,2,3,4 };
+	vector<int> expected { 24,12,8,6 };
+	vector<int> actual(solMed.productExceptSelf_1(input));
+	EXPECT_EQ(actual, expected);
+
+	input = { -1,1,0,-3,3 };
+	expected = { 0,0,9,0,0 };
+	actual = solMed.productExceptSelf_1(input);
+	EXPECT_EQ(actual, expected);
+
 }

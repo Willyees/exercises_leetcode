@@ -24,6 +24,8 @@ public:
 	int lengthOfLongestSubstring_1(std::string s);
 	std::string longestPalindrome(std::string s);
 	bool increasingTriplet(std::vector<int>& nums);//O(N) O(1)
+	std::vector<int> productExceptSelf(std::vector<int>& nums);
+	std::vector<int> productExceptSelf_1(std::vector<int>& nums);
 
 	/** linked lists**/
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);

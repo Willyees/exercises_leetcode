@@ -436,10 +436,36 @@ bool SolutionMed::increasingTriplet(std::vector<int>& nums) {
 std::vector<int> SolutionMed::productExceptSelf(std::vector<int>& nums) {
 	vector<int> output;
 	for (size_t idx = 0; idx < nums.size(); ++idx) {
-		int product = 0;
+		int product = 1;
 		for (size_t prod = 0; prod < nums.size(); ++prod) {
 			if (prod != idx) {
 				product *= nums[prod];
+			}
+		}
+		output.push_back(product);
+	}
+	return output;
+}
+
+/**bruteforce improvement using dynamic programming. each successive product = previous product / current idx to skip * previous idx that was skipped
+*/
+std::vector<int> SolutionMed::productExceptSelf_1(std::vector<int>& nums) {
+	vector<int> output;
+	if (nums.empty())
+		return output;
+	//skipping first element
+	//product *= nums[idx];
+	int product = accumulate(nums.begin() + 1, nums.end(), 1, multiplies<int>());//fancy product using stl
+	output.push_back(product);
+	for (size_t prod = 1; prod < nums.size(); ++prod) {
+		if(nums[prod] != 0)
+			product = output.back() / nums[prod] * nums[prod - 1];
+		else {
+			product = 1;
+			for (size_t i = 0; i < nums.size(); ++i) {
+				if (i != prod) {
+					product *= nums[i];
+				}
 			}
 		}
 		output.push_back(product);
