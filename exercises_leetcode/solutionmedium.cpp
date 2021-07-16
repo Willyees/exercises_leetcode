@@ -448,6 +448,7 @@ std::vector<int> SolutionMed::productExceptSelf(std::vector<int>& nums) {
 }
 
 /**bruteforce improvement using dynamic programming. each successive product = previous product / current idx to skip * previous idx that was skipped
+* problem: all the nums with '0' has to usediffernte approach: cannot divide by 0
 */
 std::vector<int> SolutionMed::productExceptSelf_1(std::vector<int>& nums) {
 	vector<int> output;
@@ -470,6 +471,25 @@ std::vector<int> SolutionMed::productExceptSelf_1(std::vector<int>& nums) {
 		}
 		output.push_back(product);
 	}
+	return output;
+}
+
+/**not using division. create 2 vectors, left and right. ouput[i] = left[i] * right[i]
+*/
+std::vector<int> SolutionMed::productExceptSelf_2(std::vector<int>& nums) {
+	vector<int> left{ 1 }, output;
+	vector<int> right(nums.size(), 1);
+	//fill left. each num = left[i-1] * nums[i-1]
+	for (size_t i = 1; i < nums.size(); ++i) {
+		left.push_back(left.back() * nums[i - 1]);
+	}
+	//fill right
+	for (int i = nums.size() - 2; i >= 0; --i) {
+		right[i] = right[i + 1] * nums[i + 1];
+	}
+	right;
+	for (size_t i = 0; i < nums.size(); ++i)
+		output.push_back(left[i] * right[i]);
 	return output;
 }
 
