@@ -27,6 +27,7 @@ public:
 	std::vector<int> productExceptSelf(std::vector<int>& nums);
 	std::vector<int> productExceptSelf_1(std::vector<int>& nums);
 	std::vector<int> productExceptSelf_2(std::vector<int>& nums);
+	std::vector<int> productExceptSelf_3(std::vector<int>& nums);
 
 	/** linked lists**/
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);

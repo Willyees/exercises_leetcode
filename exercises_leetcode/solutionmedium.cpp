@@ -475,6 +475,7 @@ std::vector<int> SolutionMed::productExceptSelf_1(std::vector<int>& nums) {
 }
 
 /**not using division. create 2 vectors, left and right. ouput[i] = left[i] * right[i]
+* O(2N), O(2N) space
 */
 std::vector<int> SolutionMed::productExceptSelf_2(std::vector<int>& nums) {
 	vector<int> left{ 1 }, output;
@@ -490,6 +491,24 @@ std::vector<int> SolutionMed::productExceptSelf_2(std::vector<int>& nums) {
 	right;
 	for (size_t i = 0; i < nums.size(); ++i)
 		output.push_back(left[i] * right[i]);
+	return output;
+}
+
+/**similar to previous, but O(N) space
+*/
+std::vector<int> SolutionMed::productExceptSelf_3(std::vector<int>& nums) {
+	vector<int> output { 1 };
+	vector<int> right(nums.size(), 1);
+	//fill left. each num = left[i-1] * nums[i-1]
+	for (size_t i = 1; i < nums.size(); ++i) {
+		output.push_back(output.back() * nums[i - 1]);
+	}
+	//carry the product with a variable
+	for (int i = nums.size() - 1, prod = 1; i >= 0; --i) {
+		output[i] *= prod;
+		prod *= nums[i];//prod points to the product of nums[i + 1] (this because it is updated AFTER using it on the output vector)
+	}
+
 	return output;
 }
 

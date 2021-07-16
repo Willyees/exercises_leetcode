@@ -267,3 +267,16 @@ TEST(productExceptSelf_2, tests) {
 	EXPECT_EQ(actual, expected);
 
 }
+
+TEST(productExceptSelf_3, tests) {
+	vector<int> input{ 1,2,3,4 };
+	vector<int> expected{ 24,12,8,6 };
+	vector<int> actual(solMed.productExceptSelf_3(input));
+	EXPECT_EQ(actual, expected);
+
+	input = { -1,1,0,-3,3 };
+	expected = { 0,0,9,0,0 };
+	actual = solMed.productExceptSelf_3(input);
+	EXPECT_EQ(actual, expected);
+
+}
