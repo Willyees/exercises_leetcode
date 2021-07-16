@@ -430,6 +430,23 @@ bool SolutionMed::increasingTriplet(std::vector<int>& nums) {
 	return false;
 }
 
+/**
+@return: vector<int> where output[i] = product of all others nums except nums[i]
+*/
+std::vector<int> SolutionMed::productExceptSelf(std::vector<int>& nums) {
+	vector<int> output;
+	for (size_t idx = 0; idx < nums.size(); ++idx) {
+		int product = 0;
+		for (size_t prod = 0; prod < nums.size(); ++prod) {
+			if (prod != idx) {
+				product *= nums[prod];
+			}
+		}
+		output.push_back(product);
+	}
+	return output;
+}
+
 ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {
 	ListNode head;//keep the head of the linkedlist 
 	ListNode* dummy = &head;
