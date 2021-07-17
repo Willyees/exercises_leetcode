@@ -2359,6 +2359,32 @@ int Solution::maxSubArray(std::vector<int>& nums) {
     return maximum;
 }
 
+/**similar but keep a current sum that gets reset < 0. 
+*/
+int maxSubArray_1(std::vector<int>& nums) {
+    int sum = 0;
+    int maxsum = INT_MIN;//in this way, any first element gets assigned
+    for (int n : nums) {
+        sum += n;
+        maxsum = max(sum, maxsum);
+        if (sum < 0)
+            sum = 0;//once sum < 0, start a new subarray with n as first elem
+    }
+    return maxsum;
+}
+
+/**kadane's alg
+*/
+int maxSubArray_2(std::vector<int>& nums) {
+    int sum = 0;
+    int maxsum = INT_MIN;//in this way, any first element gets assigned
+    for (int n : nums) {
+        sum = max(n, sum + n);//if the current sum  + n < n, pick n and start new subarray
+        maxsum = max(sum, maxsum);
+    }
+    return maxsum;
+}
+
 /**
 * @params: a, b: string representation of binary values
 */
@@ -2386,6 +2412,7 @@ std::string Solution::addBinary(std::string a, std::string b) {
 
     return output;
 }
+
 
 /**
 * output string representation of 1 .. "n". if current number is multiple of 3, output "fizz", if of 5 "buzz", if both 3 and 5 "fizzbuzz"
