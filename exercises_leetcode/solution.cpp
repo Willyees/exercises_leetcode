@@ -2267,17 +2267,19 @@ std::vector<int>& Solution::merge_sort(vector<int>& v) {
 }
 
 std::vector<int> Solution::merge_sort_rec(vector<int>& v, int l, int r) {
+    cout << l << " " << r << endl;
+
     if (l >= r)
         return vector<int> {v[l]};
     int mid = (r - l) / 2 + l;
-    vector<int> left_v = merge_sort_rec(v, 0, mid);
+    vector<int> left_v = merge_sort_rec(v, l, mid);
     vector<int> right_v = merge_sort_rec(v, mid + 1, r);
     //merge together the left and right subarrays into the original array
-    vector<int> merged = merge_sort_helper2vectors(v, left_v, right_v,l);
-    return merged;
+    merge_sort_helper2vectors(v, left_v, right_v,l);
+    return vector<int> {v.begin() + l, v.begin() + r + 1} ;
 }
 
-vector<int>& Solution::merge_sort_helper2vectors(vector<int>& v, vector<int> left_v, vector<int> right_v, int l) {
+void Solution::merge_sort_helper2vectors(vector<int>& v, vector<int> left_v, vector<int> right_v, int l) {
     int l_idx = 0, r_idx = 0;
     //right_v starts at mid + 1
     while (l_idx < left_v.size() && r_idx < right_v.size()) {
@@ -2297,7 +2299,7 @@ vector<int>& Solution::merge_sort_helper2vectors(vector<int>& v, vector<int> lef
         v[l++] = left_v[l_idx++];
     while (r_idx < right_v.size())
         v[l++] = right_v[r_idx++];
-    return v;
+    return;
 }
 
 /**correct but leetcode will output limit time

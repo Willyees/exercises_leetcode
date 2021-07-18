@@ -158,7 +158,7 @@ public:
 	int firstBadVersion_2(int n);//binary search- correct implementation
 	std::vector<int>& merge_sort(std::vector<int>& v);
 	std::vector<int> merge_sort_rec(std::vector<int>& v, int l, int r);
-	std::vector<int>& merge_sort_helper2vectors(std::vector<int>& v, std::vector<int> left_v, std::vector<int> right_v, int l);
+	void merge_sort_helper2vectors(std::vector<int>& v, std::vector<int> left_v, std::vector<int> right_v, int l);
 
 	/*dinamic programming*/
 	int climbStairs_rec(int n);//O(2^N); O(N)
