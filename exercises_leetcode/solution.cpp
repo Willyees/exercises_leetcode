@@ -2261,6 +2261,45 @@ int Solution::firstBadVersion_2(int n) {
     return begin;
 }
 
+std::vector<int>& Solution::merge_sort(vector<int>& v) {
+    v = merge_sort_rec(v, 0, v.size() - 1);
+    return v;
+}
+
+std::vector<int> Solution::merge_sort_rec(vector<int>& v, int l, int r) {
+    if (l >= r)
+        return vector<int> {v[l]};
+    int mid = (r - l) / 2 + l;
+    vector<int> left_v = merge_sort_rec(v, 0, mid);
+    vector<int> right_v = merge_sort_rec(v, mid + 1, r);
+    //merge together the left and right subarrays into the original array
+    vector<int> merged = merge_sort_helper2vectors(v, left_v, right_v,l);
+    return merged;
+}
+
+vector<int>& Solution::merge_sort_helper2vectors(vector<int>& v, vector<int> left_v, vector<int> right_v, int l) {
+    int l_idx = 0, r_idx = 0;
+    //right_v starts at mid + 1
+    while (l_idx < left_v.size() && r_idx < right_v.size()) {
+        if (left_v[l_idx] < right_v[r_idx]) {
+            v[l] = left_v[l_idx];
+            ++l_idx;
+        }
+        else {
+            v[l] = right_v[r_idx];
+            ++r_idx;
+        }
+
+        ++l;
+    }
+    //one of them is empty
+    while (l_idx < left_v.size())
+        v[l++] = left_v[l_idx++];
+    while (r_idx < right_v.size())
+        v[l++] = right_v[r_idx++];
+    return v;
+}
+
 /**correct but leetcode will output limit time
 * @param n: total number of steps to be taken
 * @param i: current step
@@ -2361,7 +2400,7 @@ int Solution::maxSubArray(std::vector<int>& nums) {
 
 /**similar but keep a current sum that gets reset < 0. 
 */
-int maxSubArray_1(std::vector<int>& nums) {
+int Solution::maxSubArray_1(std::vector<int>& nums) {
     int sum = 0;
     int maxsum = INT_MIN;//in this way, any first element gets assigned
     for (int n : nums) {
@@ -2375,7 +2414,7 @@ int maxSubArray_1(std::vector<int>& nums) {
 
 /**kadane's alg
 */
-int maxSubArray_2(std::vector<int>& nums) {
+int Solution::maxSubArray_2(std::vector<int>& nums) {
     int sum = 0;
     int maxsum = INT_MIN;//in this way, any first element gets assigned
     for (int n : nums) {
@@ -2384,6 +2423,20 @@ int maxSubArray_2(std::vector<int>& nums) {
     }
     return maxsum;
 }
+
+/**divide and conquer
+*/
+int Solution::maxSubArray_3(std::vector<int>& nums) {
+    return maxSubArray_3_divideconq(nums, 0, nums.size() - 1);
+}
+
+/**divide the array in 2 sections, recursively find the highest subarray
+*/
+int Solution::maxSubArray_3_divideconq(std::vector<int>& nums, int l, int r) {
+    return -1;
+}
+
+
 
 /**
 * @params: a, b: string representation of binary values

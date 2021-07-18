@@ -280,3 +280,21 @@ TEST(productExceptSelf_3, tests) {
 	EXPECT_EQ(actual, expected);
 
 }
+
+TEST(merge_sort_helper2vectors, tests) {
+	vector<int> input{ 1,5,3,2,9,47,6 };
+	int mid = input.size() / 2;
+	vector<int> left{2,5,9,47};
+	vector<int> right{1,3,6};
+	vector<int> expected{ 1,2,3,5,6,9,47 };
+	sol.merge_sort_helper2vectors(input, left, right, 0);
+	EXPECT_EQ(input, expected);
+}
+
+TEST(merge_sort, tests) {
+	vector<int> input{ 1,5,3,2,9,47,6 };
+	sol.merge_sort(input);
+	vector<int> expected{ 1,2,3,4,6,9,47 };
+	assert(input.size() == expected.size());
+	EXPECT_EQ(input, expected);
+}

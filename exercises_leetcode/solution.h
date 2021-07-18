@@ -156,11 +156,19 @@ public:
 	int firstBadVersion(int n);//bruteforce O(N)
 	int firstBadVersion_1(int n);//binary search- incorrect implementation
 	int firstBadVersion_2(int n);//binary search- correct implementation
+	std::vector<int>& merge_sort(std::vector<int>& v);
+	std::vector<int> merge_sort_rec(std::vector<int>& v, int l, int r);
+	std::vector<int>& merge_sort_helper2vectors(std::vector<int>& v, std::vector<int> left_v, std::vector<int> right_v, int l);
+
 	/*dinamic programming*/
 	int climbStairs_rec(int n);//O(2^N); O(N)
 	int climbStair_rec_memoization(int n);//O(N); O(N)
 	int rob(std::vector<int>& nums);
 	int maxSubArray(std::vector<int>& nums);
+	int maxSubArray_1(std::vector<int>& nums);
+	int maxSubArray_2(std::vector<int>& nums);
+	int maxSubArray_3(std::vector<int>& nums);
+	int maxSubArray_3_divideconq(std::vector<int>& nums, int l, int r);
 	/* math */
 	std::string addBinary(std::string a, std::string b);
 	std::vector<std::string> fizzBuzz(int n);//O(N), O(1)
