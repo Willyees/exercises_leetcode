@@ -294,7 +294,7 @@ TEST(merge_sort_helper2vectors, tests) {
 TEST(merge_sort, tests) {
 	vector<int> input{ 1,5,3,2,9,47,6 };
 	sol.merge_sort(input);
-	vector<int> expected{ 1,2,3,4,6,9,47 };
+	vector<int> expected{ 1,2,3,5,6,9,47 };
 	assert(input.size() == expected.size());
 	EXPECT_EQ(input, expected);
 }
