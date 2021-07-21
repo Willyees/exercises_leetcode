@@ -2438,6 +2438,33 @@ int Solution::maxSubArray_3_divideconq(std::vector<int>& nums, int l, int r) {
     return -1;
 }
 
+/**similar as kadane algorithm, but needs a modification to take into account negative numbers that turn positive when * with a negative
+*/
+int Solution::maxProduct(std::vector<int>& nums) {
+    if (nums.empty())
+        return 0;
+    int maxSum = nums[0];
+    int minSum = nums[0];
+    int sol = nums[0];
+    for (size_t idx = 1; idx < nums.size(); ++idx) {
+        int n = nums[idx];
+        maxSum *= n;
+        minSum *= n;
+
+        int tempMax = maxSum;//need to keep track of maxSum before appliying the max function, otherwise the maxSum would be lost in case minSum > maxSum
+        maxSum = max(maxSum, minSum);
+        minSum = min(tempMax, minSum);
+
+        maxSum = max(maxSum, n);
+        minSum = min(minSum, n);
+        
+        sol = max(sol, maxSum);
+
+    }
+
+    return sol;
+}
+
 
 
 /**
