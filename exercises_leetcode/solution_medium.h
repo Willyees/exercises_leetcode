@@ -28,6 +28,8 @@ public:
 	std::vector<int> productExceptSelf_1(std::vector<int>& nums);
 	std::vector<int> productExceptSelf_2(std::vector<int>& nums);
 	std::vector<int> productExceptSelf_3(std::vector<int>& nums);
+	int maxProduct(std::vector<int>& nums);
+	int findMin(std::vector<int>& nums);//153.
 
 	/** linked lists**/
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);

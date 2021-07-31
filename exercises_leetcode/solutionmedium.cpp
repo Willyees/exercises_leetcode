@@ -512,6 +512,51 @@ std::vector<int> SolutionMed::productExceptSelf_3(std::vector<int>& nums) {
 	return output;
 }
 
+
+/**similar as kadane algorithm, but needs a modification to take into account negative numbers that turn positive when * with a negative
+*/
+int SolutionMed::maxProduct(std::vector<int>& nums) {
+	if (nums.empty())
+		return 0;
+	int maxSum = nums[0];
+	int minSum = nums[0];
+	int sol = nums[0];
+	for (size_t idx = 1; idx < nums.size(); ++idx) {
+		int n = nums[idx];
+		maxSum *= n;
+		minSum *= n;
+
+		int tempMax = maxSum;//need to keep track of maxSum before appliying the max function, otherwise the maxSum would be lost in case minSum > maxSum
+		maxSum = max(maxSum, minSum);
+		minSum = min(tempMax, minSum);
+
+		maxSum = max(maxSum, n);
+		minSum = min(minSum, n);
+
+		sol = max(sol, maxSum);
+
+	}
+
+	return sol;
+}
+
+/**
+* @param nums: inital sorted array has been rotated between [1..nums.size()] times.
+* @return minimum element in nums
+* has to run O(logN)
+*/
+int SolutionMed::findMin(std::vector<int>& nums) {
+	size_t left = 0, right = nums.size() - 1;
+	while (left < right) {
+		size_t mid = left + (right - left) / 2;
+		if (nums[right] > nums[mid])
+			right = mid;
+		else if (nums[right] < nums[mid])
+			left = mid + 1;
+	}
+	return nums[left];
+}
+
 ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {
 	ListNode head;//keep the head of the linkedlist 
 	ListNode* dummy = &head;

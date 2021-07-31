@@ -298,3 +298,8 @@ TEST(merge_sort, tests) {
 	assert(input.size() == expected.size());
 	EXPECT_EQ(input, expected);
 }
+
+TEST(findMin, tests) {
+	vector<int> input{ 1,2,3,5 };
+	solMed.findMin(input);
+}
