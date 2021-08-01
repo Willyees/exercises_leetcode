@@ -614,7 +614,8 @@ int SolutionMed::search(std::vector<int>& nums, int target) {
 }
 
 /**keep moving left or right based on the smallest height container. keep track of biggest container
-* @return largest container
+* @param height: each item is the height of a line based on the X axys.
+* @return largest area container amogst height items
 */
 int SolutionMed::maxArea(std::vector<int>& height) {
 	int largest = 0;
@@ -623,10 +624,29 @@ int SolutionMed::maxArea(std::vector<int>& height) {
 		int l_h = height[l], r_h = height[r];
 		int area = min(l_h, r_h) * (r - l);
 		largest = max(area, largest);
-		if (l_h < r_h)
+		if (l_h < r_h)//move either left or right index based on which is shorter
 			++l;
 		else
 			--r;
+	}
+
+	return largest;
+}
+
+/**skipping all the items that have lower height than previous because they cannot get bigger area compared to the more wider lines
+*/
+int SolutionMed::maxArea_1(std::vector<int>& height) {
+	int largest = 0;
+	int l = 0, r = height.size() - 1;
+	while (l < r) {
+		int l_h = height[l], r_h = height[r];
+		int h = min(l_h, r_h);//this is the constraint height, smallest between the twos
+		int area = h * (r - l);
+		largest = max(area, largest);
+		int prev_l_h = l_h;
+		int prev_r_h = r_h;
+		while (height[l] <= h && l < r) ++l;//comparing with the smallest height, keep searching for a highest one. if the current is higher, keep it
+		while (height[r] <= h && l < r) --r;
 	}
 
 	return largest;

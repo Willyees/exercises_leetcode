@@ -344,8 +344,15 @@ TEST(searchRotated, singleelement) {
 }
 
 TEST(maxArea, tests) {
-	vector<int> input { 1,8,6,2,5,4,8,3,7 };
+	vector<int> input{ 1,8,6,2,5,4,8,3,7 };
 	int acutal = solMed.maxArea(input);
+	int expected = 49;
+	EXPECT_EQ(acutal, expected);
+}
+
+TEST(maxArea_1, tests) {
+	vector<int> input{ 1,8,6,2,5,4,8,3,7 };
+	int acutal = solMed.maxArea_1(input);
 	int expected = 49;
 	EXPECT_EQ(acutal, expected);
 }
