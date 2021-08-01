@@ -161,7 +161,21 @@ std::vector<std::vector<int>> SolutionMed::threeSum_2(std::vector<int>& nums) {
 /** similar as 2 but using a set to avoid handling the cases that have been already added
 */
 std::vector<std::vector<int>> SolutionMed::threeSum_3(std::vector<int>& nums) {
-	set<vector<int>>
+	set<vector<int>> out_set;
+	for (size_t first = 0; first < nums.size(); ++first) {
+		int sum_needed = -nums[first];
+		size_t second = first + 1, third = nums.size() - 1;
+		while (second < third) {
+			int sum = nums[second] + nums[third];
+			if (sum == sum_needed)
+				out_set.insert(vector<int> {nums[first], nums[second], nums[third]});
+			else if (sum > sum_needed)
+				--third;
+			else //sum < sum_needed
+				++second;
+		}
+	}
+	return vector<vector<int>>(out_set.begin(), out_set.end());
 }
 
 /**
@@ -597,6 +611,25 @@ int SolutionMed::search(std::vector<int>& nums, int target) {
 		}
 	}
 	return -1;
+}
+
+/**keep moving left or right based on the smallest height container. keep track of biggest container
+* @return largest container
+*/
+int SolutionMed::maxArea(std::vector<int>& height) {
+	int largest = 0;
+	int l = 0,  r = height.size() - 1;
+	while (l < r) {
+		int l_h = height[l], r_h = height[r];
+		int area = min(l_h, r_h) * (r - l);
+		largest = max(area, largest);
+		if (l_h < r_h)
+			++l;
+		else
+			--r;
+	}
+
+	return largest;
 }
 
 ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {

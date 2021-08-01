@@ -16,6 +16,7 @@ public:
 	std::vector<std::vector<int>> threeSum(std::vector<int>& nums);
 	std::vector<std::vector<int>> threeSum_1(std::vector<int>& nums);
 	std::vector<std::vector<int>> threeSum_2(std::vector<int>& nums);
+	std::vector<std::vector<int>> threeSum_3(std::vector<int>& nums);
 	void setZeroesMatrix(std::vector<std::vector<int>>& matrix);
 	void setZeroesMatrix_1(std::vector<std::vector<int>>& matrix);//space O(1)
 	std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs);//O(N KlogK)
@@ -31,6 +32,7 @@ public:
 	int maxProduct(std::vector<int>& nums);
 	int findMin(std::vector<int>& nums);//153.
 	int search(std::vector<int>& nums, int target);//33.
+	int maxArea(std::vector<int>& height);//11.
 
 	/** linked lists**/
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
