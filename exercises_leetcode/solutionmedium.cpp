@@ -1,4 +1,5 @@
 #include <stack>
+#include <set>
 #include <numeric>
 #include <iostream>
 #include <algorithm>
@@ -152,9 +153,15 @@ std::vector<std::vector<int>> SolutionMed::threeSum_2(std::vector<int>& nums) {
 			}
 		}
 		while (first + 1 < nums.size() && nums[first] == nums[first + 1])//this will be true until the last of same values (xes 1,1,1,2-> until the last 1). the outer loop will skip it and set 'first' as the next new value (xes: 2)
-			++first;
+			++first;	
 	}
 	return result;
+}
+
+/** similar as 2 but using a set to avoid handling the cases that have been already added
+*/
+std::vector<std::vector<int>> SolutionMed::threeSum_3(std::vector<int>& nums) {
+	set<vector<int>>
 }
 
 /**
@@ -555,6 +562,41 @@ int SolutionMed::findMin(std::vector<int>& nums) {
 			left = mid + 1;
 	}
 	return nums[left];
+}
+
+/**
+* @param nums: inital sorted array has been rotated between [0.. k] times.
+* @return index of target or -1
+* has to run O(logN)
+*/
+int SolutionMed::search(std::vector<int>& nums, int target) {
+	int left = 0, right = nums.size() - 1;
+	while (left <= right) {
+		int mid = left + (right - left) / 2;
+		if (target == nums[mid]) {
+			return mid;
+		}
+		if (nums[left] < nums[mid]) {//no drop left
+			if (target >= nums[left] && target < nums[mid])//go left
+				right = mid - 1;
+			else//go right
+				left = mid + 1;
+		}
+		else if (nums[mid] < nums[right]) { //no drop right
+			if (target > nums[mid] && target <= nums[right])//go right
+				left = mid + 1;
+			else//go left
+				right = mid - 1;
+		}
+		else {//no rotation
+			if (target < nums[mid])
+				right = mid - 1;
+			else
+				left = mid + 1;
+
+		}
+	}
+	return -1;
 }
 
 ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {

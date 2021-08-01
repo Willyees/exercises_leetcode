@@ -301,5 +301,44 @@ TEST(merge_sort, tests) {
 
 TEST(findMin, tests) {
 	vector<int> input{ 1,2,3,5 };
-	solMed.findMin(input);
+	int actual = solMed.findMin(input);
+	int expected = 1;
+	EXPECT_EQ(actual, expected);
+}
+
+TEST(searchRotated, tests) {
+	vector<int> input{ 4,5,6,7,0,1,2 };
+	int actual = solMed.search(input, 0);
+	int expected = 4;
+	EXPECT_EQ(actual, expected);
+	input = { 1,3 };
+	actual = solMed.search(input, 3);
+	expected = 1;
+	EXPECT_EQ(actual, expected);
+
+	input = { 3,1 };
+	actual = solMed.search(input, 1);
+	expected = 1;
+	EXPECT_EQ(actual, expected);
+}
+
+
+TEST(searchRotated, notpresent) {
+	vector<int> input{ 4,5,6,7,0,1,2 };
+	int actual = solMed.search(input, 3);
+	int expected = -1;
+	EXPECT_EQ(actual, expected);
+	
+	input = { 0 };
+	actual = solMed.search(input, 3);
+	expected = -1;
+	EXPECT_EQ(actual, expected);
+
+}
+
+TEST(searchRotated, singleelement) {
+	vector<int> input{ 0 };
+	int actual = solMed.search(input, 3);
+	int expected = -1;
+	EXPECT_EQ(actual, expected);
 }
