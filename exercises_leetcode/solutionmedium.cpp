@@ -1106,3 +1106,27 @@ void SolutionMed::letterCombinations_rec(const std::string digits, string curren
 		letterCombinations_rec(digits, temp, sol);
 	}
 }
+
+/** sum of a and b without + and -
+*/
+int SolutionMed::getSum(int a, int b) {
+	int out = 0;
+	int carry = 0;
+	int mask = 1;//001
+	int bit_idx = 0;
+	while(bit_idx < 32) {
+		//get bit by bit from a and b using the mask
+		int a_bit = mask & a;//isolate the 1st bit using logical AND
+		int b_bit = mask & b;
+		out = out | (a_bit ^ b_bit) ^ carry;
+		
+		if ((a_bit & b_bit) == (1 << bit_idx))//abit and bbit are same and are both 1 (true)
+			carry = 1 << bit_idx + 1;//+1 because carry is in the next bit
+		else
+			carry = 0;
+
+		bit_idx++;
+		mask <<=  1;
+	}
+	return out;
+}

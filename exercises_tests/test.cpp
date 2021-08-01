@@ -356,3 +356,10 @@ TEST(maxArea_1, tests) {
 	int expected = 49;
 	EXPECT_EQ(acutal, expected);
 }
+
+TEST(getSum, tests) {
+	int input1 = 2, input2 = 3;
+	int actual = solMed.getSum(input1, input2);
+	int expected = 5;
+	EXPECT_EQ(actual, expected);
+}
