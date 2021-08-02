@@ -1145,3 +1145,31 @@ int SolutionMed::getSum_1(int a, int b) {
 	}
 	return a;
 }
+
+/** Bredth First Search clone graph. 
+* Only load nodes in the queue that has not been visited yet. Neighbors are loaded in a node, only when it is being visited.
+* @param: node: node of the graph. contains list of neighbors
+* @return: deep copy of the undirected and connected graph
+*/
+NodeGraph* SolutionMed::cloneGraph(NodeGraph* node) {
+	if (!node) {
+		return nullptr;
+	}
+	unordered_map<NodeGraph*, NodeGraph*> copies;
+	NodeGraph* copy = new NodeGraph(node->val, {});
+	copies[node] = copy;
+	queue<NodeGraph*> todo;
+	todo.push(node);
+	while (!todo.empty()) {
+		NodeGraph* cur = todo.front();
+		todo.pop();
+		for (NodeGraph* neighbor : cur->neighbors) {
+			if (copies.find(neighbor) == copies.end()) {
+				copies[neighbor] = new NodeGraph(neighbor->val, {});
+				todo.push(neighbor);
+			}
+			copies[cur]->neighbors.push_back(copies[neighbor]);
+		}
+	}
+	return copy;
+}

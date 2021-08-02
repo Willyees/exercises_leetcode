@@ -35,6 +35,24 @@ public:
 	//Node(TreeNode* root);
 };
 
+class NodeGraph {
+public:
+	int val;
+	std::vector<NodeGraph*> neighbors;
+	NodeGraph() {
+		val = 0;
+		neighbors = std::vector<NodeGraph*>();
+	}
+	NodeGraph(int _val) {
+		val = _val;
+		neighbors = std::vector<NodeGraph*>();
+	}
+	NodeGraph(int _val, std::vector<NodeGraph*> _neighbors) {
+		val = _val;
+		neighbors = _neighbors;
+	}
+};
+
 class Edge {
 public:
 	int distance;

@@ -64,6 +64,9 @@ public:
 	/** binary **/
 	int getSum(int a, int b);
 	int getSum_1(int a, int b);
+
+	/** graph **/
+	NodeGraph* cloneGraph(NodeGraph* node);
 };
 
 /* template implementations*/
