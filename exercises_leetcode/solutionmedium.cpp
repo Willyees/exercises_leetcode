@@ -1108,6 +1108,7 @@ void SolutionMed::letterCombinations_rec(const std::string digits, string curren
 }
 
 /** sum of a and b without + and -
+* not working for negative integers
 */
 int SolutionMed::getSum(int a, int b) {
 	int out = 0;
@@ -1120,7 +1121,7 @@ int SolutionMed::getSum(int a, int b) {
 		int b_bit = mask & b;
 		out = out | (a_bit ^ b_bit) ^ carry;
 		
-		if ((a_bit & b_bit) == (1 << bit_idx))//abit and bbit are same and are both 1 (true)
+		if ((!(a_bit ^ b_bit ^ carry) && (a_bit | b_bit)) || (!(a_bit ^ b_bit) &&  (a_bit | b_bit)))//abit and bbit are same and at least 1 is 1 (true)
 			carry = 1 << bit_idx + 1;//+1 because carry is in the next bit
 		else
 			carry = 0;
@@ -1129,4 +1130,18 @@ int SolutionMed::getSum(int a, int b) {
 		mask <<=  1;
 	}
 	return out;
+}
+
+/** calculate the sum with XOR without any carry. Then calculate the carry with AND and sum it to the sum with a XOR, keep going until more carry is generated
+* 
+*/
+int SolutionMed::getSum_1(int a, int b) {
+	int sum = 0;
+	//use b to store the carry
+	while (b != 0) {
+		sum = a ^ b;//sum and b
+		b = (a & b) << 1;//once used b to sum, store the carry into it (needed to be added in the next iteration)
+		a = sum;
+	}
+	return a;
 }

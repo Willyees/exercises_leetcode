@@ -61,8 +61,9 @@ public:
 	std::vector<std::string> letterCombinations(std::string digits);
 	void letterCombinations_rec(const std::string digits, std::string current, std::vector<std::string>& sol);
 
-	/** others **/
+	/** binary **/
 	int getSum(int a, int b);
+	int getSum_1(int a, int b);
 };
 
 /* template implementations*/

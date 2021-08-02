@@ -362,4 +362,26 @@ TEST(getSum, tests) {
 	int actual = solMed.getSum(input1, input2);
 	int expected = 5;
 	EXPECT_EQ(actual, expected);
+
+	actual = solMed.getSum(20, 30);
+	expected = 50;
+	EXPECT_EQ(actual, expected);
+}
+
+TEST(getSum_1, positives) {
+	int input1 = 2, input2 = 3;
+	int actual = solMed.getSum_1(input1, input2);
+	int expected = 5;
+	EXPECT_EQ(actual, expected);
+
+	actual = solMed.getSum(20, 30);
+	expected = 50;
+	EXPECT_EQ(actual, expected);
+}
+
+TEST(getSum_1, negatives) {
+	int input1 = -2, input2 = -3;
+	int actual = solMed.getSum_1(input1, input2);
+	int expected = -5;
+	EXPECT_EQ(actual, expected);
 }
