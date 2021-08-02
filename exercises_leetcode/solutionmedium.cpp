@@ -1140,7 +1140,7 @@ int SolutionMed::getSum_1(int a, int b) {
 	//use b to store the carry
 	while (b != 0) {
 		sum = a ^ b;//sum and b
-		b = (a & b) << 1;//once used b to sum, store the carry into it (needed to be added in the next iteration)
+		b = (unsigned) (a & b) << 1;//once used b to sum, store the carry into it (needed to be added in the next iteration)
 		a = sum;
 	}
 	return a;
