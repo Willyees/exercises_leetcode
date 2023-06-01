@@ -34,6 +34,8 @@ public:
 	int search(std::vector<int>& nums, int target);//33.
 	int maxArea(std::vector<int>& height);//11.
 	int maxArea_1(std::vector<int>& height);//11. speed improvement
+	std::vector<std::vector<int>> spiralMatrix2(int n);//59.
+
 
 	/** linked lists**/
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);

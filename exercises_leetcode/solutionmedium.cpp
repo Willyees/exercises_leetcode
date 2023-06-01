@@ -652,6 +652,44 @@ int SolutionMed::maxArea_1(std::vector<int>& height) {
 	return largest;
 }
 
+/**Given a positive integer n, generate an n x n matrix filled with elements from 1 to n^2 in spiral order.
+*/
+std::vector<std::vector<int>> SolutionMed::spiralMatrix2(int n) {
+	
+	std::vector<std::vector<int>> v(n, std::vector<int>(n));
+	const int size = n * n;
+	int idx = 1;
+	int loop = 0;
+	while (idx < size) {
+		for (int col = loop; col < n - 1 - loop; ++col) {
+			int row = loop;
+			v[row][col] = idx;
+			++idx;
+		}
+		for (int row = loop; row < n - 1 - loop; ++row) {
+			int col = n - loop - 1;
+			v[row][col] = idx;
+			++idx;
+		}
+		for (int col = n - loop - 1; col >= 1 + loop; --col) {
+			int row = n - 1 - loop;
+			v[row][col] = idx;
+			++idx;
+		}
+		for (int row = n - loop - 1; row >= 1 + loop; --row) {
+			int col = loop;
+			v[row][col] = idx;
+			++idx;
+		}
+		++loop;
+	}
+	// this is to set the central piece for odd sizes. I am sure it can be better done
+	int i = n % 2;
+	if (n % 2)
+		v[n / 2][n / 2] = idx;
+	return v;
+}
+
 ListNode* SolutionMed::addTwoNumbers(ListNode* l1, ListNode* l2) {
 	ListNode head;//keep the head of the linkedlist 
 	ListNode* dummy = &head;

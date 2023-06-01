@@ -53,8 +53,14 @@ void f(int& i) {
 
 
 int main() {
-	Solution sol;
-	sol.trailingZeroes(5);
+	SolutionMed sol_med;
+	auto spiral = sol_med.spiralMatrix2(4);
+	
+	for (auto& row : spiral) {
+		for(auto& elem : row)
+			cout << elem << " ";
+		cout << endl;
+	}
 	return 0;
 }
 
